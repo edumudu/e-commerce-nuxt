@@ -1,17 +1,21 @@
 <template>
-  <div>
+  <main id="page">
     <header-site />
 
     <nuxt />
-  </div>
+
+    <footer-site />
+  </main>
 </template>
 
 <script>
 import HeaderSite from '~/components/page-components/Header-site.vue'
+import FooterSite from '~/components/page-components/Footer-site.vue'
 
 export default {
   components: {
-    HeaderSite
+    HeaderSite,
+    FooterSite
   }
 }
 </script>

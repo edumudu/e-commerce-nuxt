@@ -1,12 +1,8 @@
 <template>
   <div class="dropdown">
-    <a
-      href="#"
-      class="dropdown-toggle"
-      @click.prevent
-    >
+    <span class="dropdown-toggle">
       <slot name="toggle" />
-    </a>
+    </span>
 
     <ul class="dropdown-content">
       <slot />
