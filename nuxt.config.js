@@ -48,7 +48,8 @@ export default {
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    'nuxt-fontawesome'
   ],
   /*
   ** Axios module configuration
@@ -78,5 +79,19 @@ export default {
         }
       }
     }
+  },
+
+  fontawesome: {
+    component: 'fa',
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      },
+      {
+        set: '@fortawesome/free-brands-svg-icons',
+        icons: ['fab']
+      }
+    ]
   }
 }
