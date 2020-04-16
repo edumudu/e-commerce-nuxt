@@ -1,1 +1,16 @@
+// Variaveis
+@import './variables/colors';
+
 @import './global';
+@import './general';
+
+// Bootstrap
+@import '@/node_modules/bootstrap/scss/bootstrap-grid.scss';
+
+// Components
+@import './components/dropdown';
+@import './components/buttons';
+@import './components/forms';
+
+// Page components
+@import './page-components/header-site.scss';

@@ -1,0 +1,69 @@
+@import '../mixins/buttons-mixins';
+
+/*
+ * Botões
+*/
+.btn {
+  padding: 0.5rem 1.1rem;
+  color: #fff;
+  font-size: 1rem;
+  background-color: $teal;
+  border: none;
+  border-radius: .25rem;
+  cursor: pointer;
+  transition: background-color 0.4s,
+              box-shadow 0.4s;
+
+  &:disabled,
+  &.disabled {
+    opacity: 0.65;
+    pointer-events: none;
+  }
+}
+
+.btn-block { display: block; }
+.btn-shop { @extend .btn-flat; }
+
+.btn-add-cart {
+  background-color: #e94d1c;
+  height: 38px;
+}
+
+/*
+ * default
+*/
+.btn-secondary { @include make-btn($secondary); }
+.btn-success { @include make-btn($success); }
+.btn-info { @include make-btn($info); }
+.btn-danger { @include make-btn($danger); }
+.btn-warning { @include make-btn($warning); }
+.btn-dark { @include make-btn($dark); }
+
+/*
+ * Outline
+*/
+.btn-outline-secondary { @include make-outline($secondary); }
+.btn-outline-success { @include make-outline($success); }
+.btn-outline-info { @include make-outline($info); }
+.btn-outline-danger { @include make-outline($danger); }
+.btn-outline-warning { @include make-outline($warning); }
+.btn-outline-dark { @include make-outline($dark); }
+
+/*
+ * Flat
+*/
+.btn-flat {
+  background-color: transparent;
+  color: $dark-color;
+  //border: 1px solid $default_color;
+
+  &:hover {
+      background-color: rgba(0,0,0,0.08);
+  }
+}
+.btn-flat-secondary { @include make-flat($secondary); }
+.btn-flat-success { @include make-flat($success); }
+.btn-flat-info { @include make-flat($info); }
+.btn-flat-danger { @include make-flat($danger); }
+.btn-flat-warningt { @include make-flat($warning); }
+.btn-flat-dark { @include make-flat($dark); }

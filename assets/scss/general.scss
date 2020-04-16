@@ -1,0 +1,21 @@
+$count-size: 15px;
+
+.icon-count {
+  display: inline-block;
+  position: relative;
+
+  .count {
+    position: absolute;
+    top: $count-size / -5;
+    right: $count-size / -3;
+    display: inline-block;
+    width: $count-size;
+    height: $count-size;
+    line-height: $count-size;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: $white;
+    background-color: $danger;
+  }
+}
