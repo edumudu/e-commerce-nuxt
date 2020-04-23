@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 
 export default {
   mode: 'universal',
@@ -48,7 +48,8 @@ export default {
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    'nuxt-fontawesome'
   ],
   /*
   ** Axios module configuration
@@ -72,11 +73,29 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/auth/login', method: 'post', propertyName: 'token' },
+          login: { url: '/auth/login', method: 'post', propertyName: 'access_token' },
           logout: { url: '/auth/logout', method: 'post' },
           user: { url: '/auth/me', method: 'get', propertyName: false }
         }
       }
     }
+  },
+
+  fontawesome: {
+    component: 'fa',
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      },
+      {
+        set: '@fortawesome/free-brands-svg-icons',
+        icons: ['fab']
+      },
+      {
+        set: '@fortawesome/free-regular-svg-icons',
+        icons: ['far']
+      }
+    ]
   }
-}
+};

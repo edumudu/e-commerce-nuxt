@@ -1,0 +1,51 @@
+.site-footer {
+  padding: 1.5rem 0;
+  color: #c2c1c1;
+  background-color: $dark-color;
+
+  p { 
+    color: $gray; 
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+  }
+
+  a {
+    color :inherit; 
+    transition: color 0.2s;
+  
+    &:hover { color: rgb(231, 61, 80); }
+  }
+
+  .copy {
+    color: $light_color;
+    font-weight: 400;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  .footer-title {
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    font-weight: 600;
+  
+    &::after {
+      content: '';
+      display: block;
+      width: 50px; 
+      height: 2px;
+      background-color: rgb(231,61,80);
+    }
+  }
+  
+  .social-media { font-size: 2rem; }
+  
+  address {
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+
+  .module-list li {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}

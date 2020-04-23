@@ -1,1 +1,29 @@
+// Variaveis
+@import './variables/colors';
+
 @import './global';
+@import './general';
+@import './helpers';
+
+// Bootstrap
+@import '@/node_modules/bootstrap/scss/bootstrap-grid.scss';
+
+// Components
+@import './components/dropdown';
+@import './components/buttons';
+@import './components/forms';
+@import './components/slider';
+@import './components/vitrine';
+@import './components/product-quantity';
+@import './components/product-img-carrousel';
+@import './components/rating-stars';
+@import './components/tabs';
+@import './components/table';
+@import './components/stepper';
+
+// Page components
+@import './page-components/header-site';
+@import './page-components/footer-site';
+
+// Pages
+@import './pages/product';
