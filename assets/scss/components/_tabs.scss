@@ -1,0 +1,50 @@
+/*
+ * Tabs
+*/
+.tabs {
+  width: 100%;
+  border-bottom:1px solid rgb(221,221,221);
+
+  & > li{
+    position: relative;
+    display: inline-block;
+    margin-right: -4px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: transparent;
+
+    &.active {
+      color: rgb(231,61,80);
+      &::after { width: 100%; }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 0;
+      height: 1px;
+      background-color: rgb(231,61,80);
+      transition: width 0.3s;
+    }
+
+    &:nth-of-type(odd)::after {
+      left: auto;
+      right: 0;
+    }
+
+    &:hover {
+      background-color: rgba(0,0,0,0.05);
+    }
+  }
+
+  & li > a { 
+    display: inline-block;
+    padding: 8px 10px;
+    color: inherit; 
+  }
+}
+
+.pane-content { font-size: 0.95rem; }

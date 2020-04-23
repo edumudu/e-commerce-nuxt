@@ -63,6 +63,37 @@ textarea.form-field {
   }
 }
 
+
+// Material desgin Inputs
+.md-wrapper {
+  position: relative;
+  width: 100%;
+
+  .form-field + .md-float {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    color: #777;
+    padding-left: 0.35rem;
+    padding-right: 0.35rem;
+    text-transform: capitalize;
+    cursor: text;
+    transition: color 0.4s,
+                transform 0.4s,
+                top 0.4s,
+                background-color 0.4s;
+  }
+  
+  .form-field:focus + .md-float,
+  .form-field.active + .md-float {
+    top: -0.5rem;
+    transform: scale(0.85);
+    background-color: #fff;
+  }
+  
+  .form-field:focus + .md-float { color: $info; }
+}
+
 /*
  * Custom checkbox
  */

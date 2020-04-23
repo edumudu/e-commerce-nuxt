@@ -18,16 +18,16 @@ export default {
 
   methods: {
     open () {
-      this.active = true
+      this.active = true;
     },
 
     close () {
-      this.active = false
+      this.active = false;
     },
 
     toggle () {
-      this.active = !this.active
+      this.active = !this.active;
     }
   }
-}
+};
 </script>

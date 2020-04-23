@@ -27,6 +27,11 @@ a {
   text-decoration: none;
 }
 
+p { margin-bottom: 10px; }
+
+input,
+textarea { font-size: inherit; }
+
 #page {
   min-height: 100vh;
   display: flex;

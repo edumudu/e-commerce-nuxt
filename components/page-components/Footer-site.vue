@@ -1,5 +1,5 @@
 <template>
-  <footer class="site-footer">
+  <footer class="site-footer mt-5">
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-lg-3 my-2 my-md-0">
@@ -88,5 +88,5 @@
 <script>
 export default {
 
-}
+};
 </script>

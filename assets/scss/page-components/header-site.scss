@@ -36,9 +36,9 @@ header.site-header {
       color: #fff;
     }
 
-    @for $i from 2 through  4 {
-      &:nth-of-type(#{$i}):hover ~ .line,
-      &:nth-of-type(#{$i}):active ~ .line{
+    @for $i from 1 through  4 {
+      &:nth-of-type(#{$i}).active ~ .line,
+      &:nth-of-type(#{$i}):not(.active):hover ~ .line { // :not only for specify level
         transform: translate($line-width * ($i - 1));
       }
     }

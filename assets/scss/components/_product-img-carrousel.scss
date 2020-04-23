@@ -1,0 +1,29 @@
+.product-image{ 
+  max-width: 420px; 
+  margin: 0 auto;
+
+  > img { max-height: 500px; }
+
+  .product-other-images {
+    min-height: 100%;
+    max-width: 420px;
+    height: 114px;
+    overflow: hidden;
+  
+    .galery-wrapper { 
+      height: 100%; 
+      padding-left: 5px;
+  
+      img { 
+        width: 60px;
+        height: 100%; 
+        margin: 0 12px 12px 0;
+        border: 1px solid rgb(230,230,230);
+        cursor: pointer;
+        transition: transform 0.4s;
+  
+        &:hover { transform: scale(1.2); }
+      }
+    }
+  }
+}
