@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 
 export default {
   mode: 'universal',
@@ -73,7 +73,7 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/auth/login', method: 'post', propertyName: 'token' },
+          login: { url: '/auth/login', method: 'post', propertyName: 'access_token' },
           logout: { url: '/auth/logout', method: 'post' },
           user: { url: '/auth/me', method: 'get', propertyName: false }
         }
@@ -91,7 +91,11 @@ export default {
       {
         set: '@fortawesome/free-brands-svg-icons',
         icons: ['fab']
+      },
+      {
+        set: '@fortawesome/free-regular-svg-icons',
+        icons: ['far']
       }
     ]
   }
-}
+};
