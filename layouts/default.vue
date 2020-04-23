@@ -9,15 +9,15 @@
 </template>
 
 <script>
-import HeaderSite from '~/components/page-components/Header-site.vue'
-import FooterSite from '~/components/page-components/Footer-site.vue'
+import HeaderSite from '~/components/page-components/Header-site.vue';
+import FooterSite from '~/components/page-components/Footer-site.vue';
 
 export default {
   components: {
     HeaderSite,
     FooterSite
   }
-}
+};
 </script>
 
 <style lang="scss">
