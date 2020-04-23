@@ -1,0 +1,74 @@
+header.site-header {
+  background-color: $dark-color;
+}
+
+/*
+ * Header - menu do site
+*/
+.brand-logo img{
+  width: 90px;
+}
+
+.menu-desktop {
+  $line-width: 91px;
+
+  position: relative;
+  display: flex;
+
+  .line {
+    content: '';
+    position: absolute;
+    bottom: 0.95rem;
+    display: block;
+    width: $line-width;
+    height: 3px;
+    background-color: $success;
+    transition: transform 0.3s;
+  }
+ 
+  .menu-item { 
+    padding-bottom: 0.95rem;
+    padding-top: 0.95rem;
+    color: #d6d6d6;
+
+    &:hover,
+    &.active {
+      color: #fff;
+    }
+
+    @for $i from 1 through  4 {
+      &:nth-of-type(#{$i}).active ~ .line,
+      &:nth-of-type(#{$i}):not(.active):hover ~ .line { // :not only for specify level
+        transform: translate($line-width * ($i - 1));
+      }
+    }
+  }
+
+  .menu-link {
+    display: inline-block;
+    width: $line-width;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    color: inherit;
+    text-align: center;
+    border-bottom: 3px solid #dcdcdc;
+    transition: color, border 0.2s;
+    text-transform: uppercase;
+  }
+}
+
+/*
+ * navbar user
+*/
+.navbar-user {
+  .user-menu {
+    > li { 
+      margin-right: 12px;
+      text-align: center; 
+      color: $gray;
+      transition: color 0.25s;
+
+      > a:hover { color: $success; }
+    }
+  }
+}

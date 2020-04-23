@@ -1,0 +1,36 @@
+@mixin make-btn($color) {
+  background-color: $color;
+  color: #fff;
+  border: 1px solid $color;
+
+  &:hover {
+    background-color: adjust-color($color, $lightness: -5%);
+    -webkit-box-shadow: 0px 0px 8px 2px adjust-color($color, $alpha: -0.59);
+    -moz-box-shadow: 0px 0px 8px 2px adjust-color($color, $alpha: -0.59);
+    box-shadow: 0px 0px 8px 2px adjust-color($color, $alpha: -0.59);
+  }
+}
+
+// Outline
+@mixin make-outline($color) {
+  color: $color;
+  background-color: transparent;
+  border: 1px solid $color;
+
+  &:hover {
+    background-color: adjust-color($color, $alpha: -0.85);
+    -webkit-box-shadow: 0px 0px 8px 2px adjust-color($color, $alpha: -0.59);
+    -moz-box-shadow: 0px 0px 8px 2px adjust-color($color, $alpha: -0.59);
+    box-shadow: 0px 0px 8px 2px adjust-color($color, $alpha: -0.59);
+  }
+}
+
+// Flat
+@mixin make-flat($color) {
+  color: $color;
+  background-color: transparent;
+
+  &:hover {
+    background-color: adjust-color($color, $alpha: -0.9);
+  }
+}
