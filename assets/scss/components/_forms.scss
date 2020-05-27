@@ -3,7 +3,8 @@
   padding: 0.45rem 0.75rem;
   font-size: 1.2rem;
   line-height: 1.5;
-  color: $gray-2;
+  color: inherit;
+  font-family: inherit;
   border-radius: 5px;
   border: 1px solid $gray;
   outline: none;
@@ -13,6 +14,11 @@
   &:focus {
     color: $dark_color;
     border-color: $info;
+  }
+
+  &.small {
+    padding: 0.25rem 0.55rem;
+    font-size: 1rem;
   }
 
   &.icon {
@@ -48,25 +54,24 @@ textarea.form-field {
 }
 
 .form-group {
+  margin-top: 0.85rem;
+
+  .form-field { border-radius: 5px; }
+}
+
+.input-group {
   display: flex;
 
-  .form-field {
-    border-radius: 5px 0 0 5px;
-  }
-
-  .form-field + .form-field {
-    border-radius: 0 5px 5px 0;
-  }
-
-  .form-field ~ .btn {
-    border-radius: 0 5px 5px 0;
-  }
+  .form-field { border-radius: 5px 0 0 5px; }
+  .form-field + .form-field { border-radius: 0 5px 5px 0; }
+  .form-field ~ .btn { border-radius: 0 5px 5px 0; }
 }
 
 
 // Material desgin Inputs
 .md-wrapper {
   position: relative;
+  display: inline-block;
   width: 100%;
 
   .form-field + .md-float {

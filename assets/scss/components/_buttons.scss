@@ -21,6 +21,14 @@
   }
 }
 
+.btn-small {
+  @extend .btn;
+
+  padding: 0.2rem 0.8rem;
+  font-size: 0.85rem; 
+}
+
+
 .btn-block { display: block; }
 .btn-shop { @extend .btn-flat; }
 

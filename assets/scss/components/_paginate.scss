@@ -1,0 +1,31 @@
+.paginate {
+  display: flex;
+  justify-content: flex-end;
+
+  > li{
+    a{
+      $size: 25px;
+
+      display: block;
+      width: $size;
+      height: $size;
+      font-size: .9rem;
+      font-weight: 700;
+      line-height: $size;
+      text-align: center;
+      color: $dark_color;
+      border-radius: 50%;
+    }
+
+    &.active a {
+      color: $white;
+      background-color: $dark_color;
+    }
+
+    &.disabled a,
+    &:disabled a{
+      color: $gray-2;
+      pointer-events: none;
+    }
+  }
+}

@@ -2,7 +2,7 @@
   <div class="product-quantity d-flex">
     <input
       v-model="currentValue"
-      class="form-field quantity center"
+      class="form-field quantity"
       type="text"
       readonly
     >

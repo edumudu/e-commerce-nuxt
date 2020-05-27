@@ -42,3 +42,63 @@ $count-size: 15px;
 
   &:hover::after { width: 130%; }
 }
+
+.soft-title {
+  position: relative;
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 1.2rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 50px;
+    height: 1px;
+    background-color: $danger;
+  }
+}
+
+.mid-title {
+  @extend .soft-title;
+
+  font-size: 1.5rem;
+  color: $dark_color;
+}
+
+.page-title {
+  padding: 1.5rem 0;
+  color: $dark_color;
+  font-size: 1.8rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: $dark_color;
+  margin-bottom: 1.5rem;
+}
+
+.max-660 { max-width: 660px; }
+
+#page-content .overlay-loading {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  background-color: $white;
+
+  &.active { display: flex; }
+
+  > img {
+    width: 150px;
+    height: 150px;
+  }
+}

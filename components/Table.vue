@@ -16,21 +16,30 @@
         :key="product.id"
       >
         <td>
-          <img class="responsive-img" src="https://www.vestbrasil.com.br/media/catalog/product/cache/1/image/800x/9df78eab33525d08d6e5fb8d27136e95/b/l/blusa_mikaela_-_mk02-fem_2_.jpg">
+          <img
+            :src="product.photos[0] || 'https://via.placeholder.com/300x200?text=Not%20Photo'"
+            :alt="product.name"
+          >
         </td>
 
         <td v-text="product.name" />
         <td>Modelo 2</td>
 
         <td>
-          <stepper
-            v-model="product.quantity"
-            :max="product.estoque"
-          />
+          <div class="d-inline-flex">
+            <stepper
+              :value="product.quantity"
+              :max="product.inventory"
+              @input="(newQty) => setProductQuantity({ product, qty: newQty })"
+            />
 
-          <button class="btn-remove d-inline-flex justify-content-center alig-items-center">
-            <fa :icon="['fas', 'times']" />
-          </button>
+            <button
+              class="btn btn-danger btn-remove d-inline-flex justify-content-center ml-1"
+              @click="removeFromCart(product)"
+            >
+              <fa :icon="['fas', 'times']" />
+            </button>
+          </div>
         </td>
         <td>R$ {{ product.price }}</td>
         <td>R$ {{ (product.price * product.quantity).toFixed(2) }}</td>
@@ -40,6 +49,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import Stepper from '~/components/Stepper.vue';
 
 export default {
@@ -47,6 +57,16 @@ export default {
 
   props: {
     products: { type: Array, required: true }
+  },
+
+  methods: {
+    removeFromCart (product) {
+      this.$store.dispatch('cart/removeProductFromCart', product);
+    },
+
+    ...mapActions({
+      setProductQuantity: 'cart/setProductQuantity'
+    })
   }
 };
 </script>

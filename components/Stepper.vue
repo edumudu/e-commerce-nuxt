@@ -5,16 +5,14 @@
       type="text"
     >
 
-    <span>
-      <fa
-        :icon="['fas', 'angle-up']"
-        @click="up"
-      />
+    <span class="d-flex justify-content-center align-items-center flex-column">
+      <button @click="up">
+        <fa :icon="['fas', 'angle-up']" />
+      </button>
 
-      <fa
-        :icon="['fas', 'angle-down']"
-        @click="down"
-      />
+      <button @click="down">
+        <fa :icon="['fas', 'angle-down']" />
+      </button>
     </span>
   </div>
 </template>

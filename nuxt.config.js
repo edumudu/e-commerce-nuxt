@@ -56,7 +56,8 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: process.env.BASE_URL_API
+    baseURL: process.env.BASE_URL_API,
+    headers: { Accept: 'aplication/json' }
   },
   /*
   ** Build configuration
