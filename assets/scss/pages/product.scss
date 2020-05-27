@@ -1,9 +1,3 @@
-section.product-page {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  color: #3e4d5c
-}
-
 .product-description-section {
   .product-title {
     padding-bottom: 12px;
@@ -48,6 +42,7 @@ section.product-page {
   border-bottom: 1px solid #f4f4f4;
   padding: 20px 0;
   margin-bottom: 20px;
+  color: $theme-color;
 
   > div { 
     margin-right: 40px; 
@@ -101,7 +96,7 @@ section.product-page {
   color: #3e4d5c;
 
   .row { border-bottom: 1px solid #eee; }
-  .row .col{ padding: 8px 0; }
+  .row > div { padding: 8px 0; }
 
   .table-head {
     font-weight: 800;
@@ -111,4 +106,7 @@ section.product-page {
   .table-body .col:nth-of-type(1) { font-weight: 600; }
 }
 
-.write-review{ max-width: 600px; }
+.review-item {
+  color: $theme_color;
+  border-bottom: 1px solid #eee;
+}

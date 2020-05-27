@@ -1,6 +1,6 @@
 .stepper {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
   
   width: 50px;
   height: 35px;
@@ -9,8 +9,9 @@
 
 .stepper input {
   width: 100%;
-  height: 100%;
-  padding: 0 20px 0 2px;
+  // height: 100%;
+  flex: 1;
+  // padding: 0 20px 0 2px;
   text-align: center;
   color: #555;
   border: none;
@@ -18,40 +19,25 @@
 }
 
 .stepper > span {
-  position: absolute;
-  top: 0;
-  right: 0;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 20px;
-  height: 100%;
+  flex-basis: 20px;
   border-width: 0 0 0 1px;
   border-style: solid;
   border-color: inherit;
-}
-
-.stepper > span i {
-  width: 100%;
-  height: 50%;
-  color: #fff;
   background-color: rgba(109, 118, 125, 1);
-  cursor: pointer;
-  transition: 0.25s;
 }
 
-.stepper > span i:hover {
-  background-color: rgba(53,66,174,1);
-}
-
-/*
- * remove button
-*/
-.btn-remove {
-  margin-top: 1px;
-  width: 35px;
-  height: 35px;
+.stepper > span button {
+  width: 100%;
+  height: 100%;
   color: #fff;
-  background-color: #e74c3c;
-  border: 1px solid #e74c3c;
+  font-size: 0.9rem;
+  transition: 0.25s;
   cursor: pointer;
+  border: none;
+  background-color: inherit;
+  outline: none;
+}
+
+.stepper > span button:hover {
+  background-color: rgba(53,66,174,1);
 }

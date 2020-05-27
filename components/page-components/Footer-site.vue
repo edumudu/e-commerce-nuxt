@@ -78,7 +78,7 @@
     </div>
 
     <div class="container">
-      <p class="copy mb-0">
+      <p class="copy mb-0 mt-3">
         Copyright &copy; Todos os direitos reservados
       </p>
     </div>

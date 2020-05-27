@@ -1,11 +1,13 @@
 .vitrine { 
   padding: 0 1.4rem;
+  min-height: 200px;
   
-  .products-box > .box {
+  .products-box .box {
     border: 1px solid #ccc;
     color: #777;
     border-radius: 0.44rem;
     border: none;
+    overflow: hidden;
     transition: box-shadow 0.4s,
                 transform 0.4s;
   

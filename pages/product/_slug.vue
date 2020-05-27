@@ -1,9 +1,16 @@
 <template>
   <section id="page-content">
+    <div
+      class="overlay-loading"
+      :class="{ active }"
+    >
+      <img src="/assets/svgs/load-1s-200px.svg" class="mt-5">
+    </div>
+
     <div class="container">
       <div class="row my-5">
         <div class="col-md-6">
-          <product-img-carrousel v-if="product.imgs.length > 0" :imgs="product.imgs" />
+          <product-img-carrousel v-if="product.photos" :imgs="product.photos" />
         </div>
 
         <div class="col-md-6">
@@ -12,7 +19,7 @@
               {{ product.name }}
 
               <button
-                v-if="product.posted_by === $auth.user.id"
+                v-if="$auth.loggedIn && $auth.user.access_level === 'admin'"
                 class="btn btn-danger ml-auto"
                 @click="deletePost"
               >
@@ -31,11 +38,9 @@
               </div>
             </div>
 
-            <div class="description">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam porta elit sed elit congue, ut gravida felis auctor. Vivamus a sem faucibus, facilisis arcu non, mollis felis. Fusce at fermentum ex. Donec ante orci, faucibus sit
-              </p>
-            </div>
+            <p class="description">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam porta elit sed elit congue, ut gravida felis auctor. Vivamus a sem faucibus, facilisis arcu non, mollis felis. Fusce at fermentum ex. Donec ante orci, faucibus sit
+            </p>
 
             <div class="product-options d-flex">
               <div>
@@ -88,7 +93,11 @@
 
               <div class="review-links">
                 <a href="">
-                  <span>7</span> reviews
+                  <span>
+                    {{ reviewsCounter }}
+                  </span>
+
+                  reviews
                 </a>
 
                 <a href="">
@@ -109,7 +118,7 @@
             </tab>
 
             <tab name="Informação">
-              <div class="information-table">
+              <div class="information-table my-2 mx-3">
                 <div class="table-head">
                   <div class="row">
                     <div class="col-sm-12">
@@ -150,26 +159,26 @@
 
             <tab name="Avaliações">
               <div
-                v-for="r in reviews"
+                v-for="r in product.reviews"
                 :key="r.id"
-                class="review-item"
+                class="review-item pb-2 mb-4"
               >
                 <div class="review-submitted">
                   <div class="d-flex justify-content-between">
-                    <strong> {{ r.user }} </strong>
+                    <strong> {{ r.user.name }} </strong>
 
                     <rating-stars :value="r.rating" />
                   </div>
-                  <span class="text-muted"> {{ r.created_at }} </span>
+                  <span class="text-muted px-0"> {{ r.created_at }} </span>
                 </div>
 
-                <div class="review-content">
+                <div class="review-content mt-2">
                   <p> {{ r.review }} </p>
                 </div>
               </div>
 
               <div
-                v-show="reviews.length <= 0"
+                v-if="!reviewsCounter"
                 class="py-4"
               >
                 No comments yet.
@@ -177,7 +186,7 @@
 
               <div
                 v-if="$auth.loggedIn"
-                class="write-review mx-auto"
+                class="write-review mx-auto max-660"
               >
                 <h1 class="title">
                   Escreva sua avaliação
@@ -199,7 +208,7 @@
                   </div>
 
                   <div class="form-group d-flex justify-content-center">
-                    <button type="submit" class="btn">
+                    <button type="submit" class="btn" :disabled="sendingReview">
                       Enviar
                     </button>
                   </div>
@@ -241,12 +250,19 @@ export default {
       review: '',
       rating: 0
     },
-    reviews: []
+    active: true,
+    sendingReview: false
   }),
 
+  computed: {
+    reviewsCounter () {
+      return this.product.reviews && this.product.reviews.length;
+    }
+  },
+
   async mounted () {
-    this.product = await this.$axios.$get(`/product/${this.$route.params.id}`);
-    this.reviews = await this.$axios.$get('/review', { params: { prod_id: this.$route.params.id } });
+    this.product = await this.$axios.$get(`/product/${this.$route.params.slug}`);
+    this.active = false;
   },
 
   methods: {
@@ -260,23 +276,26 @@ export default {
     },
 
     async sendReview () {
+      this.sendingReview = true;
+
       const data = {
-        prod_ref: +this.$route.params.id,
-        user_ref: this.$auth.user.id,
+        product: +this.product.id,
 
         ...this.review
       };
 
-      const { id } = await this.$axios.$post('/review', data);
-      this.reviews.push(await this.$axios.$get(`/review/${id}`));
+      const review = await this.$axios.$post('/review', data);
+      this.product.reviews.push(review);
+
       this.review = {
         review: '',
         rating: 0
       };
+      this.sendingReview = false;
     },
 
     async deletePost () {
-      await this.$axios.$delete(`/product/${this.product.id}`);
+      await this.$axios.$delete(`/product/${this.product.slug}`);
       this.$router.push('/');
     }
   }

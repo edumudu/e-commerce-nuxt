@@ -27,7 +27,8 @@ export default {
   }),
 
   async mounted () {
-    this.destaques = await this.$axios.$get('/product');
+    const { data } = await this.$axios.$get('/product');
+    this.destaques = data;
   }
 };
 </script>

@@ -46,10 +46,8 @@
                 required
               />
 
-              <nuxt-link to="/forget-password">
-                <span class="support-link">
-                  Esqueceu sua senha?
-                </span>
+              <nuxt-link class="support-link" to="/forget-password">
+                Esqueceu sua senha?
               </nuxt-link>
             </div>
 
@@ -78,8 +76,7 @@ export default {
 
   methods: {
     sendLogin () {
-      this.$auth.loginWith('local', { data: this.login })
-        .then(response => console.log(this.$auth.user));
+      this.$auth.loginWith('local', { data: this.login });
     }
   }
 };

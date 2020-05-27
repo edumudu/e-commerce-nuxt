@@ -1,7 +1,7 @@
 <template>
   <section id="page-content" class="contact">
     <div class="container">
-      <div class="contact-container">
+      <div class="contact-container max-660 mx-auto">
         <h1 class="title">
           Fale Conosco
         </h1>
@@ -14,7 +14,7 @@
           class="row mt-4"
           @submit.prevent="sendContact"
         >
-          <div class="form-group col-12 col-lg-6 offset-lg-3">
+          <div class="form-group col-12">
             <Input
               v-model="form.name"
               name="name"
@@ -23,7 +23,7 @@
             />
           </div>
 
-          <div class="form-group col-12 col-lg-6 offset-lg-3">
+          <div class="form-group col-12">
             <Input
               v-model="form.email"
               placeholder="email"
@@ -33,7 +33,7 @@
             />
           </div>
 
-          <div class="form-group col-12 col-lg-6 offset-lg-3">
+          <div class="form-group col-12">
             <Input
               v-model="form.tel"
               placeholder="telefone"
@@ -42,7 +42,7 @@
             />
           </div>
 
-          <div class="form-group col-12 col-lg-6 offset-lg-3">
+          <div class="form-group col-12">
             <Input
               v-model="form.message"
               type="textarea"
@@ -51,7 +51,7 @@
             />
           </div>
 
-          <div class="form-group col-lg-6 mx-auto">
+          <div class="form-group mx-auto">
             <button class="btn large" type="submit" name="send">
               Enviar
             </button>
