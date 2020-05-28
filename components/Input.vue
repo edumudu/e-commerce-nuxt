@@ -4,7 +4,7 @@
       v-if="type === 'textarea'"
       v-model="computedValue"
       class="form-field"
-      :class="{ active }"
+      :class="{ active, invalid: !!error }"
       :type="type"
       :name="name"
       :required="required"
@@ -14,7 +14,7 @@
       v-else
       v-model="computedValue"
       class="form-field"
-      :class="{ active }"
+      :class="{ active , invalid: !!error }"
       :type="type"
       :name="name"
       :required="required"
@@ -28,6 +28,11 @@
     >
       {{ muted }}
     </span>
+
+    <span class="invalid-message">
+      {{ error }}
+    </span>
+
   </label>
 </template>
 
@@ -39,7 +44,8 @@ export default {
     placeholder: { type: String, default: '' },
     name: { type: String, default: '' },
     muted: { type: String, default: '' },
-    required: { type: Boolean, default: false }
+    required: { type: Boolean, default: false },
+    error: { type: String, default: '' }
   },
 
   computed: {

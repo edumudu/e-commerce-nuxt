@@ -27,34 +27,52 @@
             Eu tenho uma conta.
           </p>
 
-          <form @submit.prevent="sendLogin">
-            <div class="form-group">
-              <Input
-                v-model="login.email"
-                name="login"
-                placeholder="E-mail"
-                required
-              />
-            </div>
+          <validation-observer v-slot="{ handleSubmit, invalid }">
+            <form @submit.prevent="handleSubmit(sendLogin)">
+              <div class="form-group">
+                <validation-provider
+                  v-slot="{ errors }"
+                  rules="required|email"
+                >
+                  <Input
+                    v-model.trim="login.email"
+                    name="login"
+                    type="email"
+                    placeholder="E-mail"
+                    :error="errors[0]"
+                  />
+                </validation-provider>
+              </div>
 
-            <div class="form-group">
-              <Input
-                v-model="login.password"
-                type="password"
-                name="password"
-                placeholder="Senha"
-                required
-              />
+              <div class="form-group">
+                <validation-provider
+                  v-slot="{ errors }"
+                  rules="required|min:8"
+                >
+                  <Input
+                    v-model.trim="login.password"
+                    type="password"
+                    name="password"
+                    placeholder="Senha"
+                    :error="errors[0]"
+                  />
+                </validation-provider>
 
-              <nuxt-link class="support-link" to="/forget-password">
-                Esqueceu sua senha?
-              </nuxt-link>
-            </div>
+                <nuxt-link class="support-link ml-2" to="/forget-password">
+                  Esqueceu sua senha?
+                </nuxt-link>
+              </div>
 
-            <div class="form-group">
-              <input class="btn" type="submit" value="Entrar">
-            </div>
-          </form>
+              <div class="form-group">
+                <input
+                  class="btn"
+                  type="submit"
+                  value="Entrar"
+                  :disabled="sending || invalid"
+                >
+              </div>
+            </form>
+          </validation-observer>
         </div>
       </div>
     </div>
@@ -62,12 +80,18 @@
 </template>
 
 <script>
+import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import Input from '~/components/Input.vue';
 
 export default {
-  components: { Input },
+  components: {
+    Input,
+    ValidationProvider,
+    ValidationObserver
+  },
 
   data: () => ({
+    sending: false,
     login: {
       email: '',
       password: ''
@@ -75,8 +99,10 @@ export default {
   }),
 
   methods: {
-    sendLogin () {
-      this.$auth.loginWith('local', { data: this.login });
+    async sendLogin () {
+      this.sending = true;
+      await this.$auth.loginWith('local', { data: this.login });
+      this.sending = false;
     }
   }
 };
