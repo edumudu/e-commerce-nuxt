@@ -4,14 +4,28 @@
       <slot name="toggle" />
     </span>
 
-    <ul class="dropdown-content">
+    <ul
+      v-if="isList"
+      class="dropdown-content"
+    >
       <slot />
     </ul>
+
+    <div
+      v-else
+      class="dropdown-content"
+    >
+      <slot />
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    isList: { type: Boolean, default: true }
+  },
+
   data: () => ({
     active: false
   }),

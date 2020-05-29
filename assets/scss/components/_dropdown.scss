@@ -1,7 +1,9 @@
+$arrow-size: 11px;
+
 .dropdown {
   position: relative;
 
-  .dropdown-content {
+  &-content {
     position: absolute;
     top: calc(100% + 12px);
     left: 50%;
@@ -20,31 +22,32 @@
     &::before {
       content: '';
       position: absolute;
-      top: -11px;
+      top: -$arrow-size;
       left: 50%;
       transform: translateX(-50%);
       z-index: 16;
       width: 0;
       height: 0;
 
-      border-left: 11px solid transparent;
-      border-right: 11px solid transparent;
+      border-left: $arrow-size solid transparent;
+      border-right: $arrow-size solid transparent;
 
-      border-bottom: 11px solid #fff;
+      border-bottom: $arrow-size solid #fff;
       
     }
 
     &::after {
       content: '';
       position: absolute;
-      top: -11px;
+      top: -$arrow-size;
+      left: 0;
       width: 100%;
-      height: 11px;
+      height: $arrow-size;
       z-index: 15;
     }
   }
 
-  .dropdown-content li > a{
+  &-content li > a{
     display: block;
     width: 100%;
     padding: 5px 0;
@@ -54,6 +57,7 @@
     white-space: nowrap;
 
     &:hover { color: rgba(48, 56, 65, 1); }
+
     i {
       display: inline-block;
       margin-right: 5px;
@@ -61,13 +65,32 @@
     }
   }
 
-  .dropdown-toggle {
+  &-toggle {
     cursor: pointer;
     font-size: 1.5rem;
   }
 
-  &:hover .dropdown-toggle + .dropdown-content { 
-    display: block;
-    animation: dropdoown_in 0.4s;
+  &:hover &-toggle + &-content { display: block; }
+
+  &.left &-content {
+    left: -$arrow-size;
+    transform: none;
+
+    &::before {
+      left: $arrow-size;
+      transform: none;
+    }
+  }
+
+  &.right &-content {
+    left: auto;
+    right: -$arrow-size;
+    transform: none;
+
+    &::before {
+      left: auto;
+      right: $arrow-size;
+      transform: none;
+    }
   }
 }
