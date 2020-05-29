@@ -1,3 +1,5 @@
+$input-default-radius: 3px;
+
 .form-field {
   width: 100%;
   padding: 0.45rem 0.75rem;
@@ -5,7 +7,7 @@
   line-height: 1.5;
   color: inherit;
   font-family: inherit;
-  border-radius: 5px;
+  border-radius: $input-default-radius;
   border: 1px solid $gray;
   outline: none;
   transition: color 0.4s,
@@ -46,9 +48,8 @@
     pointer-events: none;
   }
 
-  &.invalid {
-    border: 1px solid $danger;
-  }
+  &.is-invalid { border: 1px solid $danger; }
+  &.is-valid { border: 1px solid $green; }
 }
 
 textarea.form-field { 
@@ -67,16 +68,14 @@ textarea.form-field {
 
 .form-group {
   margin-top: 0.85rem;
-
-  .form-field { border-radius: 5px; }
 }
 
 .input-group {
   display: flex;
 
-  .form-field { border-radius: 5px 0 0 5px; }
-  .form-field + .form-field { border-radius: 0 5px 5px 0; }
-  .form-field ~ .btn { border-radius: 0 5px 5px 0; }
+  .form-field { border-radius: $input-default-radius 0 0 $input-default-radius; }
+  .form-field + .form-field { border-radius: 0 repeat($input-default-radius, 2) 0; }
+  .form-field ~ .btn { border-radius: 0 repeat($input-default-radius, 2) 0; }
 }
 
 
@@ -110,7 +109,8 @@ textarea.form-field {
   
   .form-field:focus + .md-float { color: $info; }
 
-  .form-field.invalid + .md-float { color: $red; }
+  .form-field.is-invalid + .md-float { color: $red; }
+  .form-field.is-valid + .md-float { color: $green; }
 }
 
 /*

@@ -27,11 +27,15 @@
             Eu tenho uma conta.
           </p>
 
+          <span v-show="failMessage" class="alert alert-danger">
+            {{ failMessage }}
+          </span>
+
           <validation-observer v-slot="{ handleSubmit, invalid }">
             <form @submit.prevent="handleSubmit(sendLogin)">
               <div class="form-group">
                 <validation-provider
-                  v-slot="{ errors }"
+                  v-slot="{ errors, valid }"
                   rules="required|email"
                 >
                   <Input
@@ -40,13 +44,14 @@
                     type="email"
                     placeholder="E-mail"
                     :error="errors[0]"
+                    :is-valid="valid"
                   />
                 </validation-provider>
               </div>
 
               <div class="form-group">
                 <validation-provider
-                  v-slot="{ errors }"
+                  v-slot="{ errors, valid }"
                   rules="required|min:8"
                 >
                   <Input
@@ -55,6 +60,7 @@
                     name="password"
                     placeholder="Senha"
                     :error="errors[0]"
+                    :is-valid="valid"
                   />
                 </validation-provider>
 
@@ -64,12 +70,13 @@
               </div>
 
               <div class="form-group">
-                <input
-                  class="btn"
+                <button
+                  class="btn-press"
                   type="submit"
-                  value="Entrar"
                   :disabled="sending || invalid"
                 >
+                  Entrar
+                </button>
               </div>
             </form>
           </validation-observer>
@@ -92,6 +99,7 @@ export default {
 
   data: () => ({
     sending: false,
+    failMessage: '',
     login: {
       email: '',
       password: ''
@@ -101,8 +109,16 @@ export default {
   methods: {
     async sendLogin () {
       this.sending = true;
-      await this.$auth.loginWith('local', { data: this.login });
+      this.$nuxt.$loading.start();
+
+      try {
+        await this.$auth.loginWith('local', { data: this.login });
+      } catch (e) {
+        this.failMessage = 'User or password incorrect';
+      }
+
       this.sending = false;
+      this.$nuxt.$loading.finish();
     }
   }
 };

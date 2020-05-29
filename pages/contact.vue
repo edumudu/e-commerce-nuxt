@@ -10,20 +10,21 @@
           Valorizamos a opnião dos nossos clientes, e por isso queremos saber oque você esta achando. Mande-nos oque você esta achando da experiência no site, oque você acha que poderia melhorar, sugestões, ou apenas um elogio :).
         </p>
 
-        <validation-observer v-slot="{ handleSubmit, invalid }">
+        <validation-observer ref="form" v-slot="{ handleSubmit, invalid }">
           <form
             class="row mt-4"
             @submit.prevent="handleSubmit(sendContact)"
           >
             <div class="form-group col-12">
               <validation-provider
-                v-slot="{ errors }"
-                rules="required|alpha"
+                v-slot="{ errors, valid }"
+                rules="required|alpha_spaces"
               >
                 <Input
                   v-model.trim="form.name"
                   name="name"
                   placeholder="nome"
+                  :is-valid="valid"
                   :error="errors[0]"
                 />
               </validation-provider>
@@ -31,7 +32,7 @@
 
             <div class="form-group col-12">
               <validation-provider
-                v-slot="{ errors }"
+                v-slot="{ errors, valid }"
                 rules="required|email"
               >
                 <Input
@@ -40,43 +41,46 @@
                   name="email"
                   type="email"
                   :error="errors[0]"
+                  :is-valid="valid"
                 />
               </validation-provider>
             </div>
 
             <div class="form-group col-12">
               <validation-provider
-                v-slot="{ errors }"
+                v-slot="{ errors, valid }"
                 rules="required"
               >
                 <Input
-                  v-model.trim="form.tel"
+                  v-model.trim="form.phone"
                   placeholder="telefone"
-                  name="telefone"
+                  name="phone"
                   muted="Opcional"
                   :error="errors[0]"
+                  :is-valid="valid"
                 />
               </validation-provider>
             </div>
 
             <div class="form-group col-12">
               <validation-provider
-                v-slot="{ errors }"
+                v-slot="{ errors, valid }"
                 rules="required|min:30"
               >
                 <Input
-                  v-model.trim="form.message"
+                  v-model.trim="form.body"
                   type="textarea"
                   placeholder="Menssagem"
-                  name="message"
+                  name="body"
                   :error="errors[0]"
+                  :is-valid="valid"
                 />
               </validation-provider>
             </div>
 
             <div class="form-group mx-auto">
               <button
-                class="btn large"
+                class="btn-press btn-large"
                 type="submit"
                 name="send"
                 :disabled="sending || invalid"
@@ -107,16 +111,29 @@ export default {
     form: {
       name: '',
       email: '',
-      tel: '',
-      message: ''
+      phone: '',
+      body: ''
     }
   }),
 
   methods: {
-    sendContact () {
+    async sendContact () {
       this.sending = true;
+      this.$nuxt.$loading.start();
+
+      try {
+        await this.$axios.$post('/contact', this.form);
+        this.form.name = this.form.email = this.form.phone = this.form.body = '';
+
+        this.$nextTick(() => {
+          this.$refs.form.reset();
+        });
+      } catch (error) {
+        console.warn(error);
+      }
 
       this.sending = false;
+      this.$nuxt.$loading.finish();
     }
   }
 };

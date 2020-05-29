@@ -1,5 +1,6 @@
 import { extend } from 'vee-validate';
-import { required, min, email, alpha, confirmed, numeric, max } from 'vee-validate/dist/rules';
+// eslint-disable-next-line camelcase
+import { required, min, email, alpha, alpha_spaces, confirmed, numeric, max } from 'vee-validate/dist/rules';
 
 extend('required', {
   ...required,
@@ -24,6 +25,12 @@ extend('email', {
 extend('alpha', {
   ...alpha,
   message: 'This field must be only contain alphabetic characters'
+});
+
+extend('alpha_spaces', {
+  // eslint-disable-next-line camelcase
+  ...alpha_spaces,
+  message: 'This field must be only contain alphabetic characters as well as spaces'
 });
 
 extend('confirmed', {
