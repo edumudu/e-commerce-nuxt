@@ -1,5 +1,6 @@
 // Variaveis
 @import './variables/colors';
+@import './variables/var-names';
 
 @import './global';
 @import './general';
@@ -25,6 +26,7 @@
 @import './components/stepper';
 @import './components/collapse-cart';
 @import './components/paginate';
+@import './components/alert';
 
 // Page components
 @import './page-components/header-site';

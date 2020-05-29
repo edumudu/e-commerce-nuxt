@@ -1,61 +1,146 @@
 @import '../mixins/buttons-mixins';
 
+$raise-size: 7px;
+$button-default-height: 48px;
+$button-default-border-radius: 6px;
+
 /*
  * Botões
 */
 .btn {
-  padding: 0.5rem 1.1rem;
+  display: inline-block;
+  height: $button-default-height;
+  padding: 0 30px;
   color: #fff;
-  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  text-rendering: auto;
+  font-size: 0.9rem;
+  line-height: $button-default-height;
+  font-weight: 700;
   background-color: $teal;
   border: none;
-  border-radius: .25rem;
+  border-radius: $button-default-border-radius;
   cursor: pointer;
+  outline: none;
   transition: background-color 0.4s,
               box-shadow 0.4s;
 
-  &:disabled,
-  &.disabled {
+  &:disabled {
     opacity: 0.65;
     pointer-events: none;
   }
+
+  &.loading {
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      display: inline-block;
+      height: 100%;
+      width: 0;
+      background-color: rgba(0,0,0,0.5);
+      transition: width .2s;
+      border-radius: $button-default-border-radius;
+    }
+  }
+   
+  @for $i from 1 through 100 {
+    &.loading[data-status="#{$i}"]::after {
+      width: percentage($i / 100);
+    }
+  }
+  
 }
 
 .btn-small {
-  @extend .btn;
-
-  padding: 0.2rem 0.8rem;
+  padding: 0 0.8rem;
   font-size: 0.85rem; 
 }
 
+.btn-large {
+  padding: 0 40px;
+  font-size: 1.2rem; 
+}
 
 .btn-block { display: block; }
-.btn-shop { @extend .btn-flat; }
+.btn-shop {
+  @extend .btn-flat;
+
+  padding: 0 15px;
+}
 
 .btn-add-cart {
   background-color: #e94d1c;
-  height: 38px;
+}
+
+.btn-press {
+  @extend .btn;
+
+  position: relative;
+  box-shadow: 0 #{$raise-size} 0 adjust-color($color: $teal, $lightness: -5%);
+  transition: background-color 0.4s,
+              box-shadow 0.2s,
+              transform 0.2s;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    box-shadow: 0 #{$raise-size + 4px} 1px rgba(0,0,0,0.5);
+    transition: box-shadow 0.2s;
+  }
+  
+  &:hover {
+    transform: translateY(3px);
+    box-shadow: 0 #{$raise-size - 2px} 0 adjust-color($color: $teal, $lightness: -5%);
+
+    &::before {
+      box-shadow: 0 #{$raise-size} 1px rgba(0,0,0,0.5);
+    }
+  }
+
+  &:active {
+    transform: translateY($raise-size);
+    box-shadow: 0 0 0 adjust-color($color: $teal, $lightness: -5%);
+
+    &::before { box-shadow: 0 0 0 rgba(0,0,0,0.5); }
+  }
+
+  &:disabled {
+    transform: translateY($raise-size);
+    box-shadow: 0 0 0 #000;
+
+    &::before { box-shadow: 0 0 0 rgba(0,0,0,0.5); }
+  }
 }
 
 /*
  * default
 */
-.btn-secondary { @include make-btn($secondary); }
-.btn-success { @include make-btn($success); }
-.btn-info { @include make-btn($info); }
-.btn-danger { @include make-btn($danger); }
-.btn-warning { @include make-btn($warning); }
-.btn-dark { @include make-btn($dark); }
+@each $name, $value in $var_list_names {
+  .btn-#{$name} {
+    @include make-btn($value);
+  }
+}
 
 /*
  * Outline
 */
-.btn-outline-secondary { @include make-outline($secondary); }
-.btn-outline-success { @include make-outline($success); }
-.btn-outline-info { @include make-outline($info); }
-.btn-outline-danger { @include make-outline($danger); }
-.btn-outline-warning { @include make-outline($warning); }
-.btn-outline-dark { @include make-outline($dark); }
+@each $name, $value in $var_list_names {
+  .btn-outline-#{$name} {
+    @include make-outline($value);
+  }
+}
 
 /*
  * Flat
@@ -69,9 +154,9 @@
       background-color: rgba(0,0,0,0.08);
   }
 }
-.btn-flat-secondary { @include make-flat($secondary); }
-.btn-flat-success { @include make-flat($success); }
-.btn-flat-info { @include make-flat($info); }
-.btn-flat-danger { @include make-flat($danger); }
-.btn-flat-warningt { @include make-flat($warning); }
-.btn-flat-dark { @include make-flat($dark); }
+
+@each $name, $value in $var_list_names {
+  .btn-flat-#{$name} {
+    @include make-flat($value);
+  }
+}
