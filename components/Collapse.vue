@@ -19,7 +19,7 @@
           :placeholder="inputPlaceholder"
         />
 
-        <button class="btn-small">
+        <button class="btn btn-small">
           {{ buttonText }}
         </button>
       </div>

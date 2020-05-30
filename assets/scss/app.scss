@@ -27,6 +27,7 @@
 @import './components/collapse-cart';
 @import './components/paginate';
 @import './components/alert';
+@import './components/responsive-table';
 
 // Page components
 @import './page-components/header-site';
@@ -34,3 +35,5 @@
 
 // Pages
 @import './pages/product';
+
+@import './components/errors';

@@ -41,7 +41,7 @@
         <div class="col-sm-12 col-md-10">
           <div
             class="overlay-loading"
-            :class="{ active }"
+            :class="{ active: $fetchState.pending }"
           >
             <img src="/assets/svgs/load-1s-200px.svg">
           </div>
@@ -67,37 +67,20 @@ export default {
     Paginate
   },
 
+  async fetch () {
+    const response = await this.$axios.$get(`/product?page=${this.$route.query.page || 1}`);
+
+    this.products = response.data;
+    this.totalPages = Math.ceil(response.total / response.per_page);
+  },
+
   data: () => ({
     products: [],
-    active: true,
     totalPages: 0
   }),
 
-  computed: {
-    currentPage () {
-      return +this.$route.query.page || 1;
-    }
-  },
-
   watch: {
-    currentPage (newValue) {
-      this.fetchProducts();
-    }
-  },
-
-  mounted () {
-    this.fetchProducts();
-  },
-
-  methods: {
-    async fetchProducts () {
-      this.active = true;
-      this.products = [];
-      const response = await this.$axios.$get(`/product?page=${this.currentPage}`);
-      this.products = response.data;
-      this.totalPages = Math.ceil(response.total / response.per_page);
-      this.active = false;
-    }
+    '$route.query': '$fetch'
   }
 };
 </script>

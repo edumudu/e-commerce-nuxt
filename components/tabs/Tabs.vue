@@ -9,7 +9,7 @@
         <a
           :href="tab.href"
           data-toggle="tab"
-          @click="selectTab(tab)"
+          @click.prevent="selectTab(tab)"
         >
           {{ tab.name }}
         </a>
