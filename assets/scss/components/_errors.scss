@@ -1,0 +1,26 @@
+.error-404 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #0e0d0d;
+  color: #fff;
+
+  &-container { text-align: center; }
+  &-title { font-size: 3rem; }
+
+  &-link {
+    color: $gray;
+    transition: color 0.3s, font-size 0.3s;
+
+    &:hover {
+      color: #fff;
+      font-size: 1.05rem;
+    }
+  }
+}
