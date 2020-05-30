@@ -7,7 +7,17 @@
 
       <div class="row">
         <div class="col-sm-12 col-md-9">
-          <Table :products="products" />
+          <div v-if="cartProducts.length">
+            <Table :products="cartProducts" />
+
+            <div class="d-flex justify-content-between">
+              Total: <span>{{ cartTotal.toFixed(2) }}</span>
+            </div>
+          </div>
+
+          <div v-else>
+            No have products in cart yet
+          </div>
         </div>
 
         <div class="col-sm-12 col-md-3">
@@ -16,31 +26,21 @@
               Oque você quer
             </h2>
             <div class="options-contain">
-              <div class="collapse">
-                <h3>Use um codigo de cupom</h3>
-                <div class="collapsable">
-                  <p>Entrte com o codigo do cupom</p>
-                  <div class="flex">
-                    <input class="form-field" type="text" name="cupom" placeholder="Insira o cupom">
-                    <button class="btn">
-                      Aplicar
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <Collapse
+                title="Use um codigo de cupom"
+                input-placeholder="cupom"
+                button-text="Aplicar"
+              >
+                Entre com o codigo do cupom
+              </Collapse>
 
-              <div class="collapse">
-                <h3>Verificar Frete</h3>
-                <div class="collapsable">
-                  <p>Informe o CEP</p>
-                  <div class="flex">
-                    <input class="form-field" type="text" name="CEP" placeholder="Insira o CEP">
-                    <button class="btn">
-                      Verificar
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <Collapse
+                title="Verificar Frete"
+                input-placeholder="CEP"
+                button-text="Verificar"
+              >
+                Informe o CEP
+              </Collapse>
             </div>
           </div>
         </div>
@@ -52,26 +52,24 @@
 <script>
 import { mapGetters } from 'vuex';
 import Table from '~/components/Table.vue';
+import Collapse from '~/components/Collapse.vue';
 
 export default {
   middleware: 'auth',
 
-  components: { Table },
-
-  data: () => ({
-    products: []
-  }),
-
-  async mounted () {
-    for (const cartItem of this.cartItems()) {
-      const product = await this.$axios.$get(`/product/${cartItem.id}`);
-      this.products.push({ ...product, quantity: cartItem.quantity });
-    }
+  components: {
+    Table,
+    Collapse
   },
 
-  methods: {
+  data: () => ({
+    //
+  }),
+
+  computed: {
     ...mapGetters({
-      cartItems: 'cart/cartItems'
+      cartProducts: 'cart/cartProducts',
+      cartTotal: 'cart/cartTotal'
     })
   }
 };

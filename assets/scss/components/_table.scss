@@ -1,75 +1,46 @@
 .table-responsive {
   width: 100%;
   border-collapse: collapse;
-}
 
-.table-responsive thead{
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 0.95rem;
-  color: #fff;
-  background-color: #2980b9;
-}
-
-.table-responsive thead td {
-  padding: 15px;
-  text-align: center;
-}
-
-.table-responsive tbody {
-  color: #4f4f4f;
-  font-size: 0.9rem;
-  font-weight: 400;
-}
-
-.table-responsive tbody tr {
-  height: 90px;
-  transition: background-color 0.35s;
-}
-
-.table-responsive tbody tr:hover {
-  background-color: rgba(0,0,0,0.08);
-}
-
-.table-responsive tbody td {
-  border-bottom: 1px solid #95a5a6;
-  text-align: center;
-}
-
-.table-responsive .responsive-img {
-  max-height: 90px;
-}
-
-/*
- * Collapse
-*/
-.collapse {
-  padding: 10px 0;
-  border-bottom: 1px solid #bdc3c7;
-}
-
-.collapse h3{
-  font-size: 0.85rem;
-  cursor: pointer;
+  thead{
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    color: #fff;
+    background-color: #2980b9;
+  }
   
-}
-
-.collapse h3:hover{
-  color: #e74c3c;
-}
-
-.collapse p {
-  font-size: 0.9rem;
-}
-
-.collapse .collapsable {
-  overflow: hidden;
-  height: auto;
-  max-height: 0;
-  animation: collapse_in 0.3s;
-}
-
-.collapse.active .collapsable {
-  animation: collapse_out 1s;
-  max-height: 600px;
+  thead td {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  tbody {
+    color: #4f4f4f;
+    font-size: 0.9rem;
+    font-weight: 400;
+  
+    .btn-remove {
+      width: 35px;
+      height: 35px;
+      padding: 9px 0;
+      background-color: $danger_light;
+    }
+  }
+  
+  tbody tr {
+    height: 90px;
+    transition: background-color 0.35s;
+  }
+  
+  tbody tr:hover {
+    background-color: rgba(0,0,0,0.08);
+  }
+  
+  tbody td {
+    border-bottom: 1px solid #95a5a6;
+    text-align: center;
+  }
+  
+  img { max-height: 90px; }
 }

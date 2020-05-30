@@ -1,0 +1,38 @@
+$arrow-size: 8px;
+
+.tooltip {
+  position: relative;
+
+  &::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(#{$arrow-size} + 100%);
+    left: 50%;
+    display: none;
+    min-width: 140px;
+    padding: 6px 10px;
+    text-align: center;
+    background-color: $danger;
+    color: $white;
+    font-size: .8rem;
+    border-radius: 3px;
+    transform: translateX(-50%);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -$arrow-size;
+    left: 50%;
+    display: none;
+    transform: translateX(-50%);
+
+    border-left: $arrow-size solid transparent;
+    border-right: $arrow-size solid transparent;
+
+    border-bottom: $arrow-size solid $danger;
+  }
+
+  &:hover::before,
+  &:hover::after { display: block; }
+}

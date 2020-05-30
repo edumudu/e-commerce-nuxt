@@ -1,23 +1,23 @@
 <template>
-  <label class="md-wrapper my-1">
+  <label class="md-wrapper">
     <textarea
       v-if="type === 'textarea'"
       v-model="computedValue"
       class="form-field"
-      :class="{ active }"
+      :class="{ active, 'is-invalid': !!error, 'is-valid': isValid}"
       :type="type"
       :name="name"
-      @blur="changeActive"
+      :required="required"
     />
 
     <input
       v-else
       v-model="computedValue"
       class="form-field"
-      :class="{ active }"
+      :class="{ active , 'is-invalid': !!error, 'is-valid': isValid }"
       :type="type"
       :name="name"
-      @blur="changeActive"
+      :required="required"
     >
 
     <span class="md-float" v-text="placeholder" />
@@ -28,6 +28,11 @@
     >
       {{ muted }}
     </span>
+
+    <span class="invalid-message">
+      {{ error }}
+    </span>
+
   </label>
 </template>
 
@@ -38,12 +43,11 @@ export default {
     value: { type: String, default: '' },
     placeholder: { type: String, default: '' },
     name: { type: String, default: '' },
-    muted: { type: String, default: '' }
+    muted: { type: String, default: '' },
+    required: { type: Boolean, default: false },
+    error: { type: String, default: '' },
+    isValid: { type: Boolean, default: false }
   },
-
-  data: () => ({
-    active: false
-  }),
 
   computed: {
     computedValue: {
@@ -54,12 +58,10 @@ export default {
       get () {
         return this.value;
       }
-    }
-  },
+    },
 
-  methods: {
-    changeActive () {
-      this.active = this.value.trim().length > 0;
+    active () {
+      return this.value.trim().length > 0;
     }
   }
 };

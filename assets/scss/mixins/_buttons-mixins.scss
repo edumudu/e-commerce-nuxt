@@ -1,5 +1,5 @@
 @mixin make-btn($color) {
-  background-color: $color;
+  background-color: $color !important;
   color: #fff;
   border: 1px solid $color;
 
@@ -32,5 +32,13 @@
 
   &:hover {
     background-color: adjust-color($color, $alpha: -0.9);
+  }
+}
+
+@mixin btn-press-set-color($color) {
+  &.btn-press {
+    box-shadow: 0 #{$raise-size} 0 adjust-color($color: $color, $lightness: -5%);
+    
+    &:hover { box-shadow: 0 #{$raise-size - 2px} 0 adjust-color($color: $color, $lightness: -5%); }
   }
 }

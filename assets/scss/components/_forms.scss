@@ -1,24 +1,32 @@
+$input-default-radius: 3px;
+
 .form-field {
   width: 100%;
   padding: 0.45rem 0.75rem;
   font-size: 1.2rem;
   line-height: 1.5;
-  color: $gray-2;
-  border-radius: 5px;
+  color: inherit;
+  font-family: inherit;
+  border-radius: $input-default-radius;
   border: 1px solid $gray;
-  outline: none;
   transition: color 0.4s,
-              border 0.4s;
+              border 0.4s,
+              box-shadow 0.4s;
 
   &:focus {
     color: $dark_color;
-    border-color: $info;
+    box-shadow: inset 0 0 0 2px $info;
+  }
+
+  &.small {
+    padding: 0.25rem 0.55rem;
+    font-size: 1rem;
   }
 
   &.icon {
     padding-left: 2.5rem;
 
-  + .help-icon {
+    + .help-icon {
       position: absolute;
       top: 50%;
       left: 16px;
@@ -26,19 +34,23 @@
       color: $dark_color;
     }
   }
-}
 
-.form-field:disabled,
-.form-field.disabled {
-  opacity: 0.65;
-  pointer-events: none;
-  background-color: rgb(230, 230, 230);
-}
+  &:disabled,
+  &.disabled {
+    opacity: 0.65;
+    pointer-events: none;
+    background-color: rgb(230, 230, 230);
+  }
 
-.form-field:read-only {
-  opacity: 0.8;
-  background-color: rgb(237,239,241);
-  pointer-events: none;
+  &:read-only {
+    opacity: 0.8;
+    background-color: rgb(237,239,241);
+  }
+
+  &.is-invalid { box-shadow: inset 0 0 0 1px $danger; }
+  &.is-valid { box-shadow: inset 0 0 0 1px $green; }
+  &.is-invalid:focus { box-shadow: inset 0 0 0 2px $danger; }
+  &.is-valid:focus { box-shadow: inset 0 0 0 2px $green; }
 }
 
 textarea.form-field { 
@@ -47,26 +59,31 @@ textarea.form-field {
   height: 120px;
 }
 
+.invalid-message {
+  display: block;
+  padding: 0 0.5rem;
+  margin-top: 5px;
+  color: $danger;
+  font-size: 0.77rem;
+}
+
 .form-group {
+  margin-top: 0.85rem;
+}
+
+.input-group {
   display: flex;
 
-  .form-field {
-    border-radius: 5px 0 0 5px;
-  }
-
-  .form-field + .form-field {
-    border-radius: 0 5px 5px 0;
-  }
-
-  .form-field ~ .btn {
-    border-radius: 0 5px 5px 0;
-  }
+  .form-field { border-radius: $input-default-radius 0 0 $input-default-radius; }
+  .form-field + .form-field { border-radius: 0 repeat($input-default-radius, 2) 0; }
+  .form-field ~ .btn { border-radius: 0 repeat($input-default-radius, 2) 0; }
 }
 
 
 // Material desgin Inputs
 .md-wrapper {
   position: relative;
+  display: inline-block;
   width: 100%;
 
   .form-field + .md-float {
@@ -92,6 +109,9 @@ textarea.form-field {
   }
   
   .form-field:focus + .md-float { color: $info; }
+
+  .form-field.is-invalid + .md-float { color: $red; }
+  .form-field.is-valid + .md-float { color: $green; }
 }
 
 /*

@@ -6,7 +6,7 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: '| CG Atacado',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -19,7 +19,7 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: '#e53935' },
   /*
   ** Global CSS
   */
@@ -29,6 +29,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/vee-validate',
+    { src: '~/plugins/vue-chartjs', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -56,12 +58,14 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: process.env.BASE_URL_API
+    baseURL: process.env.BASE_URL_API,
+    headers: { Accept: 'aplication/json' }
   },
   /*
   ** Build configuration
   */
   build: {
+    transpile: ['vee-validate/dist/rules'],
     /*
     ** You can extend webpack config here
     */
@@ -73,7 +77,7 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/auth/login', method: 'post', propertyName: 'access_token' },
+          login: { url: '/auth/login', method: 'post', propertyName: 'token' },
           logout: { url: '/auth/logout', method: 'post' },
           user: { url: '/auth/me', method: 'get', propertyName: false }
         }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
 
 * {
   padding: 0;
@@ -7,7 +7,7 @@
 }
 
 html {
-  font-family: Roboto, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   scroll-behavior: smooth;
@@ -27,10 +27,21 @@ a {
   text-decoration: none;
 }
 
-p { margin-bottom: 10px; }
+p {
+  margin-bottom: 10px;
+  color: $theme-color;
+}
 
 input,
-textarea { font-size: inherit; }
+textarea {
+  font-size: inherit;
+}
+
+a,
+button,
+select,
+input,
+textarea { outline: none; }
 
 #page {
   min-height: 100vh;
@@ -38,4 +49,7 @@ textarea { font-size: inherit; }
   flex-direction: column;
 }
 
-#page-content { flex: 1; }
+#page-content {
+  position: relative;
+  flex: 1;
+}

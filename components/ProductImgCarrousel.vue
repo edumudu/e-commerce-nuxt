@@ -2,7 +2,7 @@
   <div class="product-image">
     <img
       class="responsive-img active"
-      :src="imgs[active]"
+      :src="imgs[active] && imgs[active].image || 'https://via.placeholder.com/450x500?text=Not%20Photo'"
     >
 
     <div class="product-other-images py-3">
@@ -12,7 +12,7 @@
           :key="index"
           class="responsive-img"
           :class="{ active: active === index }"
-          :src="img"
+          :src="img.image"
           @click="setImg(index)"
         >
       </div>
@@ -32,7 +32,7 @@ export default {
   }),
 
   mounted () {
-    this.active = this.start || this.imgs.indexOf(this.imgs.find(img => img.includes('thumb')));
+    this.active = this.start || this.active;
   },
 
   methods: {

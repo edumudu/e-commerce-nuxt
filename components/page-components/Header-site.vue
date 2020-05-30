@@ -29,8 +29,8 @@
           <div class="row align-items-center justify-content-between col-md-12 row">
             <div class="navbar-search col-8 px-0">
               <form @submit.prevent>
-                <div class="form-group">
-                  <input class="form-field icon" type="text" name="search_value" placeholder="Procure por uma categoria ou um produto :)" required>
+                <div class="input-group">
+                  <input class="form-field small icon" type="text" name="search_value" placeholder="Procure por uma categoria ou um produto :)" required>
 
                   <fa :icon="['fas', 'search']" class="help-icon" />
 
@@ -93,7 +93,7 @@
 
                 <li class="menu-item">
                   <Dropdown>
-                    <template slot="toggle">
+                    <template v-slot:toggle>
                       <fa :icon="['fas', 'heart']" />
                     </template>
 
@@ -105,16 +105,26 @@
 
                 <li class="menu-item">
                   <Dropdown>
-                    <template slot="toggle">
+                    <template v-slot:toggle>
                       <nuxt-link to="/cart" class="icon-count">
                         <fa :icon="['fas', 'shopping-cart']" />
 
-                        <span class="count">2</span>
+                        <span class="count">
+                          {{ cartItems.length }}
+                        </span>
                       </nuxt-link>
                     </template>
 
-                    <li class="dropdown-item">
-                      Carrinho aqui
+                    <li
+                      v-for="product in cartProducts"
+                      :key="product.id"
+                      class="dropdown-item"
+                    >
+                      <nuxt-link :to="`/product/${product.slug}`">
+                        {{ product.name }}
+                        -
+                        {{ (product.price * product.quantity).toFixed(2) }}
+                      </nuxt-link>
                     </li>
                   </Dropdown>
                 </li>
@@ -128,6 +138,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Dropdown from '~/components/Dropdown.vue';
 
 export default {
@@ -142,6 +153,13 @@ export default {
       { text: 'sobre', href: '/about' },
       { text: 'produtos', href: '/products' }
     ]
-  })
+  }),
+
+  computed: {
+    ...mapGetters({
+      cartItems: 'cart/cartItems',
+      cartProducts: 'cart/cartProducts'
+    })
+  }
 };
 </script>

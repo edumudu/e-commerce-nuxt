@@ -16,6 +16,12 @@ export default {
   components: {
     HeaderSite,
     FooterSite
+  },
+
+  mounted () {
+    // init cart
+    this.$store.commit('cart/setCart', JSON.parse(localStorage.getItem('cart')) || []);
+    this.$store.dispatch('cart/fetchProducts');
   }
 };
 </script>

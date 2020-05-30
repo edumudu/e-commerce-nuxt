@@ -9,6 +9,10 @@
     border-radius: 0.15rem;
     line-height: 1;
   }
+
+  .quantity {
+    text-align: center;
+  }
 }
 
 .quantity-buttons {
@@ -20,7 +24,6 @@
     height: 20px;
     font-size: 0.9rem;
     color: inherit;
-    outline: none;
     border: 1px solid #ccc;
     cursor: pointer;
     transition: box-shadow 0.05s;

@@ -6,7 +6,7 @@
       </h2>
 
       <section class="row">
-        <aside class="sidebar col-sm-12 col-md-3">
+        <aside class="sidebar col-sm-12 col-md-2">
           <ul class="treeview">
             <li class="treeview-item">
               <a href="<?= MAIN_PATH . 'products?category=blusa'; ?>">
@@ -22,7 +22,7 @@
 
             <li class="treeview-item">
               <a href="<?= MAIN_PATH . 'products?category=blusa'; ?>">
-                Acessorios para a cabeça
+                Cabeça
               </a>
 
               <ul class="treeview">
@@ -38,10 +38,19 @@
           </ul>
         </aside>
 
-        <div class="col-sm-12 col-md-9">
+        <div class="col-sm-12 col-md-10">
+          <div
+            class="overlay-loading"
+            :class="{ active: $fetchState.pending }"
+          >
+            <img src="/assets/svgs/load-1s-200px.svg">
+          </div>
+
           <div class="row products-box">
             <vitrine :items="products" />
           </div>
+
+          <paginate :total-pages="totalPages" />
         </div>
       </section>
     </div>
@@ -50,18 +59,28 @@
 
 <script>
 import Vitrine from '~/components/Vitrine.vue';
+import Paginate from '~/components/Paginate.vue';
 
 export default {
   components: {
-    Vitrine
+    Vitrine,
+    Paginate
+  },
+
+  async fetch () {
+    const response = await this.$axios.$get(`/product?page=${this.$route.query.page || 1}`);
+
+    this.products = response.data;
+    this.totalPages = Math.ceil(response.total / response.per_page);
   },
 
   data: () => ({
-    products: []
+    products: [],
+    totalPages: 0
   }),
 
-  async mounted () {
-    this.products = await this.$axios.$get('/product');
+  watch: {
+    '$route.query': '$fetch'
   }
 };
 </script>
