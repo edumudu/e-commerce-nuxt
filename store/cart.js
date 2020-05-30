@@ -19,8 +19,9 @@ export const getters = {
 
 export const actions = {
   async fetchProducts ({ state, commit, getters }) {
-    let { data } = await this.$axios.post('/cart/info', { cart: getters.cartItems });
+    const cart = Array.from(getters.cartItems, item => item.id);
 
+    let { data } = await this.$axios.post('/cart/info', { cart });
     data = data.map((product) => {
       const cartItem = state.cart.find(item => item.id === product.id);
 
@@ -38,9 +39,17 @@ export const actions = {
         commit('pushProductToCart', product);
         dispatch('fetchProducts');
       } else {
+        const qty = product.quantity;
+        const prod = state.products.find(prod => prod.id === cartItem.id);
+
         commit('setItemQuantity', {
-          item: cartItem,
-          qty: product.quantity
+          index: state.cart.indexOf(cartItem),
+          qty
+        });
+
+        commit('setProductInfoQuantity', {
+          index: state.products.indexOf(prod),
+          qty
         });
       }
 
@@ -88,14 +97,6 @@ export const mutations = {
 
   pushProductToCart (state, product) {
     state.cart.push(product);
-  },
-
-  incrementItemQuantity (state, product) {
-    product.quantity++;
-  },
-
-  decrementProductInventory (state, product) {
-    product.estoque--;
   },
 
   removeItemFromCart (state, item) {

@@ -10,78 +10,130 @@
           Valorizamos a opnião dos nossos clientes, e por isso queremos saber oque você esta achando. Mande-nos oque você esta achando da experiência no site, oque você acha que poderia melhorar, sugestões, ou apenas um elogio :).
         </p>
 
-        <form
-          class="row mt-4"
-          @submit.prevent="sendContact"
-        >
-          <div class="form-group col-12">
-            <Input
-              v-model="form.name"
-              name="name"
-              placeholder="nome"
-              required
-            />
-          </div>
+        <validation-observer ref="form" v-slot="{ handleSubmit, invalid }">
+          <form
+            class="row mt-4"
+            @submit.prevent="handleSubmit(sendContact)"
+          >
+            <div class="form-group col-12">
+              <validation-provider
+                v-slot="{ errors, valid }"
+                rules="required|alpha_spaces"
+              >
+                <Input
+                  v-model.trim="form.name"
+                  name="name"
+                  placeholder="nome"
+                  :is-valid="valid"
+                  :error="errors[0]"
+                />
+              </validation-provider>
+            </div>
 
-          <div class="form-group col-12">
-            <Input
-              v-model="form.email"
-              placeholder="email"
-              name="email"
-              type="email"
-              required
-            />
-          </div>
+            <div class="form-group col-12">
+              <validation-provider
+                v-slot="{ errors, valid }"
+                rules="required|email"
+              >
+                <Input
+                  v-model.trim="form.email"
+                  placeholder="email"
+                  name="email"
+                  type="email"
+                  :error="errors[0]"
+                  :is-valid="valid"
+                />
+              </validation-provider>
+            </div>
 
-          <div class="form-group col-12">
-            <Input
-              v-model="form.tel"
-              placeholder="telefone"
-              name="telefone"
-              muted="Opcional"
-            />
-          </div>
+            <div class="form-group col-12">
+              <validation-provider
+                v-slot="{ errors, valid }"
+                rules="required"
+              >
+                <Input
+                  v-model.trim="form.phone"
+                  placeholder="telefone"
+                  name="phone"
+                  muted="Opcional"
+                  :error="errors[0]"
+                  :is-valid="valid"
+                />
+              </validation-provider>
+            </div>
 
-          <div class="form-group col-12">
-            <Input
-              v-model="form.message"
-              type="textarea"
-              placeholder="Menssagem"
-              name="message"
-            />
-          </div>
+            <div class="form-group col-12">
+              <validation-provider
+                v-slot="{ errors, valid }"
+                rules="required|min:30"
+              >
+                <Input
+                  v-model.trim="form.body"
+                  type="textarea"
+                  placeholder="Menssagem"
+                  name="body"
+                  :error="errors[0]"
+                  :is-valid="valid"
+                />
+              </validation-provider>
+            </div>
 
-          <div class="form-group mx-auto">
-            <button class="btn large" type="submit" name="send">
-              Enviar
-            </button>
-          </div>
-        </form>
+            <div class="form-group mx-auto">
+              <button
+                class="btn-press btn-large"
+                type="submit"
+                name="send"
+                :disabled="sending || invalid"
+              >
+                Enviar
+              </button>
+            </div>
+          </form>
+        </validation-observer>
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import Input from '~/components/Input.vue';
 
 export default {
   components: {
-    Input
+    Input,
+    ValidationProvider,
+    ValidationObserver
   },
 
   data: () => ({
+    sending: false,
     form: {
       name: '',
       email: '',
-      tel: '',
-      message: ''
+      phone: '',
+      body: ''
     }
   }),
 
   methods: {
-    sendContact () {
+    async sendContact () {
+      this.sending = true;
+      this.$nuxt.$loading.start();
 
+      try {
+        await this.$axios.$post('/contact', this.form);
+        this.form.name = this.form.email = this.form.phone = this.form.body = '';
+
+        this.$nextTick(() => {
+          this.$refs.form.reset();
+        });
+      } catch (error) {
+        console.warn(error);
+      }
+
+      this.sending = false;
+      this.$nuxt.$loading.finish();
     }
   }
 };

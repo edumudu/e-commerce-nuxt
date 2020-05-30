@@ -33,7 +33,15 @@ p {
 }
 
 input,
-textarea { font-size: inherit; }
+textarea {
+  font-size: inherit;
+}
+
+a,
+button,
+select,
+input,
+textarea { outline: none; }
 
 #page {
   min-height: 100vh;

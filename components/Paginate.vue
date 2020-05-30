@@ -1,7 +1,7 @@
 <template>
-  <ul class="paginate">
+  <ul v-show="totalPages > 1" class="paginate">
     <li :class="{ disabled: currentPage == 1 }">
-      <nuxt-link :to="`/products?page=${currentPage - 1}`">
+      <nuxt-link :to="`${$route.path}?page=${currentPage - 1}`">
         <fa :icon="['fas', 'angle-left']" />
       </nuxt-link>
     </li>
@@ -11,13 +11,13 @@
       :key="index"
       :class="{ active: page == currentPage}"
     >
-      <nuxt-link :to="`/products?page=${page}`">
+      <nuxt-link :to="`${$route.path}?page=${page}`">
         {{ page }}
       </nuxt-link>
     </li>
 
     <li :class="{ disabled: currentPage == totalPages }">
-      <nuxt-link :to="`/products?page=${currentPage + 1}`">
+      <nuxt-link :to="`${$route.path}?page=${currentPage + 1}`">
         <fa :icon="['fas', 'angle-right']" />
       </nuxt-link>
     </li>

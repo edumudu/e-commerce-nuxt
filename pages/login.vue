@@ -27,34 +27,59 @@
             Eu tenho uma conta.
           </p>
 
-          <form @submit.prevent="sendLogin">
-            <div class="form-group">
-              <Input
-                v-model="login.email"
-                name="login"
-                placeholder="E-mail"
-                required
-              />
-            </div>
+          <span v-show="failMessage" class="alert alert-danger">
+            {{ failMessage }}
+          </span>
 
-            <div class="form-group">
-              <Input
-                v-model="login.password"
-                type="password"
-                name="password"
-                placeholder="Senha"
-                required
-              />
+          <validation-observer v-slot="{ handleSubmit, invalid }">
+            <form @submit.prevent="handleSubmit(sendLogin)">
+              <div class="form-group">
+                <validation-provider
+                  v-slot="{ errors, valid }"
+                  rules="required|email"
+                >
+                  <Input
+                    v-model.trim="login.email"
+                    name="login"
+                    type="email"
+                    placeholder="E-mail"
+                    :error="errors[0]"
+                    :is-valid="valid"
+                  />
+                </validation-provider>
+              </div>
 
-              <nuxt-link class="support-link" to="/forget-password">
-                Esqueceu sua senha?
-              </nuxt-link>
-            </div>
+              <div class="form-group">
+                <validation-provider
+                  v-slot="{ errors, valid }"
+                  rules="required|min:8"
+                >
+                  <Input
+                    v-model.trim="login.password"
+                    type="password"
+                    name="password"
+                    placeholder="Senha"
+                    :error="errors[0]"
+                    :is-valid="valid"
+                  />
+                </validation-provider>
 
-            <div class="form-group">
-              <input class="btn" type="submit" value="Entrar">
-            </div>
-          </form>
+                <nuxt-link class="support-link ml-2" to="/forget-password">
+                  Esqueceu sua senha?
+                </nuxt-link>
+              </div>
+
+              <div class="form-group">
+                <button
+                  class="btn-press"
+                  type="submit"
+                  :disabled="sending || invalid"
+                >
+                  Entrar
+                </button>
+              </div>
+            </form>
+          </validation-observer>
         </div>
       </div>
     </div>
@@ -62,12 +87,19 @@
 </template>
 
 <script>
+import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import Input from '~/components/Input.vue';
 
 export default {
-  components: { Input },
+  components: {
+    Input,
+    ValidationProvider,
+    ValidationObserver
+  },
 
   data: () => ({
+    sending: false,
+    failMessage: '',
     login: {
       email: '',
       password: ''
@@ -75,8 +107,18 @@ export default {
   }),
 
   methods: {
-    sendLogin () {
-      this.$auth.loginWith('local', { data: this.login });
+    async sendLogin () {
+      this.sending = true;
+      this.$nuxt.$loading.start();
+
+      try {
+        await this.$auth.loginWith('local', { data: this.login });
+      } catch (e) {
+        this.failMessage = 'User or password incorrect';
+      }
+
+      this.sending = false;
+      this.$nuxt.$loading.finish();
     }
   }
 };

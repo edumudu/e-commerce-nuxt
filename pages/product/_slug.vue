@@ -2,7 +2,7 @@
   <section id="page-content">
     <div
       class="overlay-loading"
-      :class="{ active }"
+      :class="{ active: $fetchState.pending }"
     >
       <img src="/assets/svgs/load-1s-200px.svg" class="mt-5">
     </div>
@@ -74,7 +74,7 @@
               />
 
               <button
-                class="btn btn-add-cart"
+                class="btn-press btn-add-cart"
                 @click="addToCart"
               >
                 Adicionar ao carrinho
@@ -208,7 +208,11 @@
                   </div>
 
                   <div class="form-group d-flex justify-content-center">
-                    <button type="submit" class="btn" :disabled="sendingReview">
+                    <button
+                      type="submit"
+                      class="btn-press"
+                      :disabled="sendingReview"
+                    >
                       Enviar
                     </button>
                   </div>
@@ -240,6 +244,10 @@ export default {
     Tab
   },
 
+  async fetch () {
+    this.product = await this.$axios.$get(`/product/${this.$route.params.slug}`);
+  },
+
   data: () => ({
     product: {
       rating: 0,
@@ -250,7 +258,6 @@ export default {
       review: '',
       rating: 0
     },
-    active: true,
     sendingReview: false
   }),
 
@@ -258,11 +265,6 @@ export default {
     reviewsCounter () {
       return this.product.reviews && this.product.reviews.length;
     }
-  },
-
-  async mounted () {
-    this.product = await this.$axios.$get(`/product/${this.$route.params.slug}`);
-    this.active = false;
   },
 
   methods: {

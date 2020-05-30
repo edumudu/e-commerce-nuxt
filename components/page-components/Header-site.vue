@@ -93,7 +93,7 @@
 
                 <li class="menu-item">
                   <Dropdown>
-                    <template slot="toggle">
+                    <template v-slot:toggle>
                       <fa :icon="['fas', 'heart']" />
                     </template>
 
@@ -105,7 +105,7 @@
 
                 <li class="menu-item">
                   <Dropdown>
-                    <template slot="toggle">
+                    <template v-slot:toggle>
                       <nuxt-link to="/cart" class="icon-count">
                         <fa :icon="['fas', 'shopping-cart']" />
 
