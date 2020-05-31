@@ -254,7 +254,7 @@ export default {
 
         this.$auth.setUserToken(token);
       } catch (e) {
-        console.log(e);
+        //
       }
 
       this.sending = false;

@@ -129,7 +129,7 @@ export default {
           this.$refs.form.reset();
         });
       } catch (error) {
-        console.warn(error);
+        //
       }
 
       this.sending = false;
