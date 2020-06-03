@@ -47,10 +47,10 @@
           </div>
 
           <div class="row products-box">
-            <vitrine :items="products" />
+            <product-vitrine :items="products" />
           </div>
 
-          <paginate :total-pages="totalPages" />
+          <data-paginate :total-pages="totalPages" />
         </div>
       </section>
     </div>
@@ -58,13 +58,15 @@
 </template>
 
 <script>
-import Vitrine from '~/components/Vitrine.vue';
-import Paginate from '~/components/Paginate.vue';
+import ProductVitrine from '~/components/ProductVitrine.vue';
+import DataPaginate from '~/components/DataPaginate.vue';
 
 export default {
+  transition: 'slide-left',
+
   components: {
-    Vitrine,
-    Paginate
+    ProductVitrine,
+    DataPaginate
   },
 
   async fetch () {

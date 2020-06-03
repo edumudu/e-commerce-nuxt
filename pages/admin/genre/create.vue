@@ -1,6 +1,10 @@
 <template>
   <section class="page-content">
-    <div class="card">
+    <div class="card float-title">
+      <h1 class="card-title">
+        Cadastrar novo gênero
+      </h1>
+
       <div v-show="failMessage" class="alert alert-danger">
         {{ failMessage }}
       </div>
@@ -13,7 +17,7 @@
                 v-slot="{ errors, valid }"
                 rules="required|alpha_spaces|max:255"
               >
-                <Input
+                <base-input
                   v-model.trim="data.name"
                   placeholder="Gênero"
                   name="name"
@@ -41,16 +45,17 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import Input from '~/components/Input.vue';
+import BaseInput from '~/components/form/BaseInput.vue';
 import dataCreate from '~/mixins/admin/dataCreate';
 
 export default {
   layout: 'dashboard',
+  transition: 'slide-up',
 
   components: {
     ValidationObserver,
     ValidationProvider,
-    Input
+    BaseInput
   },
 
   mixins: [dataCreate],

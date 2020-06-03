@@ -1,19 +1,21 @@
 <template>
   <section id="page-content">
-    <slider :imgs="imgs" />
+    <home-slider :imgs="imgs" />
 
-    <vitrine title="destaques" :items="destaques" />
+    <product-vitrine title="destaques" :items="destaques" />
   </section>
 </template>
 
 <script>
-import Slider from '~/components/Slider.vue';
-import Vitrine from '~/components/Vitrine.vue';
+import HomeSlider from '~/components/HomeSlider.vue';
+import ProductVitrine from '~/components/ProductVitrine.vue';
 
 export default {
+  transition: 'slide-right',
+
   components: {
-    Slider,
-    Vitrine
+    HomeSlider,
+    ProductVitrine
   },
 
   data: () => ({

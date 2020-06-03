@@ -13,7 +13,7 @@
       </p>
 
       <div class="d-flex">
-        <Input
+        <base-input
           name="cupom"
           class="mr-3"
           :placeholder="inputPlaceholder"
@@ -28,11 +28,11 @@
 </template>
 
 <script>
-import Input from '~/components/Input.vue';
+import BaseInput from '~/components/form/BaseInput.vue';
 
 export default {
   components: {
-    Input
+    BaseInput
   },
 
   props: {
@@ -52,3 +52,8 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/keyframes/collapse';
+  @import '~/assets/scss/components/_collapse-cart';
+</style>

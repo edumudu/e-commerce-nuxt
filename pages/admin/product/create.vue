@@ -1,6 +1,10 @@
 <template>
   <section class="page-content">
-    <div class="card">
+    <div class="card float-title">
+      <h1 class="card-title">
+        Cadastrar novo produdo
+      </h1>
+
       <div v-show="failMessage" class="alert alert-danger">
         {{ failMessage }}
       </div>
@@ -13,7 +17,7 @@
                 v-slot="{ errors, valid }"
                 rules="required|alpha_spaces|max:255"
               >
-                <Input
+                <base-input
                   v-model.trim="data.name"
                   placeholder="Nome"
                   name="name"
@@ -28,7 +32,7 @@
                 v-slot="{ errors, valid }"
                 rules="required|numeric|min:1"
               >
-                <Input
+                <base-input
                   v-model.trim="data.inventory"
                   placeholder="Estoque"
                   name="inventory"
@@ -43,7 +47,7 @@
                 v-slot="{ errors, valid }"
                 rules="required|numeric|min:1"
               >
-                <Input
+                <base-input
                   v-model.trim="data.price"
                   placeholder="Preço"
                   name="price"
@@ -58,25 +62,14 @@
                 v-slot="{ errors, valid }"
                 rules="required|numeric|min:1"
               >
-                <select
-                  v-model.trim="data.genre"
+                <base-select
+                  v-model="data.genre"
                   placeholder="Gênero"
                   name="genre"
-                  class="form-field"
-                  :class="{ 'is-valid': valid, 'is-invalid': !!errors[0] }"
-                >
-                  <option
-                    v-for="genre in genres"
-                    :key="genre.id"
-                    :value="genre.id"
-                  >
-                    {{ genre.name }}
-                  </option>
-                </select>
-
-                <span class="invalid-message">
-                  {{ errors[0] }}
-                </span>
+                  :options="genres"
+                  :error="errors[0]"
+                  :is-valid="valid"
+                />
               </validation-provider>
             </div>
 
@@ -85,26 +78,15 @@
                 v-slot="{ errors, valid }"
                 rules="required|numeric|min:1"
               >
-                <select
+                <base-select
                   v-model="data.categories"
                   placeholder="Categoria"
                   name="categories[]"
-                  class="form-field"
-                  :class="{ 'is-valid': valid, 'is-invalid': !!errors[0] }"
                   multiple
-                >
-                  <option
-                    v-for="category in categories"
-                    :key="category.id"
-                    :value="category.id"
-                  >
-                    {{ category.name }}
-                  </option>
-                </select>
-
-                <span class="invalid-message">
-                  {{ errors[0] }}
-                </span>
+                  :options="categories"
+                  :error="errors[0]"
+                  :is-valid="valid"
+                />
               </validation-provider>
             </div>
 
@@ -146,16 +128,19 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import Input from '~/components/Input.vue';
+import BaseInput from '~/components/form/BaseInput.vue';
+import BaseSelect from '~/components/form/BaseSelect.vue';
 import dataCreate from '~/mixins/admin/dataCreate';
 
 export default {
   layout: 'dashboard',
+  transition: 'slide-up',
 
   components: {
     ValidationObserver,
     ValidationProvider,
-    Input
+    BaseInput,
+    BaseSelect
   },
 
   mixins: [dataCreate],
@@ -194,11 +179,17 @@ export default {
             'Content-Type': 'multipart/form-data'
           }
         });
-        this.data = {};
+        this.data = {
+          name: '',
+          inventory: '',
+          price: '',
+          genre: '',
+          categories: []
+        };
         this.failMessage = '';
 
         this.$nextTick(() => {
-          this.$refs.form.reset();
+          this.$refs.formData.reset();
         });
       } catch (e) {
         this.failMessage = 'Something went wrong, try again later';

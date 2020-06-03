@@ -24,24 +24,10 @@
 export default {
   props: {
     isList: { type: Boolean, default: true }
-  },
-
-  data: () => ({
-    active: false
-  }),
-
-  methods: {
-    open () {
-      this.active = true;
-    },
-
-    close () {
-      this.active = false;
-    },
-
-    toggle () {
-      this.active = !this.active;
-    }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/components/_dropdown';
+</style>

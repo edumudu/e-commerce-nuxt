@@ -41,15 +41,24 @@
 
             <div class="navbar-user">
               <ul class="user-menu row align-items-center">
+                <li
+                  v-if="$auth.user && $auth.user.access_level === 'admin'"
+                  class="menu-item"
+                >
+                  <nuxt-link to="/admin">
+                    <fa :icon="['fas', 'chart-line']" />
+                  </nuxt-link>
+                </li>
+
                 <li class="menu-item">
-                  <Dropdown>
-                    <template v-slot:toggle>
+                  <base-dropdown>
+                    <template #toggle>
                       <fa :icon="['fas', 'user-circle']" />
                     </template>
 
                     <template
                       v-if="!$auth.loggedIn"
-                      v-slot:default
+                      #default
                     >
                       <li class="dropdown-item">
                         <nuxt-link to="/login">
@@ -70,7 +79,7 @@
 
                     <template
                       v-else
-                      v-slot:default
+                      #default
                     >
                       <li class="dropdown-item">
                         <a href="#" @click.prevent="$auth.logout()">
@@ -88,24 +97,24 @@
                         </nuxt-link>
                       </li>
                     </template>
-                  </Dropdown>
+                  </base-dropdown>
                 </li>
 
                 <li class="menu-item">
-                  <Dropdown>
-                    <template v-slot:toggle>
+                  <base-dropdown>
+                    <template #toggle>
                       <fa :icon="['fas', 'heart']" />
                     </template>
 
                     <li class="dropdown-item">
                       Lista de desejos aqui
                     </li>
-                  </Dropdown>
+                  </base-dropdown>
                 </li>
 
                 <li class="menu-item">
-                  <Dropdown>
-                    <template v-slot:toggle>
+                  <base-dropdown>
+                    <template #toggle>
                       <nuxt-link to="/cart" class="icon-count">
                         <fa :icon="['fas', 'shopping-cart']" />
 
@@ -126,7 +135,7 @@
                         {{ (product.price * product.quantity).toFixed(2) }}
                       </nuxt-link>
                     </li>
-                  </Dropdown>
+                  </base-dropdown>
                 </li>
               </ul>
             </div>
@@ -139,11 +148,11 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Dropdown from '~/components/Dropdown.vue';
+import BaseDropdown from '~/components/BaseDropdown.vue';
 
 export default {
   components: {
-    Dropdown
+    BaseDropdown
   },
 
   data: () => ({
@@ -163,3 +172,7 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/page-components/header-site';
+</style>

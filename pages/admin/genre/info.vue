@@ -8,7 +8,8 @@
 
 <script>
 export default {
-  layout: 'dashboard'
+  layout: 'dashboard',
+  transition: 'slide-up'
 
 };
 </script>
