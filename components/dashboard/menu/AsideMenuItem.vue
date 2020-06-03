@@ -6,7 +6,7 @@
     <a
       href="#"
       class="menu-link-title"
-      @click.prevent="toggleActive"
+      @click.prevent="handleClick"
     >
       <span>
         <fa :icon="icon" />
@@ -30,17 +30,26 @@
 export default {
   props: {
     title: { type: String, required: true },
-    icon: { type: Array, default: () => [] }
+    icon: { type: Array, default: () => [] },
+    isActive: { type: Boolean, default: false }
   },
 
   data: () => ({
     active: false
   }),
 
+  created () {
+    this.active = this.isActive;
+  },
+
   methods: {
-    toggleActive () {
-      this.active = !this.active;
+    handleClick () {
+      this.$emit('click', this);
     }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/components/dashboard/menu/menu-item';
+</style>

@@ -27,12 +27,12 @@
       </li>
 
       <li class="navbar-menu-item">
-        <dropdown :is-list="false" class="right">
-          <template v-slot:toggle>
+        <base-dropdown :is-list="false" class="right">
+          <template #toggle>
             <fa :icon="['far', 'user-circle']" />
           </template>
 
-          <template v-slot:default>
+          <template #default>
             <div class="navbar-menu-user">
               <span class="navbar-menu-user-profile">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRbMwn_ie7saauxGwBvXYeTvnmgZ_5intvKUi96B8ieinwfgl0K&usqp=CAU" alt="user picture">
@@ -47,16 +47,20 @@
               </h3>
             </div>
           </template>
-        </dropdown>
+        </base-dropdown>
       </li>
     </ul>
   </header>
 </template>
 
 <script>
-import Dropdown from '~/components/Dropdown.vue';
+import BaseDropdown from '~/components/BaseDropdown.vue';
 
 export default {
-  components: { Dropdown }
+  components: { BaseDropdown }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/page-components/dashboard-header';
+</style>

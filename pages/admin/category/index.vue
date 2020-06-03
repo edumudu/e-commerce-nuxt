@@ -6,22 +6,23 @@
         @remove="handleRemove"
       />
 
-      <paginate :total-pages="totalPages" />
+      <data-paginate :total-pages="totalPages" />
     </div>
   </section>
 </template>
 
 <script>
 import TableResponsive from '~/components/dashboard/TableResponsive.vue';
-import Paginate from '~/components/Paginate.vue';
+import DataPaginate from '~/components/DataPaginate.vue';
 import listData from '~/mixins/admin/listData';
 
 export default {
   layout: 'dashboard',
+  transition: 'slide-up',
 
   components: {
     TableResponsive,
-    Paginate
+    DataPaginate
   },
 
   mixins: [listData],

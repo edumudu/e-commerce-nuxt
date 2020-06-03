@@ -1,22 +1,17 @@
 # e-commerce-nuxt
 
-> Front end from e-commerce-laravel
+O objetivo final desse projeto é ter uma loja virtual feita com o framework laravel como ApiREST para o back e o frontent usando vue com Nuxtjs, respeitando o code style descrito e usando testes.
 
-## Build Setup
+## Parts of system
+- [Core/Backend](https://github.com/edumudu/e-commerce-laravel-core)
 
-```bash
-# install dependencies
-$ yarn install
+## CodeStyles
+Codestyle do projeto segue o descrito na [documentação](https://vuejs.org/v2/style-guide/) do vue.
 
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## libs
+- Nuxtjs
+- VeeValidate
+- Axios
+- vue-chartjs
+- dotenv
+- eslint

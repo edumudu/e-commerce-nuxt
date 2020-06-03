@@ -1,0 +1,38 @@
+input[type=checkbox] {
+  display: none;
+
+   + span {
+     position: relative;
+     top: 10%;
+     display: inline-block;
+     width: 17px;
+     height: 17px;
+     background-color: transparent;
+     border: 1px solid $dark;
+     border-radius: 3px;
+     cursor: pointer;
+     transition: border 0.2s;
+
+     &:hover {
+       border-color: $info;
+     }
+   }
+}
+
+input[type=checkbox]:checked + span {
+  transition: background-color 0.2s;
+  background-color: $info;
+  border-color: $info;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 7px;
+    height: 11px;
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg) translate(-6px, -20%);
+  }
+}

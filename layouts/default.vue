@@ -1,21 +1,23 @@
 <template>
   <main id="page">
-    <header-site />
+    <the-header-site />
 
     <nuxt />
 
-    <footer-site />
+    <the-footer-site />
   </main>
 </template>
 
 <script>
-import HeaderSite from '~/components/page-components/Header-site.vue';
-import FooterSite from '~/components/page-components/Footer-site.vue';
+import TheHeaderSite from '~/components/page-components/TheHeaderSite.vue';
+import TheFooterSite from '~/components/page-components/TheFooterSite.vue';
 
 export default {
+  layoutTransition: 'layout',
+
   components: {
-    HeaderSite,
-    FooterSite
+    TheHeaderSite,
+    TheFooterSite
   },
 
   mounted () {

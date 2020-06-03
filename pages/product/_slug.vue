@@ -68,7 +68,7 @@
             </div>
 
             <div class="product-cart d-flex">
-              <product-quantity
+              <stepper-quantity
                 v-model="quantity"
                 :max="product.inventory"
               />
@@ -110,14 +110,14 @@
 
         <!--Parte de descrição e reviews-->
         <div class="col-sm-12">
-          <tabs>
-            <tab name="Descrição" selected>
+          <tabs-list>
+            <tabs-item name="Descrição" selected>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sodales volutpat ligula ut congue. Quisque molestie in metus vitae luctus. Sed mi risus, euismod vel fringilla vel, vestibulum et erat. Donec massa magna, facilisis ac enim sed, suscipit varius odio. Nunc ut nulla congue, bibendum lectus et, bibendum mauris.</p>
 
               <p>Quisque egestas metus velit, feugiat mollis ante ultricies at. Mauris fermentum ac neque id mattis. Fusce lorem leo, elementum sit amet elit et, interdum vulputate enim. Nam fermentum a dolor sit amet fermentum. Nam egestas mauris libero, fringilla dictum ex vulputate a. In venenatis est a tortor consectetur pulvinar. Suspendisse in purus sit amet felis rutrum euismod.</p>
-            </tab>
+            </tabs-item>
 
-            <tab name="Informação">
+            <tabs-item name="Informação">
               <div class="information-table my-2 mx-3">
                 <div class="table-head">
                   <div class="row">
@@ -155,9 +155,9 @@
                   </div>
                 </div>
               </div>
-            </tab>
+            </tabs-item>
 
-            <tab name="Avaliações">
+            <tabs-item name="Avaliações">
               <div
                 v-for="r in product.reviews"
                 :key="r.id"
@@ -198,7 +198,7 @@
                   </div>
 
                   <div class="form-group">
-                    <Input
+                    <base-input
                       v-model="review.review"
                       placeholder="review"
                       type="textarea"
@@ -218,8 +218,8 @@
                   </div>
                 </form>
               </div>
-            </tab>
-          </tabs>
+            </tabs-item>
+          </tabs-list>
         </div>
       </div>
     </div>
@@ -227,21 +227,23 @@
 </template>
 
 <script>
-import Input from '~/components/Input.vue';
+import BaseInput from '~/components/form/BaseInput.vue';
 import ProductImgCarrousel from '~/components/ProductImgCarrousel.vue';
-import ProductQuantity from '~/components/ProductQuantity.vue';
+import StepperQuantity from '~/components/stepper/StepperQuantity.vue';
 import RatingStars from '~/components/RatingStars.vue';
-import Tabs from '~/components/tabs/Tabs.vue';
-import Tab from '~/components/tabs/Tab.vue';
+import TabsList from '~/components/tabs/TabsList.vue';
+import TabsItem from '~/components/tabs/TabsItem.vue';
 
 export default {
+  transition: 'slide-left',
+
   components: {
-    Input,
+    BaseInput,
     ProductImgCarrousel,
-    ProductQuantity,
+    StepperQuantity,
     RatingStars,
-    Tabs,
-    Tab
+    TabsList,
+    TabsItem
   },
 
   async fetch () {
@@ -303,3 +305,7 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/pages/product';
+</style>

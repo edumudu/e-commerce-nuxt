@@ -85,6 +85,7 @@
 <script>
 export default {
   layout: 'dashboard',
+  transition: 'slide-up',
 
   data: () => ({
     dataCollection: {}

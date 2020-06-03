@@ -20,7 +20,7 @@
                 v-slot="{ errors, valid }"
                 rules="required|alpha_spaces"
               >
-                <Input
+                <base-input
                   v-model.trim="form.name"
                   name="name"
                   placeholder="nome"
@@ -35,7 +35,7 @@
                 v-slot="{ errors, valid }"
                 rules="required|email"
               >
-                <Input
+                <base-input
                   v-model.trim="form.email"
                   placeholder="email"
                   name="email"
@@ -49,9 +49,9 @@
             <div class="form-group col-12">
               <validation-provider
                 v-slot="{ errors, valid }"
-                rules="required"
+                rules="max:255"
               >
-                <Input
+                <base-input
                   v-model.trim="form.phone"
                   placeholder="telefone"
                   name="phone"
@@ -67,7 +67,7 @@
                 v-slot="{ errors, valid }"
                 rules="required|min:30"
               >
-                <Input
+                <base-input
                   v-model.trim="form.body"
                   type="textarea"
                   placeholder="Menssagem"
@@ -97,11 +97,13 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import Input from '~/components/Input.vue';
+import BaseInput from '~/components/form/BaseInput.vue';
 
 export default {
+  transition: 'slide-left',
+
   components: {
-    Input,
+    BaseInput,
     ValidationProvider,
     ValidationObserver
   },
@@ -129,7 +131,7 @@ export default {
           this.$refs.form.reset();
         });
       } catch (error) {
-        console.warn(error);
+        //
       }
 
       this.sending = false;

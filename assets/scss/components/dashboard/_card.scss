@@ -3,4 +3,19 @@
   background-color: #fff;
   box-shadow: 0 0 7px $gray;
   padding: 20px 15px;
+  
+  &.float-title {
+    margin-top: 25px;
+
+    .card-title {
+      width: 95%;
+      text-align: center;
+      padding: 1rem 0 1rem;
+      margin: -50px auto 20px;
+      color: white;
+      border-radius: 5px;
+      background-image: linear-gradient(to top right, #19e4d9, #5c7de9);
+      box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    }
+  }
 }

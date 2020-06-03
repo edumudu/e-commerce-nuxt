@@ -24,7 +24,16 @@
           v-for="(key, i) in keys"
           :key="i"
         >
-          {{ row[key] }}
+          <img
+            v-if="photosFields.includes(key)"
+            class="responsive-table-image"
+            :src="row[key]"
+            :alt="row[key].length ? '' : 'No image'"
+          >
+
+          <template v-else>
+            {{ row[key] }}
+          </template>
         </td>
 
         <td v-if="needActions">
@@ -54,7 +63,8 @@ export default {
   props: {
     data: { type: Array, required: true },
     hidden: { type: Array, default: () => ['slug', 'created_at', 'updated_at'] },
-    needActions: { type: Boolean, default: true }
+    needActions: { type: Boolean, default: true },
+    photosFields: { type: Array, default: () => [] }
   },
 
   computed: {
@@ -72,3 +82,7 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/components/_responsive-table';
+</style>

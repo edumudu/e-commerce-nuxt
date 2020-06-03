@@ -24,6 +24,7 @@ export default {
   ** Global CSS
   */
   css: [
+    'bootstrap/scss/bootstrap-grid.scss'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -36,6 +37,7 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
+    '@nuxtjs/style-resources',
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/stylelint-module
@@ -101,5 +103,9 @@ export default {
         icons: ['far']
       }
     ]
+  },
+
+  styleResources: {
+    scss: './assets/scss/variables/*.scss'
   }
 };

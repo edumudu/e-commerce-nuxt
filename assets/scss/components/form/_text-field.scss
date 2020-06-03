@@ -1,9 +1,7 @@
-$input-default-radius: 3px;
-
 .form-field {
   width: 100%;
-  padding: 0.45rem 0.75rem;
-  font-size: 1.2rem;
+  padding: $field-padding;
+  font-size: $field-font-size;
   line-height: 1.5;
   color: inherit;
   font-family: inherit;
@@ -45,6 +43,11 @@ $input-default-radius: 3px;
   &:read-only {
     opacity: 0.8;
     background-color: rgb(237,239,241);
+
+    &.readonly-no-opacity {
+      background-color: #fff;
+      cursor: pointer;
+    }
   }
 
   &.is-invalid { box-shadow: inset 0 0 0 1px $danger; }
@@ -65,10 +68,6 @@ textarea.form-field {
   margin-top: 5px;
   color: $danger;
   font-size: 0.77rem;
-}
-
-.form-group {
-  margin-top: 0.85rem;
 }
 
 .input-group {
@@ -94,7 +93,7 @@ textarea.form-field {
     padding-left: 0.35rem;
     padding-right: 0.35rem;
     text-transform: capitalize;
-    cursor: text;
+    pointer-events: none;
     transition: color 0.4s,
                 transform 0.4s,
                 top 0.4s,
@@ -110,53 +109,6 @@ textarea.form-field {
   
   .form-field:focus + .md-float { color: $info; }
 
-  .form-field.is-invalid + .md-float { color: $red; }
+  .form-field.is-invalid + .md-float { color: $danger; }
   .form-field.is-valid + .md-float { color: $green; }
-}
-
-/*
- * Custom checkbox
- */
-
-input[type=checkbox] {
-  display: none;
-
-   + label {
-     content: '';
-     position: relative;
-     top: 50%;
-     transform: translateY(-50%);
-     display: inline-block;
-     width: 17px;
-     height: 17px;
-     background-color: transparent;
-     border: 1px solid $dark;
-     border-radius: 0.25rem;
-     cursor: pointer;
-     transition: border 0.2s;
-
-     &:hover {
-       border-color: $info;
-     }
-   }
-}
-
-input[type=checkbox]:checked + label {
-  transition: background-color 0.2s;
-  background-color: $info;
-  border-color: $info;
-
-  &::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 3px;
-    height: 7px;
-    border: solid #fff;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg) translate(-50%, -50%);
-    -ms-transform: rotate(45deg) translate(-50%, -50%);
-    transform: rotate(45deg) translate(-6px, -20%);
-  }
 }

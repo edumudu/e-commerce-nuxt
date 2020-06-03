@@ -22,7 +22,7 @@
                       v-slot="{ errors, valid }"
                       rules="required|alpha|min:3"
                     >
-                      <Input
+                      <base-input
                         v-model.trim="account.first_name"
                         placeholder="Primeiro nome"
                         :error="errors[0]"
@@ -36,7 +36,7 @@
                       v-slot="{ errors, valid }"
                       rules="required|alpha|min:3"
                     >
-                      <Input
+                      <base-input
                         v-model.trim="account.last_name"
                         placeholder="Sobrenome"
                         :error="errors[0]"
@@ -50,7 +50,7 @@
                       v-slot="{ errors, valid }"
                       rules="required|email"
                     >
-                      <Input
+                      <base-input
                         v-model.trim="account.email"
                         type="email"
                         placeholder="E-mail"
@@ -65,7 +65,7 @@
                       v-slot="{ errors, valid }"
                       rules="required"
                     >
-                      <Input
+                      <base-input
                         v-model.trim="account.tel"
                         placeholder="Telefone"
                         :error="errors[0]"
@@ -85,7 +85,7 @@
                     rules="required|min:8"
                     vid="password"
                   >
-                    <Input
+                    <base-input
                       v-model.trim="account.password"
                       type="password"
                       placeholder="Senha"
@@ -100,7 +100,7 @@
                     v-slot="{ errors, valid }"
                     rules="required|min:8|confirmed:password"
                   >
-                    <Input
+                    <base-input
                       v-model.trim="account.password_confirmation"
                       type="password"
                       placeholder="Confirme sua senha"
@@ -122,7 +122,7 @@
                       v-slot="{ errors, valid }"
                       rules="required"
                     >
-                      <Input
+                      <base-input
                         v-model.trim="account.street"
                         placeholder="Rua"
                         :error="errors[0]"
@@ -136,7 +136,7 @@
                       v-slot="{ errors, valid }"
                       rules="required|numeric"
                     >
-                      <Input
+                      <base-input
                         v-model.trim="account.number"
                         placeholder="Nº"
                         :error="errors[0]"
@@ -150,7 +150,7 @@
                       v-slot="{ errors, valid }"
                       rules="required"
                     >
-                      <Input
+                      <base-input
                         v-model.trim="account.city"
                         placeholder="Cidade"
                         :error="errors[0]"
@@ -164,7 +164,7 @@
                       v-slot="{ errors, valid }"
                       rules="required"
                     >
-                      <Input
+                      <base-input
                         v-model.trim="account.cep"
                         placeholder="CEP"
                         :error="errors[0]"
@@ -180,18 +180,12 @@
                   v-slot="{ errors }"
                   :rules="{ required: { allowFalse: false } }"
                 >
-                  <input
-                    id="terms"
-                    v-model.trim="isAgree"
-                    type="checkbox"
+                  <checkout
+                    v-model="isAgree"
+                    :error="errors[0]"
                   >
-
-                  <label for="terms" />
-                  <label for="terms">Li e concordo com a Política de Privacidade</label>
-
-                  <span class="invalid-message">
-                    {{ errors[0] }}
-                  </span>
+                    Li e concordo com a Política de Privacidade
+                  </checkout>
                 </validation-provider>
               </div>
 
@@ -214,13 +208,17 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import Input from '~/components/Input.vue';
+import BaseInput from '~/components/form/BaseInput.vue';
+import Checkout from '~/components/form/BaseCheckout.vue';
 
 export default {
+  transition: 'slide-left',
+
   components: {
-    Input,
+    BaseInput,
     ValidationProvider,
-    ValidationObserver
+    ValidationObserver,
+    Checkout
   },
 
   data: () => ({
@@ -254,7 +252,7 @@ export default {
 
         this.$auth.setUserToken(token);
       } catch (e) {
-        console.log(e);
+        //
       }
 
       this.sending = false;

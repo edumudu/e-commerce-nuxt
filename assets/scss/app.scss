@@ -1,39 +1,13 @@
-// Variaveis
-@import './variables/colors';
-@import './variables/var-names';
-
 @import './global';
 @import './general';
+@import './general-dashboard';
 @import './helpers';
 
-// Bootstrap
-@import '@/node_modules/bootstrap/scss/bootstrap-grid.scss';
-
-// Keyframes
-@import './keyframes/collapse';
-
 // Components
-@import './components/dropdown';
 @import './components/buttons';
-@import './components/forms';
-@import './components/slider';
-@import './components/vitrine';
-@import './components/product-quantity';
-@import './components/product-img-carrousel';
-@import './components/rating-stars';
-@import './components/tabs';
-@import './components/table';
-@import './components/stepper';
-@import './components/collapse-cart';
-@import './components/paginate';
 @import './components/alert';
-@import './components/responsive-table';
+@import './components/tooltip';
+@import './components/form/form';
+@import './components/dashboard/card';
 
-// Page components
-@import './page-components/header-site';
-@import './page-components/footer-site';
-
-// Pages
-@import './pages/product';
-
-@import './components/errors';
+@import './transition';

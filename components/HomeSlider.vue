@@ -2,7 +2,7 @@
   <section class="slider">
     <div
       class="sliders-wrapper"
-      :style=" { width: `${imgs.length * 100}%`, right: `${100 * active}%` } "
+      :style="style"
     >
       <img
         v-for="(img, index) in imgs"
@@ -24,11 +24,17 @@
       />
     </ul>
 
-    <span class="arrow-left" @click="prev">
+    <span
+      class="arrow-left"
+      @click="prev"
+    >
       <fa :icon="['fas', 'chevron-left']" />
     </span>
 
-    <span class="arrow-right" @click="next">
+    <span
+      class="arrow-right"
+      @click="next"
+    >
       <fa :icon="['fas', 'chevron-right']" />
     </span>
   </section>
@@ -42,8 +48,18 @@ export default {
   },
 
   data: () => ({
-    active: 0
+    active: 0,
+    timer: null
   }),
+
+  computed: {
+    style () {
+      return {
+        width: `${this.imgs.length * 100}%`,
+        right: `${100 * this.active}%`
+      };
+    }
+  },
 
   mounted () {
     this.clearTimer();
@@ -74,3 +90,7 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/components/_slider';
+</style>

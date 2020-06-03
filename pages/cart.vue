@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-sm-12 col-md-9">
           <div v-if="cartProducts.length">
-            <Table :products="cartProducts" />
+            <cart-table :products="cartProducts" />
 
             <div class="d-flex justify-content-between">
               Total: <span>{{ cartTotal.toFixed(2) }}</span>
@@ -26,21 +26,21 @@
               Oque você quer
             </h2>
             <div class="options-contain">
-              <Collapse
+              <input-collapse
                 title="Use um codigo de cupom"
                 input-placeholder="cupom"
                 button-text="Aplicar"
               >
                 Entre com o codigo do cupom
-              </Collapse>
+              </input-collapse>
 
-              <Collapse
+              <input-collapse
                 title="Verificar Frete"
                 input-placeholder="CEP"
                 button-text="Verificar"
               >
                 Informe o CEP
-              </Collapse>
+              </input-collapse>
             </div>
           </div>
         </div>
@@ -51,15 +51,16 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Table from '~/components/Table.vue';
-import Collapse from '~/components/Collapse.vue';
+import CartTable from '~/components/CartTable.vue';
+import InputCollapse from '~/components/InputCollapse.vue';
 
 export default {
   middleware: 'auth',
+  transition: 'slide-left',
 
   components: {
-    Table,
-    Collapse
+    CartTable,
+    InputCollapse
   },
 
   data: () => ({
