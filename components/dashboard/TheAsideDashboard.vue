@@ -6,8 +6,8 @@
       cg atacado
     </div>
 
-    <Menu>
-      <menu-item
+    <aside-menu>
+      <aside-menu-item
         title="Dashboard"
         :icon="['fas', 'chart-line']"
         :is-active="/\/admin$/.test(path)"
@@ -17,15 +17,9 @@
             Visão geral
           </nuxt-link>
         </li>
+      </aside-menu-item>
 
-        <li class="menu-subtree-item" :class="{ active: path === '/' }">
-          <nuxt-link to="/admin" class="menu-link">
-            menu-2
-          </nuxt-link>
-        </li>
-      </menu-item>
-
-      <menu-item
+      <aside-menu-item
         title="category"
         :icon="['fas', 'boxes']"
         :is-active="path.includes('/category')"
@@ -41,9 +35,9 @@
             Cadastrar categoria
           </nuxt-link>
         </li>
-      </menu-item>
+      </aside-menu-item>
 
-      <menu-item
+      <aside-menu-item
         title="genre"
         :icon="['fas', 'transgender-alt']"
         :is-active="path.includes('/genre')"
@@ -65,9 +59,9 @@
             Cadastrar gênero
           </nuxt-link>
         </li>
-      </menu-item>
+      </aside-menu-item>
 
-      <menu-item
+      <aside-menu-item
         title="Product"
         :icon="['fas', 'tshirt']"
         :is-active="path.includes('/product')"
@@ -83,19 +77,19 @@
             Cadastrar produto
           </nuxt-link>
         </li>
-      </menu-item>
-    </Menu>
+      </aside-menu-item>
+    </aside-menu>
   </aside>
 </template>
 
 <script>
-import Menu from '~/components/dashboard/menu/Menu.vue';
-import MenuItem from '~/components/dashboard/menu/MenuItem.vue';
+import AsideMenu from '~/components/dashboard/menu/AsideMenu.vue';
+import AsideMenuItem from '~/components/dashboard/menu/AsideMenuItem.vue';
 
 export default {
   components: {
-    Menu,
-    MenuItem
+    AsideMenu,
+    AsideMenuItem
   },
 
   computed: {
@@ -105,3 +99,7 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/page-components/dashboard-aside';
+</style>

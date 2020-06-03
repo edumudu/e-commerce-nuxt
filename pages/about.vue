@@ -11,3 +11,9 @@
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  transition: 'slide-left'
+};
+</script>

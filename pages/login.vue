@@ -38,7 +38,7 @@
                   v-slot="{ errors, valid }"
                   rules="required|email"
                 >
-                  <Input
+                  <base-input
                     v-model.trim="login.email"
                     name="login"
                     type="email"
@@ -54,7 +54,7 @@
                   v-slot="{ errors, valid }"
                   rules="required|min:8"
                 >
-                  <Input
+                  <base-input
                     v-model.trim="login.password"
                     type="password"
                     name="password"
@@ -88,11 +88,13 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import Input from '~/components/Input.vue';
+import BaseInput from '~/components/form/BaseInput.vue';
 
 export default {
+  transition: 'slide-left',
+
   components: {
-    Input,
+    BaseInput,
     ValidationProvider,
     ValidationObserver
   },

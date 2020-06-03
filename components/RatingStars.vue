@@ -9,6 +9,7 @@
 
     <ul
       v-if="editable"
+      key="stars-read-only"
       class="rating-stars d-flex"
       :title="curentValue"
     >
@@ -26,6 +27,7 @@
 
     <ul
       v-else
+      key="stars-edit"
       class="rating-stars d-flex"
       :title="curentValue"
     >
@@ -78,3 +80,7 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/components/_rating-stars';
+</style>

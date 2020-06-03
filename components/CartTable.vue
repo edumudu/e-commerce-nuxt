@@ -27,7 +27,7 @@
 
         <td>
           <div class="d-inline-flex">
-            <stepper
+            <base-stepper
               :value="product.quantity"
               :max="product.inventory"
               @input="(newQty) => setProductQuantity({ product, qty: newQty })"
@@ -50,10 +50,10 @@
 
 <script>
 import { mapActions } from 'vuex';
-import Stepper from '~/components/Stepper.vue';
+import BaseStepper from '~/components/stepper/BaseStepper.vue';
 
 export default {
-  components: { Stepper },
+  components: { BaseStepper },
 
   props: {
     products: { type: Array, required: true }
@@ -70,3 +70,7 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/components/_table';
+</style>

@@ -1,9 +1,9 @@
 <template>
   <main id="dashboard-page">
-    <Aside />
+    <the-aside-dashboard />
 
     <div id="dashboard-page-content">
-      <dashboard-header />
+      <the-header-dashboard />
 
       <nuxt />
     </div>
@@ -11,19 +11,20 @@
 </template>
 
 <script>
-import Aside from '~/components/dashboard/Aside.vue';
-import DashboardHeader from '~/components/dashboard/DashboardHeader.vue';
+import TheAsideDashboard from '~/components/dashboard/TheAsideDashboard.vue';
+import TheHeaderDashboard from '~/components/dashboard/TheHeaderDashboard.vue';
 
 export default {
   middleware: 'auth',
+  layoutTransition: 'layout',
 
   components: {
-    Aside,
-    DashboardHeader
+    TheAsideDashboard,
+    TheHeaderDashboard
   }
 };
 </script>
 
-<style lang="scss">
-  @import '~assets/scss/dashboard';
+<style lang="scss" scoped>
+  @import '~/assets/scss/page-components/dashboard-content';
 </style>
