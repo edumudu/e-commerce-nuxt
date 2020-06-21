@@ -2,7 +2,7 @@
   <section class="page-content">
     <div class="card float-title">
       <h1 class="card-title">
-        Cadastrar novo produdo
+        Editar product {{ product.name }}
       </h1>
 
       <validation-observer ref="form" v-slot="{ invalid, handleSubmit}">
@@ -14,7 +14,7 @@
                 rules="required|alpha_spaces|max:255"
               >
                 <base-input
-                  v-model="data.name"
+                  v-model="product.name"
                   placeholder="Nome"
                   name="name"
                   :error="errors[0]"
@@ -29,7 +29,7 @@
                 rules="required|numeric|min:1"
               >
                 <base-input
-                  v-model.number="data.inventory"
+                  v-model.number="product.inventory"
                   placeholder="Estoque"
                   name="inventory"
                   :error="errors[0]"
@@ -44,7 +44,7 @@
                 rules="required|numeric|min:1"
               >
                 <base-input
-                  v-model.number="data.price"
+                  v-model.number="product.price"
                   placeholder="Preço"
                   name="price"
                   :error="errors[0]"
@@ -59,7 +59,7 @@
                 rules="required|numeric|min:1"
               >
                 <base-select
-                  v-model="data.genre"
+                  v-model="product.genre"
                   placeholder="Gênero"
                   name="genre"
                   :options="genres"
@@ -75,7 +75,7 @@
                 rules="required|numeric|min:1"
               >
                 <base-select
-                  v-model="data.categories"
+                  v-model="product.categories"
                   placeholder="Categoria"
                   name="categories[]"
                   multiple
@@ -83,26 +83,6 @@
                   :error="errors[0]"
                   :is-valid="valid"
                 />
-              </validation-provider>
-            </div>
-
-            <div class="form-group col-12">
-              <validation-provider
-                v-slot="{ errors, valid }"
-                rules="image"
-              >
-                <input
-                  type="file"
-                  placeholder="Photos"
-                  name="photos[]"
-                  class="form-field"
-                  :class="{ 'is-valid': valid, 'is-invalid': !!errors[0] }"
-                  multiple
-                >
-
-                <span class="invalid-message">
-                  {{ errors[0] }}
-                </span>
               </validation-provider>
             </div>
 
@@ -126,11 +106,9 @@
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import BaseInput from '~/components/form/BaseInput.vue';
 import BaseSelect from '~/components/form/BaseSelect.vue';
-import dataCreate from '~/mixins/admin/dataCreate';
 
 export default {
   layout: 'dashboard',
-  transition: 'slide-up',
 
   components: {
     ValidationObserver,
@@ -139,27 +117,23 @@ export default {
     BaseSelect
   },
 
-  mixins: [dataCreate],
+  async fetch () {
+    this.genres = (await this.$axios.$get('/genre')).data;
+    this.categories = (await this.$axios.$get('/category')).data;
+    this.product = await this.$axios.$get(`/product/${this.$route.params.slug}`);
+
+    this.product.genre = this.product.genre.id;
+    this.product.categories = this.product.categories.map(category => category.id);
+  },
 
   data: () => ({
-    data: {
-      name: '',
-      inventory: '',
-      price: '',
-      genre: '',
-      categories: []
+    product: {
+      name: ''
     },
-    sending: false,
+    categories: [],
     genres: [],
-    categories: []
+    sending: false
   }),
-
-  async mounted () {
-    const genres = await this.$axios.$get('/genre');
-    const categories = await this.$axios.$get('/category');
-    this.genres = genres.data;
-    this.categories = categories.data;
-  },
 
   methods: {
     async onSubmit () {
@@ -167,30 +141,18 @@ export default {
       this.sending = true;
 
       const formData = new FormData(this.$refs.formData);
-      formData.name = 2;
 
       try {
-        await this.$axios.$post('/product', formData, {
+        await this.$axios.$post(`/product/${this.product.slug}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         });
 
-        this.$toast.success(`Successful created ${this.data.name}`);
-
-        this.data = {
-          name: '',
-          inventory: '',
-          price: '',
-          genre: '',
-          categories: []
-        };
-
-        this.$nextTick(() => {
-          this.$refs.formData.reset();
-        });
+        this.$toast.success(`Successful updated ${this.product.name}`);
+        this.$route.push('/admin/product');
       } catch (e) {
-        this.$toast.error(e.response.data.message);
+        this.$toast.error('Something went wrong, try again later');
       }
 
       this.$nuxt.$loading.finish();
@@ -200,7 +162,7 @@ export default {
 
   head () {
     return {
-      title: `Create new Product | Dashboard ${process.env.APP_NAME}`
+      title: `Update ${this.product.name} | Dashboard ${process.env.APP_NAME}`
     };
   }
 };

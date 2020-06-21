@@ -6,7 +6,7 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: '| CG Atacado',
+    title: `| ${process.eventNames.APP_NAME || ''}`,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -31,6 +31,7 @@ export default {
   */
   plugins: [
     '~/plugins/vee-validate',
+    '~/plugins/vue-toast-notification',
     { src: '~/plugins/vue-chartjs', ssr: false }
   ],
   /*

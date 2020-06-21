@@ -1,6 +1,15 @@
 import { extend } from 'vee-validate';
-// eslint-disable-next-line camelcase
-import { required, min, email, alpha, alpha_spaces, confirmed, numeric, max } from 'vee-validate/dist/rules';
+import {
+  required,
+  min,
+  email,
+  alpha,
+  // eslint-disable-next-line camelcase
+  alpha_spaces,
+  confirmed,
+  numeric,
+  max
+} from 'vee-validate/dist/rules';
 
 extend('required', {
   ...required,

@@ -42,7 +42,7 @@
             <div class="navbar-user">
               <ul class="user-menu row align-items-center">
                 <li
-                  v-if="$auth.user && $auth.user.access_level === 'admin'"
+                  v-if="$auth.user && $auth.user.role === 'admin'"
                   class="menu-item"
                 >
                   <nuxt-link to="/admin">

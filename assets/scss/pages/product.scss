@@ -5,6 +5,9 @@
     font-size: 1.45rem;
     font-weight: 600;
     border-bottom: 1px solid #f4f4f4;
+    overflow: hidden;
+    
+    .name { animation: slide_right 1s .3s both; }
   }
 
   .price-availability {

@@ -5,10 +5,6 @@
         Cadastrar novo gênero
       </h1>
 
-      <div v-show="failMessage" class="alert alert-danger">
-        {{ failMessage }}
-      </div>
-
       <validation-observer ref="form" v-slot="{ invalid, handleSubmit}">
         <form @submit.prevent="handleSubmit(onSubmit)">
           <div class="row">
@@ -18,7 +14,7 @@
                 rules="required|alpha_spaces|max:255"
               >
                 <base-input
-                  v-model.trim="data.name"
+                  v-model="data.name"
                   placeholder="Gênero"
                   name="name"
                   :error="errors[0]"
@@ -62,6 +58,12 @@ export default {
 
   data: () => ({
     route: '/genre'
-  })
+  }),
+
+  head () {
+    return {
+      title: `Create new Genre | Dashboard ${process.env.APP_NAME}`
+    };
+  }
 };
 </script>

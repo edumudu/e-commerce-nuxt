@@ -72,6 +72,12 @@ export default {
       cartProducts: 'cart/cartProducts',
       cartTotal: 'cart/cartTotal'
     })
+  },
+
+  head () {
+    return {
+      title: `My cart | ${process.env.APP_NAME}`
+    };
   }
 };
 </script>
