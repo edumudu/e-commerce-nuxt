@@ -29,6 +29,12 @@ export default {
 
   data: () => ({
     route: '/genre'
-  })
+  }),
+
+  head () {
+    return {
+      title: `List genre | Dashboard ${process.env.APP_NAME}`
+    };
+  }
 };
 </script>

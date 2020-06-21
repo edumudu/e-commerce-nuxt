@@ -42,7 +42,7 @@ export default {
   inheritAttrs: false,
 
   props: {
-    value: { type: String, default: '' },
+    value: { type: [String, Number], default: '' },
     placeholder: { type: String, default: '' },
     muted: { type: String, default: '' },
     error: { type: String, default: '' },
@@ -52,7 +52,7 @@ export default {
 
   computed: {
     active () {
-      return this.value.trim().length > 0;
+      return typeof this.value === 'string' ? this.value.trim().length > 0 : true;
     },
 
     classes () {

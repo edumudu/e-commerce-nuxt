@@ -27,19 +27,15 @@
             Eu tenho uma conta.
           </p>
 
-          <span v-show="failMessage" class="alert alert-danger">
-            {{ failMessage }}
-          </span>
-
           <validation-observer v-slot="{ handleSubmit, invalid }">
             <form @submit.prevent="handleSubmit(sendLogin)">
               <div class="form-group">
                 <validation-provider
                   v-slot="{ errors, valid }"
-                  rules="required|email"
+                  rules="required|email|max:255"
                 >
                   <base-input
-                    v-model.trim="login.email"
+                    v-model="login.email"
                     name="login"
                     type="email"
                     placeholder="E-mail"
@@ -55,7 +51,7 @@
                   rules="required|min:8"
                 >
                   <base-input
-                    v-model.trim="login.password"
+                    v-model="login.password"
                     type="password"
                     name="password"
                     placeholder="Senha"
@@ -101,7 +97,6 @@ export default {
 
   data: () => ({
     sending: false,
-    failMessage: '',
     login: {
       email: '',
       password: ''
@@ -116,12 +111,18 @@ export default {
       try {
         await this.$auth.loginWith('local', { data: this.login });
       } catch (e) {
-        this.failMessage = 'User or password incorrect';
+        this.$toast.error('User or password incorrect');
       }
 
       this.sending = false;
       this.$nuxt.$loading.finish();
     }
+  },
+
+  head () {
+    return {
+      title: `Login | ${process.env.APP_NAME}`
+    };
   }
 };
 </script>

@@ -21,7 +21,7 @@
                 rules="required|alpha_spaces"
               >
                 <base-input
-                  v-model.trim="form.name"
+                  v-model="form.name"
                   name="name"
                   placeholder="nome"
                   :is-valid="valid"
@@ -36,7 +36,7 @@
                 rules="required|email"
               >
                 <base-input
-                  v-model.trim="form.email"
+                  v-model="form.email"
                   placeholder="email"
                   name="email"
                   type="email"
@@ -52,7 +52,7 @@
                 rules="max:255"
               >
                 <base-input
-                  v-model.trim="form.phone"
+                  v-model="form.phone"
                   placeholder="telefone"
                   name="phone"
                   muted="Opcional"
@@ -68,7 +68,7 @@
                 rules="required|min:30"
               >
                 <base-input
-                  v-model.trim="form.body"
+                  v-model="form.body"
                   type="textarea"
                   placeholder="Menssagem"
                   name="body"
@@ -137,6 +137,12 @@ export default {
       this.sending = false;
       this.$nuxt.$loading.finish();
     }
+  },
+
+  head () {
+    return {
+      title: `Contact | ${process.env.APP_NAME}`
+    };
   }
 };
 </script>

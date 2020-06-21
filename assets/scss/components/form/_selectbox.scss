@@ -46,6 +46,8 @@
     background-color: #fff;
     border-radius: 0 0 5px 5px;
     border: 1px solid $gray;
+    overflow-y: auto;
+    max-height: 300px;
 
     li {
       &:hover { background-color: rgba(0,0,0,0.1); }

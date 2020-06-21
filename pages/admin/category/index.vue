@@ -29,6 +29,12 @@ export default {
 
   data: () => ({
     route: '/category'
-  })
+  }),
+
+  head () {
+    return {
+      title: `List Category | Dashboard ${process.env.APP_NAME}`
+    };
+  }
 };
 </script>

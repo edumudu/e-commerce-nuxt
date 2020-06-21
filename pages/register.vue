@@ -20,10 +20,10 @@
                   <div class="form-group col-md-6">
                     <validation-provider
                       v-slot="{ errors, valid }"
-                      rules="required|alpha|min:3"
+                      rules="required|alpha|min:3|max:255"
                     >
                       <base-input
-                        v-model.trim="account.first_name"
+                        v-model="account.first_name"
                         placeholder="Primeiro nome"
                         :error="errors[0]"
                         :is-valid="valid"
@@ -34,10 +34,10 @@
                   <div class="form-group col-md-6">
                     <validation-provider
                       v-slot="{ errors, valid }"
-                      rules="required|alpha|min:3"
+                      rules="required|alpha|min:3|max:255"
                     >
                       <base-input
-                        v-model.trim="account.last_name"
+                        v-model="account.last_name"
                         placeholder="Sobrenome"
                         :error="errors[0]"
                         :is-valid="valid"
@@ -48,10 +48,10 @@
                   <div class="form-group col-12">
                     <validation-provider
                       v-slot="{ errors, valid }"
-                      rules="required|email"
+                      rules="required|email|max:255"
                     >
                       <base-input
-                        v-model.trim="account.email"
+                        v-model="account.email"
                         type="email"
                         placeholder="E-mail"
                         :error="errors[0]"
@@ -63,10 +63,10 @@
                   <div class="form-group col-12">
                     <validation-provider
                       v-slot="{ errors, valid }"
-                      rules="required"
+                      rules="required|max:255"
                     >
                       <base-input
-                        v-model.trim="account.tel"
+                        v-model="account.tel"
                         placeholder="Telefone"
                         :error="errors[0]"
                         :is-valid="valid"
@@ -86,7 +86,7 @@
                     vid="password"
                   >
                     <base-input
-                      v-model.trim="account.password"
+                      v-model="account.password"
                       type="password"
                       placeholder="Senha"
                       :error="errors[0]"
@@ -101,7 +101,7 @@
                     rules="required|min:8|confirmed:password"
                   >
                     <base-input
-                      v-model.trim="account.password_confirmation"
+                      v-model="account.password_confirmation"
                       type="password"
                       placeholder="Confirme sua senha"
                       :error="errors[0]"
@@ -120,10 +120,10 @@
                   <div class="form-group col-md-9 col-lg-10">
                     <validation-provider
                       v-slot="{ errors, valid }"
-                      rules="required"
+                      rules="required|max:255"
                     >
                       <base-input
-                        v-model.trim="account.street"
+                        v-model="account.street"
                         placeholder="Rua"
                         :error="errors[0]"
                         :is-valid="valid"
@@ -134,10 +134,10 @@
                   <div class="form-group col-md-3 col-lg-2">
                     <validation-provider
                       v-slot="{ errors, valid }"
-                      rules="required|numeric"
+                      rules="required|numeric|max:255"
                     >
                       <base-input
-                        v-model.trim="account.number"
+                        v-model="account.number"
                         placeholder="Nº"
                         :error="errors[0]"
                         :is-valid="valid"
@@ -148,10 +148,10 @@
                   <div class="form-group col-md-8">
                     <validation-provider
                       v-slot="{ errors, valid }"
-                      rules="required"
+                      rules="required|max:255"
                     >
                       <base-input
-                        v-model.trim="account.city"
+                        v-model="account.city"
                         placeholder="Cidade"
                         :error="errors[0]"
                         :is-valid="valid"
@@ -162,10 +162,10 @@
                   <div class="form-group col-md-4">
                     <validation-provider
                       v-slot="{ errors, valid }"
-                      rules="required"
+                      rules="required|max:255"
                     >
                       <base-input
-                        v-model.trim="account.cep"
+                        v-model="account.cep"
                         placeholder="CEP"
                         :error="errors[0]"
                         :is-valid="valid"
@@ -258,6 +258,12 @@ export default {
       this.sending = false;
       this.$nuxt.$loading.finish();
     }
+  },
+
+  head () {
+    return {
+      title: `Register | ${process.env.APP_NAME}`
+    };
   }
 };
 </script>

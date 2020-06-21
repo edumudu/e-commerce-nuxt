@@ -5,10 +5,6 @@
         Editar categoria {{ category.name }}
       </h1>
 
-      <div v-show="failMessage" class="alert alert-danger">
-        {{ failMessage }}
-      </div>
-
       <validation-observer ref="form" v-slot="{ invalid, handleSubmit}">
         <form @submit.prevent="handleSubmit(onSubmit)">
           <div class="row">
@@ -18,7 +14,7 @@
                 rules="required|alpha_spaces|max:255"
               >
                 <base-input
-                  v-model.trim="category.name"
+                  v-model="category.name"
                   placeholder="Nome"
                   name="name"
                   :error="errors[0]"
@@ -62,7 +58,6 @@ export default {
   },
 
   data: () => ({
-    failMessage: '',
     sending: false,
     category: {}
   }),
@@ -82,6 +77,12 @@ export default {
       this.$nuxt.$loading.finish();
       this.sending = false;
     }
+  },
+
+  head () {
+    return {
+      title: `Update ${this.category.name} | Dashboard ${process.env.APP_NAME}`
+    };
   }
 };
 </script>

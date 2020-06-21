@@ -83,6 +83,12 @@ export default {
 
   watch: {
     '$route.query': '$fetch'
+  },
+
+  head () {
+    return {
+      title: `Products | ${process.env.APP_NAME}`
+    };
   }
 };
 </script>
