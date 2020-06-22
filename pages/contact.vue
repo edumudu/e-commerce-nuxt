@@ -10,7 +10,10 @@
           Valorizamos a opnião dos nossos clientes, e por isso queremos saber oque você esta achando. Mande-nos oque você esta achando da experiência no site, oque você acha que poderia melhorar, sugestões, ou apenas um elogio :).
         </p>
 
-        <validation-observer ref="form" v-slot="{ handleSubmit, invalid }">
+        <validation-observer
+          ref="form"
+          v-slot="{ handleSubmit, invalid }"
+        >
           <form
             class="row mt-4"
             @submit.prevent="handleSubmit(sendContact)"

@@ -6,6 +6,7 @@
       :class="classes"
       :value="value"
       v-bind="$attrs"
+      v-on="events"
       @input="$emit('input', $event.target.value)"
     />
 
@@ -15,6 +16,7 @@
       :class="classes"
       :value="value"
       v-bind="$attrs"
+      v-on="events"
       @input="$emit('input', $event.target.value)"
     >
 
@@ -64,6 +66,12 @@ export default {
           'is-valid': this.isValid
         }
       ];
+    },
+
+    events () {
+      return Object.entries(this.$listeners)
+        .filter(([key]) => key !== 'input')
+        .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
     }
   }
 };

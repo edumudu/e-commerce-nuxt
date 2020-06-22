@@ -2,13 +2,18 @@ import { extend } from 'vee-validate';
 import {
   required,
   min,
+  max,
   email,
   alpha,
   // eslint-disable-next-line camelcase
   alpha_spaces,
+  // eslint-disable-next-line camelcase
+  max_value,
+  // eslint-disable-next-line camelcase
+  min_value,
   confirmed,
   numeric,
-  max
+  digits
 } from 'vee-validate/dist/rules';
 
 extend('required', {
@@ -42,6 +47,18 @@ extend('alpha_spaces', {
   message: 'This field must be only contain alphabetic characters as well as spaces'
 });
 
+extend('max_value', {
+  // eslint-disable-next-line camelcase
+  ...max_value,
+  message: 'This field must be {max} or less'
+});
+
+extend('min_value', {
+  // eslint-disable-next-line camelcase
+  ...min_value,
+  message: 'This field must be {min} or more'
+});
+
 extend('confirmed', {
   ...confirmed,
   message: 'The {target} field does not match'
@@ -50,4 +67,9 @@ extend('confirmed', {
 extend('numeric', {
   ...numeric,
   message: 'This field may only contain numeric characters'
+});
+
+extend('digits', {
+  ...digits,
+  message: 'The field must be numeric and exactly contain {length} digits'
 });
