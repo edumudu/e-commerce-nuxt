@@ -149,8 +149,8 @@ export default {
           }
         });
 
+        this.$router.push('/admin/product');
         this.$toast.success(`Successful updated ${this.product.name}`);
-        this.$route.push('/admin/product');
       } catch (e) {
         this.$toast.error('Something went wrong, try again later');
       }

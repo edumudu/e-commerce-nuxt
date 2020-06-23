@@ -122,9 +122,9 @@
 
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
-import { mapGetters } from 'vuex';
-import BaseInput from '../components/form/BaseInput';
-import BaseSelect from '../components/form/BaseSelect';
+import { mapGetters, mapActions } from 'vuex';
+import BaseInput from '../../components/form/BaseInput';
+import BaseSelect from '../../components/form/BaseSelect';
 
 export default {
   middleware: 'auth',
@@ -158,15 +158,24 @@ export default {
 
   computed: {
     installmentsOptions () {
-      return this.installments.length ? this.installments.map(installment => ({
-        id: `${installment.quantity}|${installment.installmentAmount}`,
-        name: `${installment.quantity}x of ${installment.installmentAmount} - Total ${installment.totalAmount}`
-      })) : [{ id: `1|${this.defaultTotal}`, name: `1x of ${this.defaultTotal} - Total ${this.defaultTotal}` }];
+      return this.installments.length
+        ? this.installments.map(installment => ({
+          id: `${installment.quantity}|${installment.installmentAmount}`,
+          name: `${installment.quantity}x of ${installment.installmentAmount} - Total ${installment.totalAmount}`
+        }))
+        : [{ id: `1|${this.defaultTotal}`, name: `1x of ${this.defaultTotal} - Total ${this.defaultTotal}` }];
     },
 
     defaultTotal () {
-      return this.cartProducts().reduce((sum, product) => (product.price * product.quantity) + sum, 0).toFixed(2);
-    }
+      return this.cartProducts
+        .reduce((sum, product) => (product.price * product.quantity) + sum, 0)
+        .toFixed(2);
+    },
+
+    ...mapGetters({
+      cartItems: 'cart/cartItems',
+      cartProducts: 'cart/cartProducts'
+    })
   },
 
   watch: {
@@ -184,10 +193,12 @@ export default {
       if (value.length >= 6) {
         window.PagSeguroDirectPayment.getBrand({
           cardBin: value.toString().substr(0, 6),
+
           success: (res) => {
             this.cardInfo = res.brand;
             this.getInstallments(this.defaultTotal, res.brand.name);
           },
+
           error: () => {
             this.$toast.error('Card number invalid');
           }
@@ -199,33 +210,44 @@ export default {
       this.sending = true;
       this.$nuxt.$loading.start();
 
-      try {
-        window.PagSeguroDirectPayment.createCardToken({
-          cardNumber: this.card.number,
-          brand: this.cardInfo.name,
-          cvv: this.card.cvv,
-          expirationMonth: this.card.month,
-          expirationYear: this.card.year,
-          success: async ({ card }) => {
-            await this.$axios.post('/checkout/process', {
+      const closeSending = () => {
+        this.sending = false;
+        this.$nuxt.$loading.finish();
+      };
+
+      window.PagSeguroDirectPayment.createCardToken({
+        cardNumber: this.card.number,
+        brand: this.cardInfo.name,
+        cvv: this.card.cvv,
+        expirationMonth: this.card.month,
+        expirationYear: this.card.year,
+
+        success: async ({ card }) => {
+          try {
+            const response = await this.$axios.$post('/checkout/process', {
               token: card.token,
               hash: window.PagSeguroDirectPayment.getSenderHash(),
               installment: this.installment,
               name: this.card.name,
-              cart: this.cartItems()
+              cart: this.cartItems
             });
-          },
-          error: (e) => {
-            console.log(e);
-          }
-        });
-      } catch (e) {
-        console.log(e);
-        // this.$toast.error(e.response.data.message);
-      }
 
-      this.sending = false;
-      this.$nuxt.$loading.finish();
+            this.clearCart();
+            this.$toast.success(response.message);
+            this.$router.push('/checkout/thanks');
+          } catch (e) {
+            console.log(e);
+            this.$toast.error(e?.response?.data?.error?.message);
+          }
+
+          closeSending();
+        },
+
+        error: (e) => {
+          console.log(e);
+          closeSending();
+        }
+      });
     },
 
     getInstallments (amount, brand) {
@@ -244,9 +266,8 @@ export default {
       });
     },
 
-    ...mapGetters({
-      cartItems: 'cart/cartItems',
-      cartProducts: 'cart/cartProducts'
+    ...mapActions({
+      clearCart: 'cart/clearCart'
     })
   },
 

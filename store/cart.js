@@ -66,6 +66,12 @@ export const actions = {
     }
   },
 
+  clearCart ({ commit }) {
+    commit('setCart', []);
+    commit('setProducts', []);
+    localStorage.removeItem('cart');
+  },
+
   setProductQuantity ({ state, commit }, { product, qty }) {
     product = state.cart.find(prod => prod.id === product.id);
 
