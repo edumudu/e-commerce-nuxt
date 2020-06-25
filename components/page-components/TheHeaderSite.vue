@@ -34,7 +34,9 @@
 
                   <fa :icon="['fas', 'search']" class="help-icon" />
 
-                  <input class="btn" type="submit" name="search" value="Buscar">
+                  <button class="btn" type="submit" name="search">
+                    Buscar
+                  </button>
                 </div>
               </form>
             </div>
@@ -124,17 +126,29 @@
                       </nuxt-link>
                     </template>
 
-                    <li
-                      v-for="product in cartProducts"
-                      :key="product.id"
-                      class="dropdown-item"
+                    <template
+                      v-if="cartProducts.length"
+                      #default
                     >
-                      <nuxt-link :to="`/product/${product.slug}`">
-                        {{ product.name }}
-                        -
-                        {{ (product.price * product.quantity).toFixed(2) }}
-                      </nuxt-link>
-                    </li>
+                      <li
+                        v-for="product in cartProducts"
+                        :key="product.id"
+                        class="dropdown-item"
+                      >
+                        <nuxt-link :to="`/product/${product.slug}`">
+                          {{ product.name }}
+                          -
+                          {{ (product.price * product.quantity).toFixed(2) }}
+                        </nuxt-link>
+                      </li>
+                    </template>
+
+                    <template
+                      v-else
+                      #default
+                    >
+                      You dont have any product in cart.
+                    </template>
                   </base-dropdown>
                 </li>
               </ul>

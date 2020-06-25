@@ -32,6 +32,7 @@ export default {
   plugins: [
     '~/plugins/vee-validate',
     '~/plugins/vue-toast-notification',
+    '~/plugins/v-mask',
     { src: '~/plugins/vue-chartjs', ssr: false }
   ],
   /*
@@ -85,7 +86,13 @@ export default {
           user: { url: '/auth/me', method: 'get', propertyName: false }
         }
       }
-    }
+    },
+    cookie: {
+      options: {
+        maxAge: 3600
+      }
+    },
+    resetOnError: true
   },
 
   fontawesome: {

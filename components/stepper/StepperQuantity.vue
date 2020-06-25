@@ -1,11 +1,11 @@
 <template>
   <div class="product-quantity d-flex">
-    <input
+    <base-input
       v-model="val"
-      class="form-field quantity"
+      class="quantity"
       type="text"
       readonly
-    >
+    />
 
     <div class="quantity-buttons">
       <button
@@ -26,9 +26,14 @@
 </template>
 
 <script>
+import BaseInput from '~/components/form/BaseInput.vue';
 import stepper from '~/mixins/stepper';
 
 export default {
+  components: {
+    BaseInput
+  },
+
   mixins: [stepper]
 };
 </script>

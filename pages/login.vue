@@ -87,6 +87,8 @@ import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import BaseInput from '~/components/form/BaseInput.vue';
 
 export default {
+  middleware: 'auth',
+  auth: 'guest',
   transition: 'slide-left',
 
   components: {
