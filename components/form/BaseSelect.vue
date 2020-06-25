@@ -11,6 +11,7 @@
       <base-input
         :value="getNames"
         v-bind="$attrs"
+        type="text"
         input-class="readonly-no-opacity"
         readonly
       />

@@ -1,108 +1,289 @@
 <template>
   <section id="page-content">
     <div class="container">
-      <h2 class="title">
+      <h1 class="page-title">
         Checkout
-      </h2>
+      </h1>
 
       <validation-observer
         v-slot="{ handleSubmit, invalid }"
         ref="form"
       >
         <form
-          class="row"
+          class="row align-items-start"
           @submit.prevent="handleSubmit(sendPayment)"
         >
-          <div class="form-group col-12 col-md-6">
-            <validation-provider
-              v-slot="{ errors, valid }"
-              rules="required|numeric"
-            >
-              <base-input
-                v-model="card.number"
-                name="card_number"
-                placeholder="card number"
-                :is-valid="valid"
-                :error="errors[0]"
-                @keyup="getBrand($event.target.value)"
-              />
-            </validation-provider>
+          <div class="row col-12 col-lg-6">
+            <div class="col-12">
+              <h2 class="title">
+                Card info
+              </h2>
+            </div>
+
+            <div class="form-group col-12 col-md-6">
+              <validation-provider
+                v-slot="{ errors, valid }"
+                rules="required|digits:16"
+              >
+                <base-input
+                  v-model="card.number"
+                  v-mask="'################'"
+                  name="card_number"
+                  placeholder="card number"
+                  :is-valid="valid"
+                  :error="errors[0]"
+                  @keyup="getBrand($event.target.value)"
+                />
+              </validation-provider>
+            </div>
+
+            <div class="form-group col-12 col-md-6">
+              <validation-provider
+                v-slot="{ errors, valid }"
+                rules="required|max:255"
+              >
+                <base-input
+                  v-model="card.cpf"
+                  v-mask="'###########'"
+                  name="card_cpf"
+                  placeholder="Holder CPF"
+                  :is-valid="valid"
+                  :error="errors[0]"
+                />
+              </validation-provider>
+            </div>
+
+            <div class="form-group col-12">
+              <validation-provider
+                v-slot="{ errors, valid }"
+                rules="required"
+              >
+                <base-select
+                  v-model="installment"
+                  name="installments"
+                  placeholder="Installments"
+                  :options="installmentsOptions"
+                  :is-valid="valid"
+                  :error="errors[0]"
+                />
+              </validation-provider>
+            </div>
+
+            <div class="form-group col-12 col-md-8 col-lg-7">
+              <validation-provider
+                v-slot="{ errors, valid }"
+                rules="required|alpha_spaces"
+              >
+                <base-input
+                  v-model="card.name"
+                  name="card_name"
+                  placeholder="card name"
+                  :error="errors[0]"
+                  :is-valid="valid"
+                />
+              </validation-provider>
+            </div>
+
+            <div class="form-group col-12 col-md-4 col-lg-5">
+              <validation-provider
+                v-slot="{ errors, valid }"
+                rules="required|max:255"
+              >
+                <base-input
+                  v-model="card.birthdate"
+                  v-mask="'##/##/####'"
+                  name="card_birthdate"
+                  placeholder="holder birthdate"
+                  :error="errors[0]"
+                  :is-valid="valid"
+                />
+              </validation-provider>
+            </div>
+
+            <div class="form-group col-12 col-sm-4">
+              <validation-provider
+                v-slot="{ errors, valid }"
+                rules="required|digits:2|min_value:1|max_value:12"
+              >
+                <base-input
+                  v-model="card.month"
+                  v-mask="'##'"
+                  name="card_month"
+                  placeholder="month"
+                  :is-valid="valid"
+                  :error="errors[0]"
+                />
+              </validation-provider>
+            </div>
+
+            <div class="form-group col-12 col-sm-4">
+              <validation-provider
+                v-slot="{ errors, valid }"
+                :rules="`required|digits:4|min_value:${new Date().getFullYear()}`"
+              >
+                <base-input
+                  v-model="card.year"
+                  v-mask="'####'"
+                  name="card_year"
+                  placeholder="year"
+                  :is-valid="valid"
+                  :error="errors[0]"
+                />
+              </validation-provider>
+            </div>
+
+            <div class="form-group col-12 col-sm-4">
+              <validation-provider
+                v-slot="{ errors, valid }"
+                :rules="`required|digits:${cardInfo.cvvSize || 4}`"
+              >
+                <base-input
+                  v-model="card.cvv"
+                  v-mask="'#'.repeat(cardInfo.cvvSize || 4)"
+                  name="card_cvv"
+                  placeholder="cvv"
+                  :is-valid="valid"
+                  :error="errors[0]"
+                />
+              </validation-provider>
+            </div>
           </div>
 
-          <div class="form-group col-12 col-md-6">
-            <validation-provider
-              v-slot="{ errors, valid }"
-              rules="required"
-            >
-              <base-select
-                v-model="installment"
-                name="installments"
-                placeholder="Installments"
-                :options="installmentsOptions"
-                :is-valid="valid"
-                :error="errors[0]"
-              />
-            </validation-provider>
-          </div>
+          <div class="row col-12 col-lg-6">
+            <div class="col-12">
+              <h2 class="title">
+                Address
+              </h2>
+            </div>
 
-          <div class="form-group col-12">
-            <validation-provider
-              v-slot="{ errors, valid }"
-              rules="required|alpha_spaces"
-            >
-              <base-input
-                v-model="card.name"
-                name="card_name"
-                placeholder="card name"
-                :error="errors[0]"
-                :is-valid="valid"
-              />
-            </validation-provider>
-          </div>
+            <div class="form-group col-12">
+              <validation-provider
+                v-slot="{ errors }"
+                rules="required"
+                vid="sameAsRegister"
+              >
+                <base-checkout
+                  v-model="sameAsRegister"
+                  :error="errors[0]"
+                >
+                  Use same address of my register
+                </base-checkout>
+              </validation-provider>
+            </div>
 
-          <div class="form-group col-12 col-sm-4">
-            <validation-provider
-              v-slot="{ errors, valid }"
-              rules="required|digits:2|min_value:1|max_value:12"
-            >
-              <base-input
-                v-model="card.month"
-                name="card_month"
-                placeholder="expiration Month"
-                :is-valid="valid"
-                :error="errors[0]"
-              />
-            </validation-provider>
-          </div>
+            <template v-if="!sameAsRegister">
+              <div class="form-group col-md-4">
+                <validation-provider
+                  v-slot="{ errors, valid }"
+                  rules="required_if:sameAsRegister,false|digits:8"
+                >
+                  <base-input
+                    v-model="card.address.cep"
+                    v-mask="'########'"
+                    name="CEP"
+                    placeholder="CEP"
+                    :error="errors[0]"
+                    :is-valid="valid"
+                    @keyup="getAddress()"
+                  />
+                </validation-provider>
+              </div>
 
-          <div class="form-group col-12 col-sm-4">
-            <validation-provider
-              v-slot="{ errors, valid }"
-              :rules="`required|digits:4|min_value:${new Date().getFullYear()}`"
-            >
-              <base-input
-                v-model="card.year"
-                name="card_year"
-                placeholder="expiration year"
-                :is-valid="valid"
-                :error="errors[0]"
-              />
-            </validation-provider>
-          </div>
+              <div class="form-group col-9 col-md-8 col-lg-8">
+                <validation-provider
+                  v-slot="{ errors, valid }"
+                  rules="required_if:sameAsRegister,false|max:255"
+                >
+                  <base-input
+                    v-model="card.address.street"
+                    name="street"
+                    placeholder="Rua"
+                    readonly
+                    :error="errors[0]"
+                    :is-valid="valid"
+                  />
+                </validation-provider>
+              </div>
 
-          <div class="form-group col-12 col-sm-4">
-            <validation-provider
-              v-slot="{ errors, valid }"
-              :rules="`required|digits:${cardInfo.cvvSize || 4}`"
-            >
-              <base-input
-                v-model="card.cvv"
-                name="card_cvv"
-                placeholder="security code"
-                :is-valid="valid"
-                :error="errors[0]"
-              />
-            </validation-provider>
+              <div class="form-group col-3 col-md-3">
+                <validation-provider
+                  v-slot="{ errors, valid }"
+                  rules="required_if:sameAsRegister,false|alpha_num|max:10"
+                >
+                  <base-input
+                    v-model="card.address.addressNumber"
+                    name="number"
+                    placeholder="Nº"
+                    :error="errors[0]"
+                    :is-valid="valid"
+                  />
+                </validation-provider>
+              </div>
+
+              <div class="form-group col-3 col-md-3">
+                <validation-provider
+                  v-slot="{ errors, valid }"
+                  rules="alpha_num|max:10"
+                >
+                  <base-input
+                    v-model="card.address.apto"
+                    name="apto"
+                    placeholder="Apto"
+                    muted="Optional"
+                    :error="errors[0]"
+                    :is-valid="valid"
+                  />
+                </validation-provider>
+              </div>
+
+              <div class="form-group col-9 col-md-6">
+                <validation-provider
+                  v-slot="{ errors, valid }"
+                  rules="required_if:sameAsRegister,false|max:255"
+                >
+                  <base-input
+                    v-model="card.address.district"
+                    name="district"
+                    placeholder="Bairro"
+                    readonly
+                    :error="errors[0]"
+                    :is-valid="valid"
+                  />
+                </validation-provider>
+              </div>
+
+              <div class="form-group col-md-9">
+                <validation-provider
+                  v-slot="{ errors, valid }"
+                  rules="required_if:sameAsRegister,false|max:255"
+                >
+                  <base-input
+                    v-model="card.address.city"
+                    name="city"
+                    placeholder="Cidade"
+                    readonly
+                    :error="errors[0]"
+                    :is-valid="valid"
+                  />
+                </validation-provider>
+              </div>
+
+              <div class="form-group col-md-3">
+                <validation-provider
+                  v-slot="{ errors, valid }"
+                  rules="required_if:sameAsRegister,false|length:2"
+                >
+                  <base-input
+                    v-model="card.address.state"
+                    name="state"
+                    placeholder="Estado"
+                    readonly
+                    :error="errors[0]"
+                    :is-valid="valid"
+                  />
+                </validation-provider>
+              </div>
+            </template>
           </div>
 
           <div class="form-group mx-auto">
@@ -125,6 +306,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
 import { mapGetters, mapActions } from 'vuex';
 import BaseInput from '../../components/form/BaseInput';
 import BaseSelect from '../../components/form/BaseSelect';
+import BaseCheckout from '../../components/form/BaseCheckout';
 
 export default {
   middleware: 'auth',
@@ -134,7 +316,8 @@ export default {
     BaseInput,
     BaseSelect,
     ValidationProvider,
-    ValidationObserver
+    ValidationObserver,
+    BaseCheckout
   },
 
   async fetch () {
@@ -148,8 +331,21 @@ export default {
       name: '',
       month: '',
       year: '',
-      cvv: ''
+      cvv: '',
+      address: {
+        cep: '',
+        street: '',
+        district: '',
+        state: '',
+        city: '',
+        addressNumber: '',
+        apto: ''
+      },
+      cpf: '',
+      birthdate: '',
+      phone: ''
     },
+    sameAsRegister: true,
     cardInfo: {},
     installments: [],
     installment: '1|0',
@@ -206,6 +402,43 @@ export default {
       }
     },
 
+    async getAddress () {
+      if (this.card.address.cep.length !== 8) {
+        this.card.address = {
+          ...this.card.address,
+          street: '',
+          district: '',
+          state: '',
+          city: ''
+        };
+        return;
+      };
+
+      this.$nuxt.$loading.start();
+
+      try {
+        const instance = this.$axios.create();
+        delete instance.defaults.headers.common.Authorization;
+        const address = await instance.$get(`https://viacep.com.br/ws/${this.card.address.cep}/json/`);
+
+        if (address.erro) {
+          throw new Error(404);
+        }
+
+        this.card.address = {
+          ...this.card.address,
+          street: address.logradouro,
+          district: address.bairro,
+          state: address.uf,
+          city: address.localidade
+        };
+      } catch (e) {
+        this.$toast.error(e.message ? 'Not found this CEP' : 'Something is wrong, try again latter.');
+      } finally {
+        this.$nuxt.$loading.finish();
+      }
+    },
+
     sendPayment () {
       this.sending = true;
       this.$nuxt.$loading.start();
@@ -229,22 +462,27 @@ export default {
               hash: window.PagSeguroDirectPayment.getSenderHash(),
               installment: this.installment,
               name: this.card.name,
-              cart: this.cartItems
+              cart: this.cartItems,
+              birthdate: this.card.birthdate,
+              cpf: this.card.cpf,
+              sameAsRegister: this.sameAsRegister,
+              cep: this.card.address.cep,
+              number: this.card.address.addressNumber,
+              apto: this.card.address.apto
             });
 
             this.clearCart();
             this.$toast.success(response.message);
             this.$router.push('/checkout/thanks');
           } catch (e) {
-            console.log(e);
-            this.$toast.error(e?.response?.data?.error?.message);
+            this.$toast.error(e?.response?.data?.message || e?.response?.data?.error?.message);
+          } finally {
+            closeSending();
           }
-
-          closeSending();
         },
 
         error: (e) => {
-          console.log(e);
+          this.$toast.error(Object.values(e.errors)[0]);
           closeSending();
         }
       });

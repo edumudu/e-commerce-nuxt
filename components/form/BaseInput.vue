@@ -15,6 +15,7 @@
       class="form-field"
       :class="classes"
       :value="value"
+      :type="$attrs.type || 'text'"
       v-bind="$attrs"
       v-on="events"
       @input="$emit('input', $event.target.value)"

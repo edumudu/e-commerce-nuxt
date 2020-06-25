@@ -34,7 +34,9 @@
 
                   <fa :icon="['fas', 'search']" class="help-icon" />
 
-                  <input class="btn" type="submit" name="search" value="Buscar">
+                  <button class="btn" type="submit" name="search">
+                    Buscar
+                  </button>
                 </div>
               </form>
             </div>
@@ -141,7 +143,10 @@
                       </li>
                     </template>
 
-                    <template #default>
+                    <template
+                      v-else
+                      #default
+                    >
                       You dont have any product in cart.
                     </template>
                   </base-dropdown>

@@ -77,6 +77,7 @@
 
               <button
                 class="btn-press btn-add-cart"
+                :disabled="cartContains(product.id)"
                 @click="addToCart"
               >
                 Adicionar ao carrinho
@@ -229,6 +230,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import BaseInput from '~/components/form/BaseInput.vue';
 import ProductImgCarrousel from '~/components/ProductImgCarrousel.vue';
 import StepperQuantity from '~/components/stepper/StepperQuantity.vue';
@@ -268,7 +270,11 @@ export default {
   computed: {
     reviewsCounter () {
       return this.product.reviews && this.product.reviews.length;
-    }
+    },
+
+    ...mapGetters({
+      cartContains: 'cart/cartContains'
+    })
   },
 
   methods: {

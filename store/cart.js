@@ -14,6 +14,10 @@ export const getters = {
 
   cartTotal (state, getters) {
     return getters.cartProducts.reduce((total, current) => (current.price * current.quantity) + total, 0);
+  },
+
+  cartContains: (state, getters) => (id) => {
+    return getters.cartItems.map(item => item.id).includes(id);
   }
 };
 
@@ -21,14 +25,17 @@ export const actions = {
   async fetchProducts ({ state, commit, getters }) {
     const cart = Array.from(getters.cartItems, item => item.id);
 
-    let { data } = await this.$axios.post('/cart/info', { cart });
-    data = data.map((product) => {
+    let { data: products } = await this.$axios.post('/cart/info', { cart });
+    products = products.map((product) => {
       const cartItem = state.cart.find(item => item.id === product.id);
 
       return ({ ...cartItem, ...product });
     });
 
-    commit('setProducts', data);
+    const updatedCart = products.map(product => ({ id: product.id, quantity: product.quantity }));
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    commit('setCart', updatedCart);
+    commit('setProducts', products);
   },
 
   addProductToCart ({ state, commit, dispatch }, product) {
@@ -61,8 +68,6 @@ export const actions = {
     if (state.cart.some(cartItem => product.id === cartItem.id)) {
       commit('removeItemFromCart', product);
       dispatch('fetchProducts');
-
-      localStorage.setItem('cart', JSON.stringify(state.cart));
     }
   },
 
