@@ -259,12 +259,12 @@
                   v-slot="{ errors }"
                   :rules="{ required: { allowFalse: false } }"
                 >
-                  <checkout
+                  <base-checkout
                     v-model="isAgree"
                     :error="errors[0]"
                   >
                     Li e concordo com a Política de Privacidade
-                  </checkout>
+                  </base-checkout>
                 </validation-provider>
               </div>
 
@@ -288,7 +288,7 @@
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import BaseInput from '~/components/form/BaseInput.vue';
-import Checkout from '~/components/form/BaseCheckout.vue';
+import BaseCheckout from '~/components/form/BaseCheckout.vue';
 
 export default {
   middleware: 'auth',
@@ -299,7 +299,7 @@ export default {
     BaseInput,
     ValidationProvider,
     ValidationObserver,
-    Checkout
+    BaseCheckout
   },
 
   data: () => ({
