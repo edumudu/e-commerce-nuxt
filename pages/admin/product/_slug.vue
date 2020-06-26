@@ -118,12 +118,27 @@ export default {
   },
 
   async fetch () {
-    this.genres = (await this.$axios.$get('/genre')).data;
-    this.categories = (await this.$axios.$get('/category')).data;
-    this.product = await this.$axios.$get(`/product/${this.$route.params.slug}`);
+    try {
+      this.genres = (await this.$axios.$get('/genre')).data;
+      this.categories = (await this.$axios.$get('/category')).data;
+      this.product = await this.$axios.$get(`/product/${this.$route.params.slug}`);
 
-    this.product.genre = this.product.genre.id;
-    this.product.categories = this.product.categories.map(category => category.id);
+      this.product.genre = this.product.genre.id;
+      this.product.categories = this.product.categories.map(category => category.id);
+    } catch (e) {
+      if (!process.server) {
+        switch (e.response.status) {
+          case 404:
+            this.$toast.error('Not found product');
+            this.$router.push('/admin/product');
+            break;
+          default:
+            this.$toast.error('Something went wrong, try again later');
+        }
+      } else {
+        this.$nuxt.context.redirect('/admin/product');
+      }
+    }
   },
 
   data: () => ({
