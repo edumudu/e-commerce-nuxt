@@ -47,7 +47,10 @@
           </div>
 
           <div class="row products-box">
-            <product-vitrine :items="products" />
+            <product-vitrine
+              class="col-12"
+              :items="products"
+            />
           </div>
 
           <data-paginate :total-pages="totalPages" />
@@ -70,19 +73,33 @@ export default {
   },
 
   async fetch () {
-    const response = await this.$axios.$get(`/product?page=${this.$route.query.page || 1}`);
-
-    this.products = response.data;
-    this.totalPages = Math.ceil(response.total / response.per_page);
+    this.response = await this.$axios.$get('/product', {
+      params: this.$route.query
+    });
   },
 
   data: () => ({
-    products: [],
-    totalPages: 0
+    response: {}
   }),
+
+  computed: {
+    totalPages () {
+      return Math.ceil(this.response.total / this.response.per_page);
+    },
+
+    products () {
+      return this.response.data || [];
+    }
+  },
 
   watch: {
     '$route.query': '$fetch'
+  },
+
+  head () {
+    return {
+      title: `Products | ${process.env.APP_NAME}`
+    };
   }
 };
 </script>

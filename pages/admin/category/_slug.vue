@@ -2,12 +2,8 @@
   <section class="page-content">
     <div class="card float-title">
       <h1 class="card-title">
-        Editar categoria {{ category.name }}
+        Editar categoria {{ data.name }}
       </h1>
-
-      <div v-show="failMessage" class="alert alert-danger">
-        {{ failMessage }}
-      </div>
 
       <validation-observer ref="form" v-slot="{ invalid, handleSubmit}">
         <form @submit.prevent="handleSubmit(onSubmit)">
@@ -18,7 +14,7 @@
                 rules="required|alpha_spaces|max:255"
               >
                 <base-input
-                  v-model.trim="category.name"
+                  v-model="data.name"
                   placeholder="Nome"
                   name="name"
                   :error="errors[0]"
@@ -46,6 +42,7 @@
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import BaseInput from '~/components/form/BaseInput.vue';
+import dataUpdate from '~/mixins/admin/dataUpdate';
 
 export default {
   layout: 'dashboard',
@@ -57,31 +54,16 @@ export default {
     BaseInput
   },
 
-  async fetch () {
-    this.category = await this.$axios.$get(`/category/${this.$route.params.slug}`);
-  },
+  mixins: [dataUpdate],
 
   data: () => ({
-    failMessage: '',
-    sending: false,
-    category: {}
+    route: '/category'
   }),
 
-  methods: {
-    async onSubmit () {
-      this.sending = true;
-      this.$nuxt.$loading.start();
-
-      try {
-        await this.$axios.$put(`/category/${this.category.slug}`, this.category);
-        this.$router.push('/admin/category');
-      } catch (e) {
-
-      }
-
-      this.$nuxt.$loading.finish();
-      this.sending = false;
-    }
+  head () {
+    return {
+      title: `Update ${this.data.name} | Dashboard ${process.env.APP_NAME}`
+    };
   }
 };
 </script>

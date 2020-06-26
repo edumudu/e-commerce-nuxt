@@ -6,6 +6,7 @@
       :class="classes"
       :value="value"
       v-bind="$attrs"
+      v-on="events"
       @input="$emit('input', $event.target.value)"
     />
 
@@ -14,7 +15,9 @@
       class="form-field"
       :class="classes"
       :value="value"
+      :type="$attrs.type || 'text'"
       v-bind="$attrs"
+      v-on="events"
       @input="$emit('input', $event.target.value)"
     >
 
@@ -42,7 +45,7 @@ export default {
   inheritAttrs: false,
 
   props: {
-    value: { type: String, default: '' },
+    value: { type: [String, Number], default: '' },
     placeholder: { type: String, default: '' },
     muted: { type: String, default: '' },
     error: { type: String, default: '' },
@@ -52,7 +55,7 @@ export default {
 
   computed: {
     active () {
-      return this.value.trim().length > 0;
+      return typeof this.value === 'string' ? this.value.trim().length > 0 : true;
     },
 
     classes () {
@@ -64,6 +67,12 @@ export default {
           'is-valid': this.isValid
         }
       ];
+    },
+
+    events () {
+      return Object.entries(this.$listeners)
+        .filter(([key]) => key !== 'input')
+        .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
     }
   }
 };

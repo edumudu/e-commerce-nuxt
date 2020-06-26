@@ -3,7 +3,6 @@ export default {
     data: {
       name: ''
     },
-    failMessage: '',
     sending: false
   }),
 
@@ -14,14 +13,15 @@ export default {
 
       try {
         await this.$axios.$post(this.route, this.data);
+
+        this.$toast.success(`Successful created! ${this.data.name}`);
         this.data = {};
-        this.failMessage = '';
 
         this.$nextTick(() => {
           this.$refs.form.reset();
         });
       } catch (e) {
-        this.failMessage = 'Something went wrong, try again later';
+        this.$toast.error(e.response.data.message);
       }
 
       this.$nuxt.$loading.finish();

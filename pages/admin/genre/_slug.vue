@@ -5,11 +5,7 @@
         Editar gênero {{ data.name }}
       </h1>
 
-      <div v-show="failMessage" class="alert alert-danger">
-        {{ failMessage }}
-      </div>
-
-      <validation-observer ref="form" v-slot="{ invalid, handleSubmit}">
+      <validation-observer ref="form" v-slot="{ invalid, handleSubmit }">
         <form @submit.prevent="handleSubmit(onSubmit)">
           <div class="row">
             <div class="form-group col-12">
@@ -18,7 +14,7 @@
                 rules="required|alpha_spaces|max:255"
               >
                 <base-input
-                  v-model.trim="data.name"
+                  v-model="data.name"
                   placeholder="Nome"
                   name="name"
                   :error="errors[0]"
@@ -46,6 +42,7 @@
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import BaseInput from '~/components/form/BaseInput.vue';
+import dataUpdate from '~/mixins/admin/dataUpdate';
 
 export default {
   layout: 'dashboard',
@@ -57,31 +54,16 @@ export default {
     BaseInput
   },
 
-  async fetch () {
-    this.data = await this.$axios.$get(`/genre/${this.$route.params.slug}`);
-  },
+  mixins: [dataUpdate],
 
   data: () => ({
-    failMessage: '',
-    sending: false,
-    data: {}
+    route: '/genre'
   }),
 
-  methods: {
-    async onSubmit () {
-      this.sending = true;
-      this.$nuxt.$loading.start();
-
-      try {
-        await this.$axios.$put(`/genre/${this.data.slug}`, this.data);
-        this.$router.push('/admin/genre');
-      } catch (e) {
-
-      }
-
-      this.$nuxt.$loading.finish();
-      this.sending = false;
-    }
+  head () {
+    return {
+      title: `Update ${this.data.name} | Dashboard ${process.env.APP_NAME}`
+    };
   }
 };
 </script>

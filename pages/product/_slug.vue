@@ -16,10 +16,12 @@
         <div class="col-md-6">
           <div class="product-description-section">
             <h1 class="product-title d-flex">
-              {{ product.name }}
+              <span class="name">
+                {{ product.name }}
+              </span>
 
               <button
-                v-if="$auth.loggedIn && $auth.user.access_level === 'admin'"
+                v-if="$auth.loggedIn && $auth.user.role === 'admin'"
                 class="btn btn-danger ml-auto"
                 @click="deletePost"
               >
@@ -75,6 +77,7 @@
 
               <button
                 class="btn-press btn-add-cart"
+                :disabled="cartContains(product.id)"
                 @click="addToCart"
               >
                 Adicionar ao carrinho
@@ -227,6 +230,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import BaseInput from '~/components/form/BaseInput.vue';
 import ProductImgCarrousel from '~/components/ProductImgCarrousel.vue';
 import StepperQuantity from '~/components/stepper/StepperQuantity.vue';
@@ -266,7 +270,11 @@ export default {
   computed: {
     reviewsCounter () {
       return this.product.reviews && this.product.reviews.length;
-    }
+    },
+
+    ...mapGetters({
+      cartContains: 'cart/cartContains'
+    })
   },
 
   methods: {
@@ -302,10 +310,17 @@ export default {
       await this.$axios.$delete(`/product/${this.product.slug}`);
       this.$router.push('/');
     }
+  },
+
+  head () {
+    return {
+      title: `${this.product.name} | ${process.env.APP_NAME}`
+    };
   }
 };
 </script>
 
 <style lang="scss" scoped>
+  @import '~/assets/scss/keyframes/slide';
   @import '~/assets/scss/pages/product';
 </style>

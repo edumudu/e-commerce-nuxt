@@ -8,7 +8,10 @@
         {{ title }}
       </h1>
 
-      <div class="products-box row">
+      <div
+        v-if="items.length"
+        class="products-box row"
+      >
         <div
           v-for="item in items"
           :key="item.id"
@@ -41,6 +44,10 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div v-else>
+        Nothing found
       </div>
     </div>
   </section>

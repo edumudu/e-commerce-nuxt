@@ -3,8 +3,8 @@
     <div class="card">
       <table-responsive
         :data="data"
-        :photos-fields="['photos']"
-        @remove="handleRemove"
+        :need-actions="false"
+        :hidden="['slug', 'created_at', 'updated_at', 'items']"
       />
 
       <data-paginate :total-pages="totalPages" />
@@ -29,12 +29,12 @@ export default {
   mixins: [listData],
 
   data: () => ({
-    route: '/product'
+    route: '/order'
   }),
 
   head () {
     return {
-      title: `List Product | Dashboard ${process.env.APP_NAME}`
+      title: `List orders | Dashboard ${process.env.APP_NAME}`
     };
   }
 };

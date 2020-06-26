@@ -13,6 +13,15 @@
             <div class="d-flex justify-content-between">
               Total: <span>{{ cartTotal.toFixed(2) }}</span>
             </div>
+
+            <div class="d-flex mt-3">
+              <nuxt-link
+                to="/checkout"
+                class="btn-press btn-success ml-auto"
+              >
+                Checkout
+              </nuxt-link>
+            </div>
           </div>
 
           <div v-else>
@@ -25,6 +34,7 @@
             <h2 class="soft-title">
               Oque você quer
             </h2>
+
             <div class="options-contain">
               <input-collapse
                 title="Use um codigo de cupom"
@@ -72,6 +82,12 @@ export default {
       cartProducts: 'cart/cartProducts',
       cartTotal: 'cart/cartTotal'
     })
+  },
+
+  head () {
+    return {
+      title: `My cart | ${process.env.APP_NAME}`
+    };
   }
 };
 </script>

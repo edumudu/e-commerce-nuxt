@@ -34,6 +34,8 @@
       transform: translateY(-50%) rotate(-45deg);
       transition: transform 0.4s;
     }
+
+    /deep/ .form-field { padding-right: 34px; }
   }
 
   &-ul {
@@ -46,6 +48,8 @@
     background-color: #fff;
     border-radius: 0 0 5px 5px;
     border: 1px solid $gray;
+    overflow-y: auto;
+    max-height: 300px;
 
     li {
       &:hover { background-color: rgba(0,0,0,0.1); }

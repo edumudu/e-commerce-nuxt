@@ -20,7 +20,7 @@
       <div class="col-12 col-md-6 col-lg-3 mb-sm-2">
         <div class="card hot-info users">
           <h1 class="hot-info-information">
-            2142
+            {{ newUsers }}
           </h1>
 
           <h5 class="hot-info-title">
@@ -69,7 +69,7 @@
     <div class="row mt-2">
       <div class="col-12 col-md-6">
         <div class="card">
-          <line-chart :chart-data="dataCollection" :options="{ responsive: true }" />
+          <line-chart :chart-data="newsUsersProjection" :options="{ responsive: true }" />
         </div>
       </div>
 
@@ -87,29 +87,40 @@ export default {
   layout: 'dashboard',
   transition: 'slide-up',
 
-  data: () => ({
-    dataCollection: {}
-  }),
+  async fetch () {
+    const newsUsers = await this.$axios.$get('/user', {
+      params: { createdInTime: 1 }
+    });
 
-  mounted () {
-    this.dataCollection = {
-      labels: ['January', 'February'],
+    const usersProjection = await this.$axios.$get('/user/info', {
+      params: { projection: 3 }
+    });
+
+    this.newsUsersProjection = {
+      labels: usersProjection.map(item => item.month),
       datasets: [
         {
           label: 'Data One',
           borderColor: '#f87979',
           backgroundColor: '#f87979',
-          data: [40, 20],
-          fill: false
-        },
-
-        {
-          label: 'Data two',
-          data: [20, 60],
-          backgroundColor: '#c47',
+          data: usersProjection.map(item => item.quantity),
           fill: false
         }
       ]
+    };
+
+    this.newUsers = newsUsers.total;
+  },
+
+  data: () => ({
+    newsUsersProjection: {},
+    dataCollection: {},
+    newUsers: 0
+  }),
+
+  head () {
+    return {
+      title: `Home | Dashboard ${process.env.APP_NAME}`
     };
   }
 };

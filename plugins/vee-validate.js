@@ -1,9 +1,35 @@
 import { extend } from 'vee-validate';
-// eslint-disable-next-line camelcase
-import { required, min, email, alpha, alpha_spaces, confirmed, numeric, max } from 'vee-validate/dist/rules';
+import {
+  required,
+  // eslint-disable-next-line camelcase
+  required_if,
+  min,
+  max,
+  email,
+  alpha,
+  // eslint-disable-next-line camelcase
+  alpha_spaces,
+  // eslint-disable-next-line camelcase
+  max_value,
+  // eslint-disable-next-line camelcase
+  alpha_num,
+  // eslint-disable-next-line camelcase
+  min_value,
+  confirmed,
+  numeric,
+  digits,
+  regex,
+  length
+} from 'vee-validate/dist/rules';
 
 extend('required', {
   ...required,
+  message: 'This field is required'
+});
+
+extend('required_if', {
+  // eslint-disable-next-line camelcase
+  ...required_if,
   message: 'This field is required'
 });
 
@@ -33,6 +59,24 @@ extend('alpha_spaces', {
   message: 'This field must be only contain alphabetic characters as well as spaces'
 });
 
+extend('alpha_num', {
+  // eslint-disable-next-line camelcase
+  ...alpha_num,
+  message: 'This field may only contain alpha-numeric characters'
+});
+
+extend('max_value', {
+  // eslint-disable-next-line camelcase
+  ...max_value,
+  message: 'This field must be {max} or less'
+});
+
+extend('min_value', {
+  // eslint-disable-next-line camelcase
+  ...min_value,
+  message: 'This field must be {min} or more'
+});
+
 extend('confirmed', {
   ...confirmed,
   message: 'The {target} field does not match'
@@ -41,4 +85,19 @@ extend('confirmed', {
 extend('numeric', {
   ...numeric,
   message: 'This field may only contain numeric characters'
+});
+
+extend('digits', {
+  ...digits,
+  message: 'The field must be numeric and exactly contain {length} digits'
+});
+
+extend('regex', {
+  ...regex,
+  message: 'The field format is invalid'
+});
+
+extend('length', {
+  ...length,
+  message: 'The field must be {length} long'
 });

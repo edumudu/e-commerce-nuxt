@@ -11,6 +11,7 @@
       <base-input
         :value="getNames"
         v-bind="$attrs"
+        type="text"
         input-class="readonly-no-opacity"
         readonly
       />
@@ -86,7 +87,7 @@ export default {
     getNames () {
       return this.isArray
         ? this.getValue.map(option => this.options.find(o => o.id === option).name).join(', ')
-        : (this.getValue && this.options.find(o => o.id === this.getValue).name);
+        : (this.getValue && this.options.find(o => o.id === this.getValue)?.name);
     },
 
     isArray () {

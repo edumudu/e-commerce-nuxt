@@ -28,21 +28,13 @@
 
           <div class="row align-items-center justify-content-between col-md-12 row">
             <div class="navbar-search col-8 px-0">
-              <form @submit.prevent>
-                <div class="input-group">
-                  <input class="form-field small icon" type="text" name="search_value" placeholder="Procure por uma categoria ou um produto :)" required>
-
-                  <fa :icon="['fas', 'search']" class="help-icon" />
-
-                  <input class="btn" type="submit" name="search" value="Buscar">
-                </div>
-              </form>
+              <the-navbar-search />
             </div>
 
             <div class="navbar-user">
               <ul class="user-menu row align-items-center">
                 <li
-                  v-if="$auth.user && $auth.user.access_level === 'admin'"
+                  v-if="$auth.user && $auth.user.role === 'admin'"
                   class="menu-item"
                 >
                   <nuxt-link to="/admin">
@@ -124,17 +116,29 @@
                       </nuxt-link>
                     </template>
 
-                    <li
-                      v-for="product in cartProducts"
-                      :key="product.id"
-                      class="dropdown-item"
+                    <template
+                      v-if="cartProducts.length"
+                      #default
                     >
-                      <nuxt-link :to="`/product/${product.slug}`">
-                        {{ product.name }}
-                        -
-                        {{ (product.price * product.quantity).toFixed(2) }}
-                      </nuxt-link>
-                    </li>
+                      <li
+                        v-for="product in cartProducts"
+                        :key="product.id"
+                        class="dropdown-item"
+                      >
+                        <nuxt-link :to="`/product/${product.slug}`">
+                          {{ product.name }}
+                          -
+                          {{ (product.price * product.quantity).toFixed(2) }}
+                        </nuxt-link>
+                      </li>
+                    </template>
+
+                    <template
+                      v-else
+                      #default
+                    >
+                      You dont have any product in cart.
+                    </template>
                   </base-dropdown>
                 </li>
               </ul>
@@ -149,10 +153,12 @@
 <script>
 import { mapGetters } from 'vuex';
 import BaseDropdown from '~/components/BaseDropdown.vue';
+import TheNavbarSearch from '~/components/page-components/TheNavbarSearch.vue';
 
 export default {
   components: {
-    BaseDropdown
+    BaseDropdown,
+    TheNavbarSearch
   },
 
   data: () => ({

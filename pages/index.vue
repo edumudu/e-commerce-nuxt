@@ -31,6 +31,12 @@ export default {
   async mounted () {
     const { data } = await this.$axios.$get('/product');
     this.destaques = data;
+  },
+
+  head () {
+    return {
+      title: `Home | ${process.env.APP_NAME}`
+    };
   }
 };
 </script>

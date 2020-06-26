@@ -78,6 +78,24 @@
           </nuxt-link>
         </li>
       </aside-menu-item>
+
+      <aside-menu-item
+        title="Orders"
+        :icon="['fas', 'cart-arrow-down']"
+        :is-active="path.includes('/order')"
+      >
+        <li
+          class="menu-subtree-item"
+          :class="{ active: path === '/admin/order' }"
+        >
+          <nuxt-link
+            to="/admin/order"
+            class="menu-link"
+          >
+            See orders
+          </nuxt-link>
+        </li>
+      </aside-menu-item>
     </aside-menu>
   </aside>
 </template>
