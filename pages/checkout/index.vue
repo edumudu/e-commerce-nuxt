@@ -309,7 +309,7 @@ import BaseSelect from '../../components/form/BaseSelect';
 import BaseCheckout from '../../components/form/BaseCheckout';
 
 export default {
-  middleware: 'auth',
+  middleware: ['auth', 'haveCart'],
   transition: 'slide-left',
 
   components: {
