@@ -42,6 +42,7 @@
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import BaseInput from '~/components/form/BaseInput.vue';
+import dataUpdate from '~/mixins/admin/dataUpdate';
 
 export default {
   layout: 'dashboard',
@@ -53,31 +54,11 @@ export default {
     BaseInput
   },
 
-  async fetch () {
-    this.data = await this.$axios.$get(`/genre/${this.$route.params.slug}`);
-  },
+  mixins: [dataUpdate],
 
   data: () => ({
-    sending: false,
-    data: {}
+    route: '/genre'
   }),
-
-  methods: {
-    async onSubmit () {
-      this.sending = true;
-      this.$nuxt.$loading.start();
-
-      try {
-        await this.$axios.$put(`/genre/${this.data.slug}`, this.data);
-        this.$router.push('/admin/genre');
-      } catch (e) {
-
-      }
-
-      this.$nuxt.$loading.finish();
-      this.sending = false;
-    }
-  },
 
   head () {
     return {
