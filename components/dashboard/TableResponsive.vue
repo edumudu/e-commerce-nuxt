@@ -28,7 +28,7 @@
             v-if="photosFields.includes(key)"
             class="responsive-table-image"
             :src="row[key]"
-            :alt="row[key].length ? '' : 'No image'"
+            :alt="row[key] || 'No image'"
           >
 
           <template v-else>

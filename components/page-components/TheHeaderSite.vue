@@ -28,17 +28,7 @@
 
           <div class="row align-items-center justify-content-between col-md-12 row">
             <div class="navbar-search col-8 px-0">
-              <form @submit.prevent>
-                <div class="input-group">
-                  <input class="form-field small icon" type="text" name="search_value" placeholder="Procure por uma categoria ou um produto :)" required>
-
-                  <fa :icon="['fas', 'search']" class="help-icon" />
-
-                  <button class="btn" type="submit" name="search">
-                    Buscar
-                  </button>
-                </div>
-              </form>
+              <the-navbar-search />
             </div>
 
             <div class="navbar-user">
@@ -163,10 +153,12 @@
 <script>
 import { mapGetters } from 'vuex';
 import BaseDropdown from '~/components/BaseDropdown.vue';
+import TheNavbarSearch from '~/components/page-components/TheNavbarSearch.vue';
 
 export default {
   components: {
-    BaseDropdown
+    BaseDropdown,
+    TheNavbarSearch
   },
 
   data: () => ({
