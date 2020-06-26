@@ -1,29 +1,25 @@
 .collapse {
   padding: 10px 0;
   border-bottom: 1px solid #bdc3c7;
-}
 
-.collapse h3{
-  font-size: 0.85rem;
-  cursor: pointer;
-}
+  h3{
+    font-size: 0.85rem;
+    cursor: pointer;
 
-.collapse h3:hover{
-  color: #e74c3c;
-}
+    &:hover{ color: #e74c3c; }
+  }
 
-.collapse p {
-  font-size: 0.9rem;
-}
+  p { font-size: 0.9rem; }
 
-.collapse .collapsable {
-  overflow: hidden;
-  height: auto;
-  max-height: 0;
-  animation: collapse_in 0.3s;
-}
+  .collapsable {
+    overflow: hidden;
+    height: auto;
+    max-height: 0;
+    animation: collapse_in 0.3s;
+  }
 
-.collapse.active .collapsable {
-  animation: collapse_out 1s;
-  max-height: 600px;
+  &.active .collapsable {
+    animation: collapse_out 1s;
+    max-height: 600px;
+  }
 }

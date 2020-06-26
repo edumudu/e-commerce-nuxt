@@ -27,7 +27,7 @@ a {
   text-decoration: none;
 }
 
-p {
+p:not(.toast-text) {
   margin-bottom: 10px;
   color: $theme-color;
 }
