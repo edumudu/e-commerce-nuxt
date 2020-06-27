@@ -40,7 +40,7 @@
             <div class="form-group col-12 col-md-6">
               <validation-provider
                 v-slot="{ errors, valid }"
-                rules="required|max:255"
+                rules="required|digits:11"
               >
                 <base-input
                   v-model="card.cpf"
