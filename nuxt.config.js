@@ -78,21 +78,19 @@ export default {
   },
 
   auth: {
+    plugins: ['~/plugins/auth'],
     strategies: {
       local: {
         endpoints: {
           login: { url: '/auth/login', method: 'post', propertyName: 'token' },
           logout: { url: '/auth/logout', method: 'post' },
           user: { url: '/auth/me', method: 'get', propertyName: false }
+        },
+        token: {
+          maxAge: 60
         }
       }
-    },
-    cookie: {
-      options: {
-        maxAge: 3600
-      }
-    },
-    resetOnError: true
+    }
   },
 
   fontawesome: {
