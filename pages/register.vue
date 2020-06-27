@@ -70,7 +70,7 @@
                     >
                       <base-input
                         v-model="account.phone"
-                        v-mask="phoneMask"
+                        v-mask="phoneMask(account.phone)"
                         name="phone"
                         placeholder="Telefone"
                         :error="errors[0]"
@@ -289,6 +289,7 @@
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import BaseInput from '~/components/form/BaseInput.vue';
 import BaseCheckout from '~/components/form/BaseCheckout.vue';
+import PhoneMask from '~/mixins/phoneMask';
 
 export default {
   middleware: 'auth',
@@ -301,6 +302,8 @@ export default {
     ValidationObserver,
     BaseCheckout
   },
+
+  mixins: [PhoneMask],
 
   data: () => ({
     account: {
@@ -323,12 +326,6 @@ export default {
     isAgree: false,
     sending: false
   }),
-
-  computed: {
-    phoneMask () {
-      return this.account.phone.length <= 14 ? '(##) ####-####?#' : '(##) #####-####';
-    }
-  },
 
   methods: {
     async getAddress () {

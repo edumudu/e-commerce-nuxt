@@ -1,5 +1,7 @@
 <template>
   <section class="page-content">
+    <overlay-loading v-show="$fetchState.pending" />
+
     <div class="card float-title">
       <h1 class="card-title">
         Editar categoria {{ data.name }}

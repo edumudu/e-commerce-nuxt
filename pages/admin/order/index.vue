@@ -1,5 +1,7 @@
 <template>
   <section class="page-content">
+    <overlay-loading v-show="$fetchState.pending" />
+
     <div class="card">
       <table-responsive
         :data="data"
@@ -16,6 +18,7 @@
 import TableResponsive from '~/components/dashboard/TableResponsive.vue';
 import DataPaginate from '~/components/DataPaginate.vue';
 import listData from '~/mixins/admin/listData';
+import OverlayLoading from '~/components/OverlayLoading.vue';
 
 export default {
   layout: 'dashboard',
@@ -23,7 +26,8 @@ export default {
 
   components: {
     TableResponsive,
-    DataPaginate
+    DataPaginate,
+    OverlayLoading
   },
 
   mixins: [listData],

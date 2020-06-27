@@ -78,6 +78,7 @@ export default {
   },
 
   auth: {
+    plugins: ['~/plugins/auth'],
     strategies: {
       local: {
         endpoints: {
@@ -86,13 +87,7 @@ export default {
           user: { url: '/auth/me', method: 'get', propertyName: false }
         }
       }
-    },
-    cookie: {
-      options: {
-        maxAge: 3600
-      }
-    },
-    resetOnError: true
+    }
   },
 
   fontawesome: {

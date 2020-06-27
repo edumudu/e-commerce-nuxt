@@ -17,22 +17,22 @@ input[type=checkbox] {
        border-color: $info;
      }
    }
-}
 
-input[type=checkbox]:checked + span {
-  transition: background-color 0.2s;
-  background-color: $info;
-  border-color: $info;
-
-  &::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 7px;
-    height: 11px;
-    border: solid #fff;
-    border-width: 0 3px 3px 0;
-    transform: rotate(45deg) translate(-6px, -20%);
+   &:checked + span {
+    transition: background-color 0.2s;
+    background-color: $info;
+    border-color: $info;
+  
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 7px;
+      height: 11px;
+      border: solid #fff;
+      border-width: 0 3px 3px 0;
+      transform: rotate(45deg) translate(-6px, -20%);
+    }
   }
 }
