@@ -85,9 +85,6 @@ export default {
           login: { url: '/auth/login', method: 'post', propertyName: 'token' },
           logout: { url: '/auth/logout', method: 'post' },
           user: { url: '/auth/me', method: 'get', propertyName: false }
-        },
-        token: {
-          maxAge: 60
         }
       }
     }

@@ -476,6 +476,8 @@ export default {
             this.$router.push('/checkout/thanks');
           } catch (e) {
             this.$toast.error(e?.response?.data?.message || e?.response?.data?.error?.message);
+            this.fetchProducts();
+            this.$router.push('/cart');
           } finally {
             closeSending();
           }
@@ -505,7 +507,8 @@ export default {
     },
 
     ...mapActions({
-      clearCart: 'cart/clearCart'
+      clearCart: 'cart/clearCart',
+      fetchProducts: 'cart/fetchProducts'
     })
   },
 
