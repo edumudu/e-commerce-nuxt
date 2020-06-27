@@ -1,4 +1,10 @@
+import OverlayLoading from '~/components/OverlayLoading.vue';
+
 export default {
+  components: {
+    OverlayLoading
+  },
+
   async fetch () {
     try {
       this.data = await this.$axios.$get(`${this.route}/${this.$route.params.slug}`);
