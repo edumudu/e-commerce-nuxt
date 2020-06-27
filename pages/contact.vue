@@ -56,6 +56,7 @@
               >
                 <base-input
                   v-model="form.phone"
+                  v-mask="phoneMask(form.phone)"
                   placeholder="telefone"
                   name="phone"
                   muted="Opcional"
@@ -101,6 +102,7 @@
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import BaseInput from '~/components/form/BaseInput.vue';
+import PhoneMask from '~/mixins/phoneMask';
 
 export default {
   transition: 'slide-left',
@@ -110,6 +112,8 @@ export default {
     ValidationProvider,
     ValidationObserver
   },
+
+  mixins: [PhoneMask],
 
   data: () => ({
     sending: false,

@@ -40,7 +40,7 @@
             <div class="form-group col-12 col-md-6">
               <validation-provider
                 v-slot="{ errors, valid }"
-                rules="required|max:255"
+                rules="required|digits:11"
               >
                 <base-input
                   v-model="card.cpf"
@@ -309,7 +309,7 @@ import BaseSelect from '../../components/form/BaseSelect';
 import BaseCheckout from '../../components/form/BaseCheckout';
 
 export default {
-  middleware: 'auth',
+  middleware: ['auth', 'haveCart'],
   transition: 'slide-left',
 
   components: {
@@ -476,6 +476,8 @@ export default {
             this.$router.push('/checkout/thanks');
           } catch (e) {
             this.$toast.error(e?.response?.data?.message || e?.response?.data?.error?.message);
+            this.fetchProducts();
+            this.$router.push('/cart');
           } finally {
             closeSending();
           }
@@ -505,7 +507,8 @@ export default {
     },
 
     ...mapActions({
-      clearCart: 'cart/clearCart'
+      clearCart: 'cart/clearCart',
+      fetchProducts: 'cart/fetchProducts'
     })
   },
 

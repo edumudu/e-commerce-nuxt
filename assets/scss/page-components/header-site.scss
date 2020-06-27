@@ -68,9 +68,12 @@ header.site-header {
       margin-right: 12px;
       text-align: center; 
       color: $gray;
-      transition: color 0.25s;
+      
+      > a,
+      /deep/ .dropdown-toggle {  transition: color .25s; }
 
-      > a:hover { color: $success; }
+      &:hover > a,
+      &:hover /deep/ .dropdown-toggle { color: $success; }
     }
   }
 }

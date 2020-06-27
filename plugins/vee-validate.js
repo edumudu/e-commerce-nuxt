@@ -101,3 +101,29 @@ extend('length', {
   ...length,
   message: 'The field must be {length} long'
 });
+
+extend('decimals', {
+  params: ['decimals', 'separator'],
+  validate: (value, { decimals = '*', separator = '.' }) => {
+    if (value === null || value === undefined || value === '') {
+      return {
+        valid: false
+      };
+    }
+
+    if (+decimals === 0) {
+      return {
+        valid: /^-?\d*$/.test(value)
+      };
+    }
+
+    const regexPart = decimals === '*' ? '+' : `{${decimals}}`;
+    const regex = new RegExp(`^-?\\d+\\${separator}\\d${regexPart}$`);
+
+    return {
+      valid: regex.test(value)
+    };
+  },
+
+  message: 'This field must contain {decimals} decimal places'
+});

@@ -4,9 +4,6 @@ $button-default-border-radius: 6px;
 
 @import '../mixins/buttons-mixins';
 
-/*
- * Botões
-*/
 .btn {
   display: inline-block;
   height: $button-default-height;
@@ -84,6 +81,7 @@ $button-default-border-radius: 6px;
   @extend .btn;
 
   position: relative;
+  margin-top: -$raise-size;
   box-shadow: 0 #{$raise-size} 0 adjust-color($color: $teal, $lightness: -5%);
   transition: background-color 0.4s,
               box-shadow 0.2s,

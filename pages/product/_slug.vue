@@ -1,11 +1,6 @@
 <template>
   <section id="page-content">
-    <div
-      class="overlay-loading"
-      :class="{ active: $fetchState.pending }"
-    >
-      <img src="/assets/svgs/load-1s-200px.svg" class="mt-5">
-    </div>
+    <overlay-loading v-show="$fetchState.pending" />
 
     <div class="container">
       <div class="row my-5">
@@ -195,31 +190,35 @@
                   Escreva sua avaliação
                 </h1>
 
-                <form @submit.prevent="sendReview">
-                  <div class="form-group">
-                    <rating-stars v-model="review.rating" editable />
-                  </div>
+                <validation-observer v-slot="{ handleSubmit, invalid }">
+                  <form @submit.prevent="handleSubmit(sendReview)">
+                    <div class="form-group">
+                      <validation-provider rules="required|min_value:1">
+                        <rating-stars v-model="review.rating" editable />
+                      </validation-provider>
+                    </div>
 
-                  <div class="form-group">
-                    <base-input
-                      v-model="review.review"
-                      placeholder="review"
-                      type="textarea"
-                      name="review"
-                      required
-                    />
-                  </div>
+                    <div class="form-group">
+                      <base-input
+                        v-model="review.review"
+                        placeholder="review"
+                        type="textarea"
+                        name="review"
+                        required
+                      />
+                    </div>
 
-                  <div class="form-group d-flex justify-content-center">
-                    <button
-                      type="submit"
-                      class="btn-press"
-                      :disabled="sendingReview"
-                    >
-                      Enviar
-                    </button>
-                  </div>
-                </form>
+                    <div class="form-group d-flex justify-content-center">
+                      <button
+                        type="submit"
+                        class="btn-press"
+                        :disabled="invalid || sendingReview"
+                      >
+                        Enviar
+                      </button>
+                    </div>
+                  </form>
+                </validation-observer>
               </div>
             </tabs-item>
           </tabs-list>
@@ -231,12 +230,14 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { ValidationObserver, ValidationProvider } from 'vee-validate';
 import BaseInput from '~/components/form/BaseInput.vue';
 import ProductImgCarrousel from '~/components/ProductImgCarrousel.vue';
 import StepperQuantity from '~/components/stepper/StepperQuantity.vue';
 import RatingStars from '~/components/RatingStars.vue';
 import TabsList from '~/components/tabs/TabsList.vue';
 import TabsItem from '~/components/tabs/TabsItem.vue';
+import OverlayLoading from '~/components/OverlayLoading.vue';
 
 export default {
   transition: 'slide-left',
@@ -247,7 +248,10 @@ export default {
     StepperQuantity,
     RatingStars,
     TabsList,
-    TabsItem
+    TabsItem,
+    OverlayLoading,
+    ValidationObserver,
+    ValidationProvider
   },
 
   async fetch () {
@@ -296,14 +300,21 @@ export default {
         ...this.review
       };
 
-      const review = await this.$axios.$post('/review', data);
-      this.product.reviews.push(review);
+      try {
+        const review = await this.$axios.$post('/review', data);
+        this.product.reviews.push(review);
 
-      this.review = {
-        review: '',
-        rating: 0
-      };
-      this.sendingReview = false;
+        this.review = {
+          review: '',
+          rating: 0
+        };
+
+        this.$toast.success('vala ai amigo');
+      } catch (e) {
+        this.$toast.error(e.response.data.message);
+      } finally {
+        this.sendingReview = false;
+      }
     },
 
     async deletePost () {

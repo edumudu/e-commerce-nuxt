@@ -1,5 +1,7 @@
 <template>
   <section class="page-content">
+    <overlay-loading v-show="$fetchState.pending" />
+
     <div class="card float-title">
       <h1 class="card-title">
         Editar product {{ product.name }}
@@ -106,6 +108,7 @@
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import BaseInput from '~/components/form/BaseInput.vue';
 import BaseSelect from '~/components/form/BaseSelect.vue';
+import OverlayLoading from '~/components/OverlayLoading.vue';
 
 export default {
   layout: 'dashboard',
@@ -114,7 +117,8 @@ export default {
     ValidationObserver,
     ValidationProvider,
     BaseInput,
-    BaseSelect
+    BaseSelect,
+    OverlayLoading
   },
 
   async fetch () {

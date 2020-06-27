@@ -3,7 +3,7 @@
   justify-content: flex-end;
 
   > li{
-    a{
+    a {
       $size: 25px;
 
       display: block;
@@ -22,7 +22,6 @@
       background-color: $dark_color;
     }
 
-    &.disabled a,
     &:disabled a{
       color: $gray-2;
       pointer-events: none;

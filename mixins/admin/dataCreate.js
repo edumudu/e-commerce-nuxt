@@ -21,7 +21,7 @@ export default {
           this.$refs.form.reset();
         });
       } catch (e) {
-        this.$toast.error(e.response.data.message);
+        this.$toast.error(e?.response?.data?.message || 'Something wet wrong, try again later.');
       }
 
       this.$nuxt.$loading.finish();

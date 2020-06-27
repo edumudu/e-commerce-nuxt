@@ -39,12 +39,7 @@
         </aside>
 
         <div class="col-sm-12 col-md-10">
-          <div
-            class="overlay-loading"
-            :class="{ active: $fetchState.pending }"
-          >
-            <img src="/assets/svgs/load-1s-200px.svg">
-          </div>
+          <overlay-loading v-show="$fetchState.pending" />
 
           <div class="row products-box">
             <product-vitrine
@@ -63,13 +58,15 @@
 <script>
 import ProductVitrine from '~/components/ProductVitrine.vue';
 import DataPaginate from '~/components/DataPaginate.vue';
+import OverlayLoading from '~/components/OverlayLoading.vue';
 
 export default {
   transition: 'slide-left',
 
   components: {
     ProductVitrine,
-    DataPaginate
+    DataPaginate,
+    OverlayLoading
   },
 
   async fetch () {
