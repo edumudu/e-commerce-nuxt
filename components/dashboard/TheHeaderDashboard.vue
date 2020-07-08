@@ -39,11 +39,11 @@
               </span>
 
               <h1 class="navbar-menu-user-name">
-                Eduardo
+                {{ $auth.user.name }}
               </h1>
 
               <h3 class="navbar-menu-user-role">
-                Admin
+                {{ $auth.user.role }}
               </h3>
             </div>
           </template>

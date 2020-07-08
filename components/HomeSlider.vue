@@ -9,7 +9,6 @@
         :key="index"
         class="responsive-img"
         :src="img.src"
-        :title="img.name"
         :alt="img.name"
       >
     </div>
