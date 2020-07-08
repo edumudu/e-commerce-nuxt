@@ -20,28 +20,28 @@ export default {
 
   async fetch () {
     const genresData = await this.$axios.$get('/genre/info', {
-      params: { grouped: 'products' }
+      params: { grouped: 'products' },
     });
 
     this.genresData = {
       labels: genresData.map(item => item.name),
       datasets: [{
-        data: genresData.map(item => item.productsCount)
-      }]
+        data: genresData.map(item => item.productsCount),
+      }],
     };
   },
 
   data: () => ({
     genresData: {},
     chartOptions: {
-      responsive: true
-    }
+      responsive: true,
+    },
   }),
 
   head () {
     return {
-      title: `Genre info | Dasboard ${process.env.APP_NAME}`
+      title: `Genre info | Dasboard ${process.env.APP_NAME}`,
     };
-  }
+  },
 };
 </script>

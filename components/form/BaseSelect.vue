@@ -37,7 +37,7 @@
         class="select-option"
         @click="choseOption(option)"
       >
-        <checkout
+        <base-checkbox
           v-if="multiple"
           class="select-option-check"
           :value="value.includes(option.id)"
@@ -52,25 +52,18 @@
 </template>
 
 <script>
-import BaseInput from '~/components/form/BaseInput.vue';
-import Checkout from '~/components/form/BaseCheckout.vue';
-
 export default {
-  components: {
-    BaseInput,
-    Checkout
-  },
   inheritAttrs: false,
 
   props: {
     options: { type: Array, default: () => [] },
     multiple: { type: Boolean, default: false },
     value: { type: [String, Array, Number], default: '' },
-    name: { type: String, default: '' }
+    name: { type: String, default: '' },
   },
 
   data: () => ({
-    active: false
+    active: false,
   }),
 
   computed: {
@@ -81,7 +74,7 @@ export default {
 
       set (value) {
         this.$emit('input', value);
-      }
+      },
     },
 
     getNames () {
@@ -92,7 +85,7 @@ export default {
 
     isArray () {
       return this.multiple && Array.isArray(this.getValue);
-    }
+    },
   },
 
   beforeMount () {
@@ -127,8 +120,8 @@ export default {
       } else {
         this.getValue = [...this.getValue, option.id];
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

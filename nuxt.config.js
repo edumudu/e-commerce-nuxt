@@ -10,11 +10,11 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    ],
   },
   /*
   ** Customize the progress-bar color
@@ -24,16 +24,17 @@ export default {
   ** Global CSS
   */
   css: [
-    'bootstrap/scss/bootstrap-grid.scss'
+    'bootstrap/scss/bootstrap-grid.scss',
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/globaly-components',
     '~/plugins/vee-validate',
     '~/plugins/vue-toast-notification',
     '~/plugins/v-mask',
-    { src: '~/plugins/vue-chartjs', ssr: false }
+    { src: '~/plugins/vue-chartjs', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules
@@ -44,7 +45,7 @@ export default {
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
-    ['@nuxtjs/dotenv', { path: './' }]
+    ['@nuxtjs/dotenv', { path: './' }],
   ],
   /*
   ** Nuxt.js modules
@@ -55,7 +56,7 @@ export default {
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
     '@nuxtjs/auth',
-    'nuxt-fontawesome'
+    'nuxt-fontawesome',
   ],
   /*
   ** Axios module configuration
@@ -63,7 +64,7 @@ export default {
   */
   axios: {
     baseURL: process.env.BASE_URL_API,
-    headers: { Accept: 'aplication/json' }
+    headers: { Accept: 'aplication/json' },
   },
   /*
   ** Build configuration
@@ -74,7 +75,7 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
-    }
+    },
   },
 
   auth: {
@@ -84,10 +85,10 @@ export default {
         endpoints: {
           login: { url: '/auth/login', method: 'post', propertyName: 'token' },
           logout: { url: '/auth/logout', method: 'post' },
-          user: { url: '/auth/me', method: 'get', propertyName: false }
-        }
-      }
-    }
+          user: { url: '/auth/me', method: 'get', propertyName: false },
+        },
+      },
+    },
   },
 
   fontawesome: {
@@ -95,20 +96,20 @@ export default {
     imports: [
       {
         set: '@fortawesome/free-solid-svg-icons',
-        icons: ['fas']
+        icons: ['fas'],
       },
       {
         set: '@fortawesome/free-brands-svg-icons',
-        icons: ['fab']
+        icons: ['fab'],
       },
       {
         set: '@fortawesome/free-regular-svg-icons',
-        icons: ['far']
-      }
-    ]
+        icons: ['far'],
+      },
+    ],
   },
 
   styleResources: {
-    scss: './assets/scss/variables/*.scss'
-  }
+    scss: './assets/scss/variables/*.scss',
+  },
 };

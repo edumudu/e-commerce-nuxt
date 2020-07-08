@@ -61,42 +61,42 @@ export default {
     type: { type: String, default: 'image' },
     error: { type: String, default: '' },
     isValid: { type: Boolean, required: true },
-    multiple: { type: Boolean, default: false }
+    multiple: { type: Boolean, default: false },
   },
 
   data: () => ({
     accepts: {
-      image: 'image/*'
+      image: 'image/*',
     },
     files: [],
-    images: []
+    images: [],
   }),
 
   computed: {
     classes () {
       return {
         'is-valid': this.isValid,
-        'is-invalid': !!this.error
+        'is-invalid': !!this.error,
       };
     },
 
     names () {
       return this.files.map(item => item.name
         .replace(/\.\w+/, '')
-        .substr(0, 10)
+        .substr(0, 10),
       ).join(', ');
     },
 
     isImage () {
       return this.type === 'image';
-    }
+    },
   },
 
   watch: {
     files () {
       this.isImage && this.fetchImages();
       this.$emit('input', this.multiple ? this.files : this.files[0]);
-    }
+    },
   },
 
   methods: {
@@ -135,8 +135,8 @@ export default {
       this.files.forEach((file) => {
         this.readFileAsync(file).then(image => this.images.push(image));
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

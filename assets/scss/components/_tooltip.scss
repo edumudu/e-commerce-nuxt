@@ -14,7 +14,7 @@ $arrow-size: 8px;
     text-align: center;
     background-color: $danger;
     color: $white;
-    font-size: .8rem;
+    font-size: 0.8rem;
     border-radius: 3px;
     transform: translateX(-50%);
   }
@@ -26,10 +26,8 @@ $arrow-size: 8px;
     left: 50%;
     display: none;
     transform: translateX(-50%);
-
     border-left: $arrow-size solid transparent;
     border-right: $arrow-size solid transparent;
-
     border-bottom: $arrow-size solid $danger;
   }
 

@@ -20,8 +20,8 @@ export default {
 
   components: {
     TheAsideDashboard,
-    TheHeaderDashboard
-  }
+    TheHeaderDashboard,
+  },
 };
 </script>
 

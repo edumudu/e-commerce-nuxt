@@ -11,21 +11,21 @@
 export default {
   props: {
     name: { type: String, required: true },
-    selected: { type: Boolean, default: false }
+    selected: { type: Boolean, default: false },
   },
 
   data: () => ({
-    isActive: false
+    isActive: false,
   }),
 
   computed: {
     href () {
       return `#${this.name.toLowerCase().replace(/ /g, '-')}`;
-    }
+    },
   },
 
   mounted () {
     this.isActive = this.selected;
-  }
+  },
 };
 </script>

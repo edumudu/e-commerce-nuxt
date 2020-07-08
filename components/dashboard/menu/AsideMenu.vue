@@ -7,7 +7,7 @@
 <script>
 export default {
   data: () => ({
-    items: []
+    items: [],
   }),
 
   created () {
@@ -23,8 +23,8 @@ export default {
       Array.from(this.items, (item) => {
         item.active = !item.active && item.title === selectedItem.title;
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

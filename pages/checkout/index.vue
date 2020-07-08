@@ -162,12 +162,12 @@
                 rules="required"
                 vid="sameAsRegister"
               >
-                <base-checkout
+                <base-checkbox
                   v-model="sameAsRegister"
                   :error="errors[0]"
                 >
                   Use same address of my register
-                </base-checkout>
+                </base-checkbox>
               </validation-provider>
             </div>
 
@@ -304,20 +304,14 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
 import { mapGetters, mapActions } from 'vuex';
-import BaseInput from '../../components/form/BaseInput';
-import BaseSelect from '../../components/form/BaseSelect';
-import BaseCheckout from '../../components/form/BaseCheckout';
 
 export default {
   middleware: ['auth', 'haveCart'],
   transition: 'slide-left',
 
   components: {
-    BaseInput,
-    BaseSelect,
     ValidationProvider,
     ValidationObserver,
-    BaseCheckout
   },
 
   async fetch () {
@@ -339,17 +333,17 @@ export default {
         state: '',
         city: '',
         addressNumber: '',
-        apto: ''
+        apto: '',
       },
       cpf: '',
       birthdate: '',
-      phone: ''
+      phone: '',
     },
     sameAsRegister: true,
     cardInfo: {},
     installments: [],
     installment: '1|0',
-    sending: false
+    sending: false,
   }),
 
   computed: {
@@ -357,7 +351,7 @@ export default {
       return this.installments.length
         ? this.installments.map(installment => ({
           id: `${installment.quantity}|${installment.installmentAmount}`,
-          name: `${installment.quantity}x of ${installment.installmentAmount} - Total ${installment.totalAmount}`
+          name: `${installment.quantity}x of ${installment.installmentAmount} - Total ${installment.totalAmount}`,
         }))
         : [{ id: `1|${this.defaultTotal}`, name: `1x of ${this.defaultTotal} - Total ${this.defaultTotal}` }];
     },
@@ -370,14 +364,14 @@ export default {
 
     ...mapGetters({
       cartItems: 'cart/cartItems',
-      cartProducts: 'cart/cartProducts'
-    })
+      cartProducts: 'cart/cartProducts',
+    }),
   },
 
   watch: {
     sessionId () {
       window.PagSeguroDirectPayment.setSessionId(this.sessionId);
-    }
+    },
   },
 
   created () {
@@ -397,7 +391,7 @@ export default {
 
           error: () => {
             this.$toast.error('Card number invalid');
-          }
+          },
         });
       }
     },
@@ -409,7 +403,7 @@ export default {
           street: '',
           district: '',
           state: '',
-          city: ''
+          city: '',
         };
         return;
       };
@@ -430,7 +424,7 @@ export default {
           street: address.logradouro,
           district: address.bairro,
           state: address.uf,
-          city: address.localidade
+          city: address.localidade,
         };
       } catch (e) {
         this.$toast.error(e.message ? 'Not found this CEP' : 'Something is wrong, try again latter.');
@@ -468,7 +462,7 @@ export default {
               sameAsRegister: this.sameAsRegister,
               cep: this.card.address.cep,
               number: this.card.address.addressNumber,
-              apto: this.card.address.apto
+              apto: this.card.address.apto,
             });
 
             this.clearCart();
@@ -486,7 +480,7 @@ export default {
         error: (e) => {
           this.$toast.error(Object.values(e.errors)[0]);
           closeSending();
-        }
+        },
       });
     },
 
@@ -502,23 +496,23 @@ export default {
 
         error: () => {
           this.$toast.error('It was not possible to check installments methods, try again later');
-        }
+        },
       });
     },
 
     ...mapActions({
       clearCart: 'cart/clearCart',
-      fetchProducts: 'cart/fetchProducts'
-    })
+      fetchProducts: 'cart/fetchProducts',
+    }),
   },
 
   head () {
     return {
       title: `Chekout | ${process.env.APP_NAME}`,
       script: [
-        { src: 'https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js' }
-      ]
+        { src: 'https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js' },
+      ],
     };
-  }
+  },
 };
 </script>

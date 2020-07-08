@@ -14,11 +14,11 @@
 <script>
 export default {
   props: {
-    value: { type: Boolean, default: false }
-  }
+    value: { type: Boolean, default: false },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-  @import '~/assets/scss/components/form/_checkout';
+  @import '~/assets/scss/components/form/_checkbox';
 </style>

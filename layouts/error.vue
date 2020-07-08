@@ -28,8 +28,8 @@
 <script>
 export default {
   props: {
-    error: { type: Object, default: () => {} }
-  }
+    error: { type: Object, default: () => {} },
+  },
 };
 </script>
 

@@ -113,14 +113,14 @@ import AsideMenuItem from '~/components/dashboard/menu/AsideMenuItem.vue';
 export default {
   components: {
     AsideMenu,
-    AsideMenuItem
+    AsideMenuItem,
   },
 
   computed: {
     path () {
       return this.$route.path;
-    }
-  }
+    },
+  },
 };
 </script>
 

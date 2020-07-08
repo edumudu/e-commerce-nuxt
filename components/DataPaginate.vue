@@ -27,23 +27,23 @@
 <script>
 export default {
   props: {
-    totalPages: { type: Number, required: true }
+    totalPages: { type: Number, required: true },
   },
 
   computed: {
     currentPage () {
       return +this.$route.query.page || 1;
-    }
+    },
   },
 
   methods: {
     makePath (page) {
       return {
         path: this.$route.path,
-        query: { ...this.$route.query, page }
+        query: { ...this.$route.query, page },
       };
-    }
-  }
+    },
+  },
 };
 </script>
 

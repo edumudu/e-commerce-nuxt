@@ -7,6 +7,6 @@
 <script>
 export default {
   middleware: 'auth',
-  transition: 'slide-left'
+  transition: 'slide-left',
 };
 </script>

@@ -26,15 +26,10 @@
 </template>
 
 <script>
-import BaseInput from '~/components/form/BaseInput.vue';
 import stepper from '~/mixins/stepper';
 
 export default {
-  components: {
-    BaseInput
-  },
-
-  mixins: [stepper]
+  mixins: [stepper],
 };
 </script>
 

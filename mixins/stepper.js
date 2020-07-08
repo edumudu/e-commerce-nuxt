@@ -1,7 +1,7 @@
 export default {
   props: {
     value: { type: Number, default: 1 },
-    max: { type: Number, default: Infinity }
+    max: { type: Number, default: Infinity },
   },
 
   computed: {
@@ -12,8 +12,8 @@ export default {
 
       get () {
         return this.value;
-      }
-    }
+      },
+    },
   },
 
   methods: {
@@ -23,6 +23,6 @@ export default {
 
     down () {
       this.val -= this.val > 1;
-    }
-  }
+    },
+  },
 };

@@ -1,9 +1,9 @@
 export default {
   data: () => ({
     data: {
-      name: ''
+      name: '',
     },
-    sending: false
+    sending: false,
   }),
 
   methods: {
@@ -26,6 +26,6 @@ export default {
 
       this.$nuxt.$loading.finish();
       this.sending = false;
-    }
-  }
+    },
+  },
 };

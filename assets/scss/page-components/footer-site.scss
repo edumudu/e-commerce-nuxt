@@ -3,16 +3,16 @@
   color: #c2c1c1;
   background-color: $dark-color;
 
-  p { 
-    color: $gray; 
+  p {
+    color: $gray;
     font-size: 0.8rem;
     margin-bottom: 20px;
   }
 
   a {
-    color :inherit; 
+    color: inherit;
     transition: color 0.2s;
-  
+
     &:hover { color: rgb(231, 61, 80); }
   }
 
@@ -22,23 +22,23 @@
     font-size: 0.9rem;
     text-align: center;
   }
-  
+
   .footer-title {
     margin-bottom: 10px;
     font-size: 1.4rem;
     font-weight: 600;
-  
+
     &::after {
       content: '';
       display: block;
-      width: 50px; 
+      width: 50px;
       height: 2px;
-      background-color: rgb(231,61,80);
+      background-color: rgb(231, 61, 80);
     }
   }
-  
+
   .social-media { font-size: 2rem; }
-  
+
   address {
     font-size: 0.8rem;
     line-height: 1.7;

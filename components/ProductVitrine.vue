@@ -57,8 +57,8 @@
 export default {
   props: {
     items: { type: Array, required: true },
-    title: { type: String, default: '' }
-  }
+    title: { type: String, default: '' },
+  },
 };
 </script>
 
