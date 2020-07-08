@@ -19,7 +19,8 @@ import {
   numeric,
   digits,
   regex,
-  length
+  length,
+  image
 } from 'vee-validate/dist/rules';
 
 extend('required', {
@@ -100,6 +101,11 @@ extend('regex', {
 extend('length', {
   ...length,
   message: 'The field must be {length} long'
+});
+
+extend('image', {
+  ...image,
+  message: 'The field must be an image'
 });
 
 extend('decimals', {
