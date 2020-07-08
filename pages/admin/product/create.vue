@@ -121,9 +121,6 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import BaseInput from '~/components/form/BaseInput.vue';
-import BaseSelect from '~/components/form/BaseSelect.vue';
-import BaseFileInput from '~/components/form/BaseFileInput.vue';
 import dataCreate from '~/mixins/admin/dataCreate';
 
 export default {
@@ -133,9 +130,6 @@ export default {
   components: {
     ValidationObserver,
     ValidationProvider,
-    BaseInput,
-    BaseSelect,
-    BaseFileInput
   },
 
   mixins: [dataCreate],
@@ -147,11 +141,11 @@ export default {
       price: '',
       genre: '',
       categories: [],
-      photos: []
+      photos: [],
     },
     sending: false,
     genres: [],
-    categories: []
+    categories: [],
   }),
 
   async mounted () {
@@ -175,8 +169,8 @@ export default {
       try {
         await this.$axios.$post('/product', formData, {
           headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+            'Content-Type': 'multipart/form-data',
+          },
         });
 
         this.$toast.success(`Successful created ${this.data.name}`);
@@ -187,7 +181,7 @@ export default {
           price: '',
           genre: '',
           categories: [],
-          photos: []
+          photos: [],
         };
 
         this.$nextTick(() => {
@@ -199,13 +193,13 @@ export default {
 
       this.$nuxt.$loading.finish();
       this.sending = false;
-    }
+    },
   },
 
   head () {
     return {
-      title: `Create new Product | Dashboard ${process.env.APP_NAME}`
+      title: `Create new Product | Dashboard ${process.env.APP_NAME}`,
     };
-  }
+  },
 };
 </script>

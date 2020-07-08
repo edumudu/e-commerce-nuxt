@@ -24,11 +24,11 @@
 export default {
   props: {
     imgs: { type: Array, required: true },
-    start: { type: Number, default: 0 }
+    start: { type: Number, default: 0 },
   },
 
   data: () => ({
-    active: 0
+    active: 0,
   }),
 
   mounted () {
@@ -38,8 +38,8 @@ export default {
   methods: {
     setImg (index) {
       this.active = index;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -26,19 +26,19 @@ export default {
   components: {
     TableResponsive,
     DataPaginate,
-    OverlayLoading
+    OverlayLoading,
   },
 
   mixins: [listData],
 
   data: () => ({
-    route: '/genre'
+    route: '/genre',
   }),
 
   head () {
     return {
-      title: `List genre | Dashboard ${process.env.APP_NAME}`
+      title: `List genre | Dashboard ${process.env.APP_NAME}`,
     };
-  }
+  },
 };
 </script>

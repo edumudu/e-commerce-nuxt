@@ -31,11 +31,11 @@ export default {
   props: {
     title: { type: String, required: true },
     icon: { type: Array, default: () => [] },
-    isActive: { type: Boolean, default: false }
+    isActive: { type: Boolean, default: false },
   },
 
   data: () => ({
-    active: false
+    active: false,
   }),
 
   created () {
@@ -45,8 +45,8 @@ export default {
   methods: {
     handleClick () {
       this.$emit('click', this);
-    }
-  }
+    },
+  },
 };
 </script>
 

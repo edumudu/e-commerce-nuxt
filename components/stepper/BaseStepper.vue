@@ -21,7 +21,7 @@
 import stepper from '~/mixins/stepper';
 
 export default {
-  mixins: [stepper]
+  mixins: [stepper],
 };
 </script>
 

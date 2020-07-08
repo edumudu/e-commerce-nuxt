@@ -87,41 +87,41 @@ export default {
   async fetch () {
     const [newsUsers, newsOrders, totalUsers, totalOrders] = await Promise.all([
       this.$axios.$get('/user', {
-        params: { createdInTime: 1 }
+        params: { createdInTime: 1 },
       }),
       this.$axios.$get('/order', {
-        params: { createdInTime: 1 }
+        params: { createdInTime: 1 },
       }),
       this.$axios.$get('/user'),
-      this.$axios.$get('/order')
+      this.$axios.$get('/order'),
     ]);
 
     const [usersProjection, ordersProjection] = await Promise.all([
       this.$axios.$get('/user/info', {
-        params: { projection: 5 }
+        params: { projection: 5 },
       }),
       this.$axios.$get('/order/info', {
-        params: { projection: 5 }
-      })
+        params: { projection: 5 },
+      }),
     ]);
 
     this.usersXOrdersProjection = {
       labels: [...new Set([
         ...usersProjection.map(item => item.month),
-        ...ordersProjection.map(item => item.month)
+        ...ordersProjection.map(item => item.month),
       ])],
       datasets: [
         {
           label: 'News Users',
           data: usersProjection.map(item => item.quantity),
-          fill: false
+          fill: false,
         },
         {
           label: 'News Orders',
           data: ordersProjection.map(item => item.quantity),
-          fill: false
-        }
-      ]
+          fill: false,
+        },
+      ],
     };
 
     this.newUsers = newsUsers.total;
@@ -142,17 +142,17 @@ export default {
         yAxes: [{
           ticks: {
             suggestedMax: 50,
-            stepSize: 5
-          }
-        }]
-      }
-    }
+            stepSize: 5,
+          },
+        }],
+      },
+    },
   }),
 
   head () {
     return {
-      title: `Home | Dashboard ${process.env.APP_NAME}`
+      title: `Home | Dashboard ${process.env.APP_NAME}`,
     };
-  }
+  },
 };
 </script>

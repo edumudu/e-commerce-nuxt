@@ -23,8 +23,8 @@
 <script>
 export default {
   props: {
-    isList: { type: Boolean, default: true }
-  }
+    isList: { type: Boolean, default: true },
+  },
 };
 </script>
 

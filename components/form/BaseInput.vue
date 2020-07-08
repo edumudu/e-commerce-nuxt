@@ -50,7 +50,7 @@ export default {
     muted: { type: String, default: '' },
     error: { type: String, default: '' },
     isValid: { type: Boolean, default: false },
-    inputClass: { type: String, default: '' }
+    inputClass: { type: String, default: '' },
   },
 
   computed: {
@@ -64,8 +64,8 @@ export default {
         {
           active: this.active,
           'is-invalid': !!this.error,
-          'is-valid': this.isValid
-        }
+          'is-valid': this.isValid,
+        },
       ];
     },
 
@@ -73,8 +73,8 @@ export default {
       return Object.entries(this.$listeners)
         .filter(([key]) => key !== 'input')
         .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
-    }
-  }
+    },
+  },
 };
 </script>
 

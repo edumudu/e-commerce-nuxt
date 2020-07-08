@@ -2,7 +2,7 @@ import OverlayLoading from '~/components/OverlayLoading.vue';
 
 export default {
   components: {
-    OverlayLoading
+    OverlayLoading,
   },
 
   async fetch () {
@@ -26,7 +26,7 @@ export default {
 
   data: () => ({
     sending: false,
-    data: {}
+    data: {},
   }),
 
   methods: {
@@ -43,6 +43,6 @@ export default {
 
       this.$nuxt.$loading.finish();
       this.sending = false;
-    }
-  }
+    },
+  },
 };

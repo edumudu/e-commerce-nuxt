@@ -3,7 +3,7 @@ import { Line, Doughnut, mixins } from 'vue-chartjs';
 import 'chartjs-plugin-colorschemes';
 
 const props = {
-  options: { type: Object, default: null }
+  options: { type: Object, default: null },
 };
 
 function mounted () {
@@ -15,7 +15,7 @@ Vue.component('line-chart', {
   mixins: [mixins.reactiveProp],
   props,
 
-  mounted
+  mounted,
 });
 
 Vue.component('doughnut-chart', {
@@ -23,5 +23,5 @@ Vue.component('doughnut-chart', {
   mixins: [mixins.reactiveProp],
   props,
 
-  mounted
+  mounted,
 });

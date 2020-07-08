@@ -28,28 +28,22 @@
 </template>
 
 <script>
-import BaseInput from '~/components/form/BaseInput.vue';
-
 export default {
-  components: {
-    BaseInput
-  },
-
   props: {
     title: { type: String, required: true },
     inputPlaceholder: { type: String, default: '' },
-    buttonText: { type: String, default: '' }
+    buttonText: { type: String, default: '' },
   },
 
   data: () => ({
-    active: false
+    active: false,
   }),
 
   methods: {
     toggleActive () {
       this.active = !this.active;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -43,21 +43,21 @@
 export default {
   props: {
     imgs: { type: Array, required: true },
-    delay: { type: Number, default: 5000 }
+    delay: { type: Number, default: 5000 },
   },
 
   data: () => ({
     active: 0,
-    timer: null
+    timer: null,
   }),
 
   computed: {
     style () {
       return {
         width: `${this.imgs.length * 100}%`,
-        right: `${100 * this.active}%`
+        right: `${100 * this.active}%`,
       };
-    }
+    },
   },
 
   mounted () {
@@ -85,8 +85,8 @@ export default {
       this.timer = setInterval(() => {
         this.setActive(this.active < this.imgs.length - 1 ? this.active + 1 : 0);
       }, this.delay);
-    }
-  }
+    },
+  },
 };
 </script>
 

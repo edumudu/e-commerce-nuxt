@@ -1,12 +1,12 @@
 export default {
   async fetch () {
     this.response = await this.$axios.$get(`${this.route}`, {
-      params: this.$route.query
+      params: this.$route.query,
     });
   },
 
   data: () => ({
-    response: {}
+    response: {},
   }),
 
   computed: {
@@ -21,12 +21,12 @@ export default {
 
       set (data) {
         this.response.data = data;
-      }
-    }
+      },
+    },
   },
 
   watch: {
-    '$route.query': '$fetch'
+    '$route.query': '$fetch',
   },
 
   methods: {
@@ -44,6 +44,6 @@ export default {
       }
 
       this.$nuxt.$loading.finish();
-    }
-  }
+    },
+  },
 };

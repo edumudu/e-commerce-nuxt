@@ -43,7 +43,6 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import BaseInput from '~/components/form/BaseInput.vue';
 import dataUpdate from '~/mixins/admin/dataUpdate';
 
 export default {
@@ -53,19 +52,18 @@ export default {
   components: {
     ValidationObserver,
     ValidationProvider,
-    BaseInput
   },
 
   mixins: [dataUpdate],
 
   data: () => ({
-    route: '/category'
+    route: '/category',
   }),
 
   head () {
     return {
-      title: `Update ${this.data.name} | Dashboard ${process.env.APP_NAME}`
+      title: `Update ${this.data.name} | Dashboard ${process.env.APP_NAME}`,
     };
-  }
+  },
 };
 </script>

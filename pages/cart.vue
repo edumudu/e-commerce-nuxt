@@ -70,7 +70,7 @@ export default {
 
   components: {
     CartTable,
-    InputCollapse
+    InputCollapse,
   },
 
   data: () => ({
@@ -80,14 +80,14 @@ export default {
   computed: {
     ...mapGetters({
       cartProducts: 'cart/cartProducts',
-      cartTotal: 'cart/cartTotal'
-    })
+      cartTotal: 'cart/cartTotal',
+    }),
   },
 
   head () {
     return {
-      title: `My cart | ${process.env.APP_NAME}`
+      title: `My cart | ${process.env.APP_NAME}`,
     };
-  }
+  },
 };
 </script>
