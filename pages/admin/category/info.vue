@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-6">
           <doughnut-chart
-            :chart-data="genresData"
+            :chart-data="categoriesData"
             :options="chartOptions"
           />
         </div>
@@ -19,20 +19,20 @@ export default {
   transition: 'slide-up',
 
   async fetch () {
-    const genresData = await this.$axios.$get('/genre/info', {
+    const categoriesData = await this.$axios.$get('/category/info', {
       params: { grouped: 'products' }
     });
 
-    this.genresData = {
-      labels: genresData.map(item => item.name),
+    this.categoriesData = {
+      labels: categoriesData.map(item => item.name),
       datasets: [{
-        data: genresData.map(item => item.productsCount)
+        data: categoriesData.map(item => item.productsCount)
       }]
     };
   },
 
   data: () => ({
-    genresData: {},
+    categoriesData: {},
     chartOptions: {
       responsive: true
     }

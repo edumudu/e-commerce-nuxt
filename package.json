@@ -24,6 +24,7 @@
     "@nuxtjs/dotenv": "^1.4.0",
     "bootstrap": "4.5.0",
     "chart.js": "^2.9.3",
+    "chartjs-plugin-colorschemes": "^0.4.0",
     "nuxt": "^2.13.1",
     "nuxt-fontawesome": "^0.4.0",
     "v-mask": "^2.2.1",

@@ -4,11 +4,11 @@
       <div class="col-12 col-md-6 col-lg-3 mb-sm-2">
         <div class="card hot-info orders">
           <h1 class="hot-info-information">
-            2142
+            {{ newsOrders }}
           </h1>
 
           <h5 class="hot-info-title">
-            Total orders
+            New orders
           </h5>
 
           <div class="hot-info-icon">
@@ -36,7 +36,7 @@
       <div class="col-12 col-md-6 col-lg-3 mb-sm-2">
         <div class="card hot-info orders">
           <h1 class="hot-info-information">
-            2142
+            {{ totalOrders }}
           </h1>
 
           <h5 class="hot-info-title">
@@ -52,11 +52,11 @@
       <div class="col-12 col-md-6 col-lg-3 mb-sm-2">
         <div class="card hot-info users">
           <h1 class="hot-info-information">
-            2142
+            {{ totalUsers }}
           </h1>
 
           <h5 class="hot-info-title">
-            New users
+            Total users
           </h5>
 
           <div class="hot-info-icon">
@@ -69,13 +69,10 @@
     <div class="row mt-2">
       <div class="col-12 col-md-6">
         <div class="card">
-          <line-chart :chart-data="newsUsersProjection" :options="{ responsive: true }" />
-        </div>
-      </div>
-
-      <div class="col-12 col-md-6">
-        <div class="card">
-          <doughnut-chart :chart-data="dataCollection" :options="{ responsive: true }" />
+          <line-chart
+            :chart-data="usersXOrdersProjection"
+            :options="chartOptions"
+          />
         </div>
       </div>
     </div>
@@ -88,34 +85,68 @@ export default {
   transition: 'slide-up',
 
   async fetch () {
-    const newsUsers = await this.$axios.$get('/user', {
-      params: { createdInTime: 1 }
-    });
+    const [newsUsers, newsOrders, totalUsers, totalOrders] = await Promise.all([
+      this.$axios.$get('/user', {
+        params: { createdInTime: 1 }
+      }),
+      this.$axios.$get('/order', {
+        params: { createdInTime: 1 }
+      }),
+      this.$axios.$get('/user'),
+      this.$axios.$get('/order')
+    ]);
 
-    const usersProjection = await this.$axios.$get('/user/info', {
-      params: { projection: 3 }
-    });
+    const [usersProjection, ordersProjection] = await Promise.all([
+      this.$axios.$get('/user/info', {
+        params: { projection: 5 }
+      }),
+      this.$axios.$get('/order/info', {
+        params: { projection: 5 }
+      })
+    ]);
 
-    this.newsUsersProjection = {
-      labels: usersProjection.map(item => item.month),
+    this.usersXOrdersProjection = {
+      labels: [...new Set([
+        ...usersProjection.map(item => item.month),
+        ...ordersProjection.map(item => item.month)
+      ])],
       datasets: [
         {
-          label: 'Data One',
-          borderColor: '#f87979',
-          backgroundColor: '#f87979',
+          label: 'News Users',
           data: usersProjection.map(item => item.quantity),
+          fill: false
+        },
+        {
+          label: 'News Orders',
+          data: ordersProjection.map(item => item.quantity),
           fill: false
         }
       ]
     };
 
     this.newUsers = newsUsers.total;
+    this.newsOrders = newsOrders.total;
+    this.totalUsers = totalUsers.total;
+    this.totalOrders = totalOrders.total;
   },
 
   data: () => ({
-    newsUsersProjection: {},
-    dataCollection: {},
-    newUsers: 0
+    usersXOrdersProjection: {},
+    newUsers: 0,
+    newsOrders: 0,
+    totalUsers: 0,
+    totalOrders: 0,
+    chartOptions: {
+      responsive: true,
+      scales: {
+        yAxes: [{
+          ticks: {
+            suggestedMax: 50,
+            stepSize: 5
+          }
+        }]
+      }
+    }
   }),
 
   head () {

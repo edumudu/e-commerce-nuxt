@@ -24,6 +24,12 @@
         :icon="['fas', 'boxes']"
         :is-active="path.includes('/category')"
       >
+        <li class="menu-subtree-item" :class="{ active: path === '/admin/category/info' }">
+          <nuxt-link to="/admin/category/info" class="menu-link">
+            Visão geral
+          </nuxt-link>
+        </li>
+
         <li class="menu-subtree-item" :class="{ active: path === '/admin/category' }">
           <nuxt-link to="/admin/category" class="menu-link">
             Gerenciar categorias
