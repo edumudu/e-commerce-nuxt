@@ -43,7 +43,7 @@
             <div class="form-group col-12 col-md-4">
               <validation-provider
                 v-slot="{ errors, valid }"
-                rules="required|numeric|min:1"
+                rules="required|decimals:2|min:1"
               >
                 <base-input
                   v-model.number="product.price"
@@ -94,7 +94,7 @@
                 type="submit"
                 :disabled="sending || invalid"
               >
-                Cadastrar
+                Atualizar
               </button>
             </div>
           </div>
