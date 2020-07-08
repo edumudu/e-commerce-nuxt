@@ -10,7 +10,7 @@
 
       content: '';
       position: absolute;
-      top: calc(50% - #{$size / 2});
+      top: 20px;
       right: 18px;
       z-index: 1;
       width: $size;
@@ -27,7 +27,7 @@
   &-ul {
     position: absolute;
     z-index: 1;
-    top: 100%;
+    top: 43px;
     left: 0;
     display: none;
     width: 100%;
