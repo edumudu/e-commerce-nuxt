@@ -14,7 +14,7 @@ aside .menu .menu-item {
     -webkit-font-smoothing: antialiased;
     transition: transform $transition;
 
-    &:hover { background-color: rgba(0,0,0,0.2); }
+    &:hover { background-color: rgba(0, 0, 0, 0.2); }
 
     > svg { transition: transform $transition; }
   }
@@ -24,12 +24,12 @@ aside .menu .menu-item {
     max-height: 0;
     padding: 0;
     transition: max-height $transition, padding $transition;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
 
     .menu-link {
       display: block;
       padding: $padding;
-      font-size: .9rem;
+      font-size: 0.9rem;
     }
 
     &-item {
@@ -57,7 +57,7 @@ aside .menu .menu-item {
       &.active {
         color: $info;
         padding-left: 35px;
-      
+
         &::before {
           opacity: 1;
           left: 30px;
@@ -71,7 +71,7 @@ aside .menu .menu-item {
     color: #fff;
 
     .menu-link-title {
-      background-color: rgba(0,0,0,0.5);
+      background-color: rgba(0, 0, 0, 0.5);
 
       > svg { transform: rotate(90deg); }
     }
@@ -83,5 +83,5 @@ aside .menu .menu-item {
     }
   }
 
-  &:not(.active) .menu-link-title:hover { transform: scale(1.02); };
+  &:not(.active) .menu-link-title:hover { transform: scale(1.02); }
 }

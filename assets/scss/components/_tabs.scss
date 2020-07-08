@@ -1,8 +1,8 @@
 .tabs {
   width: 100%;
-  border-bottom:1px solid rgb(221,221,221);
+  border-bottom: 1px solid rgb(221, 221, 221);
 
-  & > li{
+  & > li {
     position: relative;
     display: inline-block;
     margin-right: -4px;
@@ -13,7 +13,7 @@
     background-color: transparent;
 
     &.active {
-      color: rgb(231,61,80);
+      color: rgb(231, 61, 80);
       &::after { width: 100%; }
     }
 
@@ -24,7 +24,7 @@
       bottom: -1px;
       width: 0;
       height: 1px;
-      background-color: rgb(231,61,80);
+      background-color: rgb(231, 61, 80);
       transition: width 0.3s;
     }
 
@@ -34,14 +34,14 @@
     }
 
     &:hover {
-      background-color: rgba(0,0,0,0.05);
+      background-color: rgba(0, 0, 0, 0.05);
     }
   }
 
-  & li > a { 
+  & li > a {
     display: inline-block;
     padding: 8px 10px;
-    color: inherit; 
+    color: inherit;
   }
 }
 

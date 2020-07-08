@@ -1,27 +1,13 @@
 .select {
-  &-wrapper {
-    position: relative;
-    user-select: none;
-    width: 100%;
-
-    &.active {
-      display: block;
-
-      .select-ul { display: block; }
-      .select-default-option::before { transform: rotate(-225deg); }
-    }
-
-    select { display: none; }
-  }
-
   &-default-option {
     position: relative;
-    background-color: #fff;;
+    background-color: #fff;
     border-radius: 5px;
     cursor: pointer;
 
     &::before {
       $size: 6px;
+
       content: '';
       position: absolute;
       top: calc(50% - #{$size / 2});
@@ -52,7 +38,7 @@
     max-height: 300px;
 
     li {
-      &:hover { background-color: rgba(0,0,0,0.1); }
+      &:hover { background-color: rgba(0, 0, 0, 0.1); }
 
       &:first-child:hover {
         border-top-left-radius: 5px;
@@ -64,6 +50,21 @@
         border-bottom-right-radius: 5px;
       }
     }
+  }
+
+  &-wrapper {
+    position: relative;
+    user-select: none;
+    width: 100%;
+
+    &.active {
+      display: block;
+
+      .select-ul { display: block; }
+      .select-default-option::before { transform: rotate(-225deg); }
+    }
+
+    select { display: none; }
   }
 
   &-option {
