@@ -15,13 +15,30 @@
       class="form-field"
       :class="classes"
       :value="value"
-      :type="$attrs.type || 'text'"
+      :type="inputType"
       v-bind="$attrs"
       v-on="events"
       @input="$emit('input', $event.target.value)"
     >
 
     <span class="md-float" v-text="placeholder" />
+
+    <div
+      v-if="isPassword"
+      class="icon-password"
+    >
+      <fa
+        v-if="passwordIsVisible"
+        :icon="['fas', 'eye-slash']"
+        @click="toggleVisible"
+      />
+
+      <fa
+        v-else
+        :icon="['fas', 'eye']"
+        @click="toggleVisible"
+      />
+    </div>
 
     <span
       v-if="error"
@@ -45,6 +62,7 @@ export default {
   inheritAttrs: false,
 
   props: {
+    type: { type: String, default: 'text' },
     value: { type: [String, Number], default: '' },
     placeholder: { type: String, default: '' },
     muted: { type: String, default: '' },
@@ -52,6 +70,10 @@ export default {
     isValid: { type: Boolean, default: false },
     inputClass: { type: String, default: '' },
   },
+
+  data: () => ({
+    inputType: null,
+  }),
 
   computed: {
     active () {
@@ -73,6 +95,24 @@ export default {
       return Object.entries(this.$listeners)
         .filter(([key]) => key !== 'input')
         .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
+    },
+
+    isPassword () {
+      return this.type === 'password';
+    },
+
+    passwordIsVisible () {
+      return this.inputType !== 'password';
+    },
+  },
+
+  created () {
+    this.inputType = this.type;
+  },
+
+  methods: {
+    toggleVisible () {
+      this.inputType = this.inputType === 'password' ? 'text' : 'password';
     },
   },
 };

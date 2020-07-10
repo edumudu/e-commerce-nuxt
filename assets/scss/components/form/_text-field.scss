@@ -112,4 +112,14 @@ textarea.form-field {
 
   .form-field.is-invalid + .md-float { color: $danger; }
   .form-field.is-valid + .md-float { color: $green; }
+
+  .icon-password {
+    position: absolute;
+    top: 23px;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+    cursor: pointer;
+    user-select: none;
+  }
 }
