@@ -46,11 +46,11 @@
 export default {
   props: {
     value: { type: [Number, String], required: true },
-    editable: { type: Boolean, default: false }
+    editable: { type: Boolean, default: false },
   },
 
   data: () => ({
-    virtuaValue: 0
+    virtuaValue: 0,
   }),
 
   computed: {
@@ -61,8 +61,8 @@ export default {
 
       get () {
         return this.virtuaValue || this.value;
-      }
-    }
+      },
+    },
   },
 
   methods: {
@@ -76,8 +76,8 @@ export default {
 
     setValue (index) {
       this.curentValue = index;
-    }
-  }
+    },
+  },
 };
 </script>
 

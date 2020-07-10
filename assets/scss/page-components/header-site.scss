@@ -5,7 +5,7 @@ header.site-header {
 /*
  * Header - menu do site
 */
-.brand-logo img{
+.brand-logo img {
   width: 90px;
 }
 
@@ -25,8 +25,8 @@ header.site-header {
     background-color: $success;
     transition: transform 0.3s;
   }
- 
-  .menu-item { 
+
+  .menu-item {
     padding-bottom: 0.95rem;
     padding-top: 0.95rem;
     color: #d6d6d6;
@@ -64,13 +64,13 @@ header.site-header {
   .user-menu {
     font-size: 1.5rem;
 
-    > li { 
+    > li {
       margin-right: 12px;
-      text-align: center; 
+      text-align: center;
       color: $gray;
-      
+
       > a,
-      /deep/ .dropdown-toggle {  transition: color .25s; }
+      /deep/ .dropdown-toggle { transition: color 0.25s; }
 
       &:hover > a,
       &:hover /deep/ .dropdown-toggle { color: $success; }

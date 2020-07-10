@@ -13,8 +13,9 @@ main#dashboard-page {
   column-gap: 10px;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr;
-  grid-template-areas: 'info icon'
-                       'title icon';
+  grid-template-areas:
+    'info icon'
+    'title icon';
   color: #fff;
 
   &-information {
@@ -32,5 +33,4 @@ main#dashboard-page {
 
   &.orders { background-image: nth($hot-info-gradient, 1); }
   &.users { background-image: nth($hot-info-gradient, 2); }
-
 }

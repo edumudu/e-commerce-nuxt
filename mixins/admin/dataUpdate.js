@@ -1,9 +1,12 @@
 import OverlayLoading from '~/components/OverlayLoading.vue';
+import CachingActivated from '~/mixins/caching-activated';
 
 export default {
   components: {
-    OverlayLoading
+    OverlayLoading,
   },
+
+  mixins: [CachingActivated],
 
   async fetch () {
     try {
@@ -26,7 +29,7 @@ export default {
 
   data: () => ({
     sending: false,
-    data: {}
+    data: {},
   }),
 
   methods: {
@@ -43,6 +46,6 @@ export default {
 
       this.$nuxt.$loading.finish();
       this.sending = false;
-    }
-  }
+    },
+  },
 };

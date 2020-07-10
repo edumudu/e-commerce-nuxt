@@ -1,5 +1,6 @@
-#page-content, .page-content {
-  transition: all .5s cubic-bezier(.55, 0, .1, 1);
+#page-content,
+.page-content {
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 }
 
 $slide-distance: 400px;
@@ -28,22 +29,24 @@ $slide-distance: 400px;
   transform: translateY(-$slide-distance);
 }
 
-.bounce-enter-active, .layout-enter {
-  animation: bounce-in .8s;
+.bounce-enter-active,
+.layout-enter {
+  animation: bounce-in 0.8s;
 }
 
-.bounce-leave-active, .layout-leave-active {
-  animation: bounce-out .5s;
+.bounce-leave-active,
+.layout-leave-active {
+  animation: bounce-out 0.5s;
 }
 
 @keyframes bounce-in {
-  0% { transform: scale(0) }
-  50% { transform: scale(1.5) }
-  100% { transform: scale(1) }
+  0% { transform: scale(0); }
+  50% { transform: scale(1.5); }
+  100% { transform: scale(1); }
 }
 
 @keyframes bounce-out {
-  0% { transform: scale(1) }
-  50% { transform: scale(1.5) }
-  100% { transform: scale(0) }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+  100% { transform: scale(0); }
 }

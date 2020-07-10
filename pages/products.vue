@@ -66,17 +66,17 @@ export default {
   components: {
     ProductVitrine,
     DataPaginate,
-    OverlayLoading
+    OverlayLoading,
   },
 
   async fetch () {
     this.response = await this.$axios.$get('/product', {
-      params: this.$route.query
+      params: this.$route.query,
     });
   },
 
   data: () => ({
-    response: {}
+    response: {},
   }),
 
   computed: {
@@ -86,17 +86,17 @@ export default {
 
     products () {
       return this.response.data || [];
-    }
+    },
   },
 
   watch: {
-    '$route.query': '$fetch'
+    '$route.query': '$fetch',
   },
 
   head () {
     return {
-      title: `Products | ${process.env.APP_NAME}`
+      title: `Products | ${process.env.APP_NAME}`,
     };
-  }
+  },
 };
 </script>

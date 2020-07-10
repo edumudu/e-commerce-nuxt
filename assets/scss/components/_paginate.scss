@@ -2,14 +2,14 @@
   display: flex;
   justify-content: flex-end;
 
-  > li{
+  > li {
     a {
       $size: 25px;
 
       display: block;
       width: $size;
       height: $size;
-      font-size: .9rem;
+      font-size: 0.9rem;
       font-weight: 700;
       line-height: $size;
       text-align: center;
@@ -22,7 +22,7 @@
       background-color: $dark_color;
     }
 
-    &:disabled a{
+    &:disabled a {
       color: $gray-2;
       pointer-events: none;
     }

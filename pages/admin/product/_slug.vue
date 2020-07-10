@@ -43,7 +43,7 @@
             <div class="form-group col-12 col-md-4">
               <validation-provider
                 v-slot="{ errors, valid }"
-                rules="required|numeric|min:1"
+                rules="required|decimals:2|min:1"
               >
                 <base-input
                   v-model.number="product.price"
@@ -94,7 +94,7 @@
                 type="submit"
                 :disabled="sending || invalid"
               >
-                Cadastrar
+                Atualizar
               </button>
             </div>
           </div>
@@ -106,8 +106,6 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import BaseInput from '~/components/form/BaseInput.vue';
-import BaseSelect from '~/components/form/BaseSelect.vue';
 import OverlayLoading from '~/components/OverlayLoading.vue';
 
 export default {
@@ -116,9 +114,7 @@ export default {
   components: {
     ValidationObserver,
     ValidationProvider,
-    BaseInput,
-    BaseSelect,
-    OverlayLoading
+    OverlayLoading,
   },
 
   async fetch () {
@@ -147,11 +143,11 @@ export default {
 
   data: () => ({
     product: {
-      name: ''
+      name: '',
     },
     categories: [],
     genres: [],
-    sending: false
+    sending: false,
   }),
 
   methods: {
@@ -164,8 +160,8 @@ export default {
       try {
         await this.$axios.$post(`/product/${this.product.slug}`, formData, {
           headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+            'Content-Type': 'multipart/form-data',
+          },
         });
 
         this.$router.push('/admin/product');
@@ -176,13 +172,13 @@ export default {
 
       this.$nuxt.$loading.finish();
       this.sending = false;
-    }
+    },
   },
 
   head () {
     return {
-      title: `Update ${this.product.name} | Dashboard ${process.env.APP_NAME}`
+      title: `Update ${this.product.name} | Dashboard ${process.env.APP_NAME}`,
     };
-  }
+  },
 };
 </script>

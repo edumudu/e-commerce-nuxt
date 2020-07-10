@@ -92,18 +92,14 @@
                 v-slot="{ errors, valid }"
                 rules="image"
               >
-                <input
-                  type="file"
+                <base-file-input
                   placeholder="Photos"
                   name="photos[]"
-                  class="form-field"
-                  :class="{ 'is-valid': valid, 'is-invalid': !!errors[0] }"
                   multiple
-                >
-
-                <span class="invalid-message">
-                  {{ errors[0] }}
-                </span>
+                  :error="errors[0]"
+                  :is-valid="valid"
+                  @input="data.photos = $event"
+                />
               </validation-provider>
             </div>
 
@@ -125,8 +121,6 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import BaseInput from '~/components/form/BaseInput.vue';
-import BaseSelect from '~/components/form/BaseSelect.vue';
 import dataCreate from '~/mixins/admin/dataCreate';
 
 export default {
@@ -136,8 +130,6 @@ export default {
   components: {
     ValidationObserver,
     ValidationProvider,
-    BaseInput,
-    BaseSelect
   },
 
   mixins: [dataCreate],
@@ -148,11 +140,12 @@ export default {
       inventory: '',
       price: '',
       genre: '',
-      categories: []
+      categories: [],
+      photos: [],
     },
     sending: false,
     genres: [],
-    categories: []
+    categories: [],
   }),
 
   async mounted () {
@@ -168,13 +161,16 @@ export default {
       this.sending = true;
 
       const formData = new FormData(this.$refs.formData);
-      formData.name = 2;
+      formData.delete('photos[]');
+      this.data.photos.forEach((photo) => {
+        formData.append('photos[]', photo);
+      });
 
       try {
         await this.$axios.$post('/product', formData, {
           headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+            'Content-Type': 'multipart/form-data',
+          },
         });
 
         this.$toast.success(`Successful created ${this.data.name}`);
@@ -184,11 +180,12 @@ export default {
           inventory: '',
           price: '',
           genre: '',
-          categories: []
+          categories: [],
+          photos: [],
         };
 
         this.$nextTick(() => {
-          this.$refs.formData.reset();
+          this.$refs.form.reset();
         });
       } catch (e) {
         this.$toast.error(e.response.data.message);
@@ -196,13 +193,13 @@ export default {
 
       this.$nuxt.$loading.finish();
       this.sending = false;
-    }
+    },
   },
 
   head () {
     return {
-      title: `Create new Product | Dashboard ${process.env.APP_NAME}`
+      title: `Create new Product | Dashboard ${process.env.APP_NAME}`,
     };
-  }
+  },
 };
 </script>

@@ -41,7 +41,6 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import BaseInput from '~/components/form/BaseInput.vue';
 import dataCreate from '~/mixins/admin/dataCreate';
 
 export default {
@@ -51,19 +50,18 @@ export default {
   components: {
     ValidationObserver,
     ValidationProvider,
-    BaseInput
   },
 
   mixins: [dataCreate],
 
   data: () => ({
-    route: '/category'
+    route: '/category',
   }),
 
   head () {
     return {
-      title: `Create new Category | Dashboard ${process.env.APP_NAME}`
+      title: `Create new Category | Dashboard ${process.env.APP_NAME}`,
     };
-  }
+  },
 };
 </script>

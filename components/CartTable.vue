@@ -56,7 +56,7 @@ export default {
   components: { BaseStepper },
 
   props: {
-    products: { type: Array, required: true }
+    products: { type: Array, required: true },
   },
 
   methods: {
@@ -65,9 +65,9 @@ export default {
     },
 
     ...mapActions({
-      setProductQuantity: 'cart/setProductQuantity'
-    })
-  }
+      setProductQuantity: 'cart/setProductQuantity',
+    }),
+  },
 };
 </script>
 

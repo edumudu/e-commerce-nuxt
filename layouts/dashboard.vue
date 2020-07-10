@@ -5,7 +5,7 @@
     <div id="dashboard-page-content">
       <the-header-dashboard />
 
-      <nuxt />
+      <nuxt keep-alive :keep-alive-props="{ max: 5 }" />
     </div>
   </main>
 </template>
@@ -20,8 +20,8 @@ export default {
 
   components: {
     TheAsideDashboard,
-    TheHeaderDashboard
-  }
+    TheHeaderDashboard,
+  },
 };
 </script>
 

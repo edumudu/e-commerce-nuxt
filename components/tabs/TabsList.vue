@@ -25,7 +25,7 @@
 <script>
 export default {
   data: () => ({
-    tabs: []
+    tabs: [],
   }),
 
   created () {
@@ -37,8 +37,8 @@ export default {
       Array.from(this.tabs, (tab) => {
         tab.isActive = tab.name === selectedTab.name;
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

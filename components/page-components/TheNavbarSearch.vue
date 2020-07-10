@@ -33,18 +33,18 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
 export default {
   components: {
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
   },
 
   data: () => ({
-    search: ''
+    search: '',
   }),
 
   methods: {
     onSubmit () {
       this.$router.push({ path: '/products', query: { search: this.search } });
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -5,9 +5,9 @@
 
   &:hover {
     background-color: adjust-color($color, $lightness: -5%);
-    -webkit-box-shadow: 0px 0px 8px 2px adjust-color($color, $alpha: -0.59);
-    -moz-box-shadow: 0px 0px 8px 2px adjust-color($color, $alpha: -0.59);
-    box-shadow: 0px 0px 8px 2px adjust-color($color, $alpha: -0.59);
+    -webkit-box-shadow: 0 0 8px 2px adjust-color($color, $alpha: -0.59);
+    -moz-box-shadow: 0 0 8px 2px adjust-color($color, $alpha: -0.59);
+    box-shadow: 0 0 8px 2px adjust-color($color, $alpha: -0.59);
   }
 }
 
@@ -19,9 +19,9 @@
 
   &:hover {
     background-color: adjust-color($color, $alpha: -0.85);
-    -webkit-box-shadow: 0px 0px 8px 2px adjust-color($color, $alpha: -0.59);
-    -moz-box-shadow: 0px 0px 8px 2px adjust-color($color, $alpha: -0.59);
-    box-shadow: 0px 0px 8px 2px adjust-color($color, $alpha: -0.59);
+    -webkit-box-shadow: 0 0 8px 2px adjust-color($color, $alpha: -0.59);
+    -moz-box-shadow: 0 0 8px 2px adjust-color($color, $alpha: -0.59);
+    box-shadow: 0 0 8px 2px adjust-color($color, $alpha: -0.59);
   }
 }
 
@@ -38,7 +38,7 @@
 @mixin btn-press-set-color($color) {
   &.btn-press {
     box-shadow: 0 #{$raise-size} 0 adjust-color($color: $color, $lightness: -5%);
-    
+
     &:hover { box-shadow: 0 #{$raise-size - 2px} 0 adjust-color($color: $color, $lightness: -5%); }
   }
 }

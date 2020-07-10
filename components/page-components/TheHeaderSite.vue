@@ -158,7 +158,7 @@ import TheNavbarSearch from '~/components/page-components/TheNavbarSearch.vue';
 export default {
   components: {
     BaseDropdown,
-    TheNavbarSearch
+    TheNavbarSearch,
   },
 
   data: () => ({
@@ -166,16 +166,16 @@ export default {
       { text: 'home', href: '/' },
       { text: 'contato', href: '/contact' },
       { text: 'sobre', href: '/about' },
-      { text: 'produtos', href: '/products' }
-    ]
+      { text: 'produtos', href: '/products' },
+    ],
   }),
 
   computed: {
     ...mapGetters({
       cartItems: 'cart/cartItems',
-      cartProducts: 'cart/cartProducts'
-    })
-  }
+      cartProducts: 'cart/cartProducts',
+    }),
+  },
 };
 </script>
 

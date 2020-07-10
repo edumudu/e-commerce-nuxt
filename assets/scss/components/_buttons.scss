@@ -20,8 +20,9 @@ $button-default-border-radius: 6px;
   border-radius: $button-default-border-radius;
   cursor: pointer;
   outline: none;
-  transition: background-color 0.4s,
-              box-shadow 0.4s;
+  transition:
+    background-color 0.4s,
+    box-shadow 0.4s;
 
   &:disabled {
     opacity: 0.65;
@@ -30,7 +31,7 @@ $button-default-border-radius: 6px;
 
   &.loading {
     position: relative;
-    
+
     &::after {
       content: '';
       position: absolute;
@@ -40,31 +41,31 @@ $button-default-border-radius: 6px;
       display: inline-block;
       height: 100%;
       width: 0;
-      background-color: rgba(0,0,0,0.5);
-      transition: width .2s;
+      background-color: rgba(0, 0, 0, 0.5);
+      transition: width 0.2s;
       border-radius: $button-default-border-radius;
     }
   }
-   
+
   @for $i from 1 through 100 {
     &.loading[data-status="#{$i}"]::after {
       width: percentage($i / 100);
     }
   }
-  
 }
 
 .btn-small {
   padding: 0 0.8rem;
-  font-size: 0.85rem; 
+  font-size: 0.85rem;
 }
 
 .btn-large {
   padding: 0 40px;
-  font-size: 1.2rem; 
+  font-size: 1.2rem;
 }
 
 .btn-block { display: block; }
+
 .btn-shop {
   @extend .btn-flat;
 
@@ -83,9 +84,10 @@ $button-default-border-radius: 6px;
   position: relative;
   margin-top: -$raise-size;
   box-shadow: 0 #{$raise-size} 0 adjust-color($color: $teal, $lightness: -5%);
-  transition: background-color 0.4s,
-              box-shadow 0.2s,
-              transform 0.2s;
+  transition:
+    background-color 0.4s,
+    box-shadow 0.2s,
+    transform 0.2s;
 
   &::before {
     content: '';
@@ -96,15 +98,15 @@ $button-default-border-radius: 6px;
     width: 100%;
     height: 100%;
     border-radius: 6px;
-    box-shadow: 0 #{$raise-size + 4px} 1px rgba(0,0,0,0.5);
+    box-shadow: 0 #{$raise-size + 4px} 1px rgba(0, 0, 0, 0.5);
     transition: box-shadow 0.2s;
   }
-  
+
   &:hover {
     transform: translateY(3px);
     box-shadow: 0 #{$raise-size - 2px} 0 adjust-color($color: $teal, $lightness: -5%);
 
-    &::before { box-shadow: 0 #{$raise-size} 1px rgba(0,0,0,0.5); }
+    &::before { box-shadow: 0 #{$raise-size} 1px rgba(0, 0, 0, 0.5); }
   }
 
   &:active,
@@ -112,7 +114,7 @@ $button-default-border-radius: 6px;
     transform: translateY($raise-size);
     box-shadow: 0 0 0 #000 !important;
 
-    &::before { box-shadow: 0 0 0 rgba(0,0,0,0.5); }
+    &::before { box-shadow: 0 0 0 rgba(0, 0, 0, 0.5); }
   }
 }
 
@@ -140,16 +142,14 @@ $button-default-border-radius: 6px;
   }
 }
 
-
 /*
  * Flat
 */
 .btn-flat {
   background-color: transparent;
   color: $dark-color;
-  //border: 1px solid $default_color;
 
   &:hover {
-      background-color: rgba(0,0,0,0.08);
+    background-color: rgba(0, 0, 0, 0.08);
   }
 }

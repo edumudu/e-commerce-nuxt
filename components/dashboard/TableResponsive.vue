@@ -64,7 +64,7 @@ export default {
     data: { type: Array, required: true },
     hidden: { type: Array, default: () => ['slug', 'created_at', 'updated_at'] },
     needActions: { type: Boolean, default: true },
-    photosFields: { type: Array, default: () => [] }
+    photosFields: { type: Array, default: () => [] },
   },
 
   computed: {
@@ -72,14 +72,14 @@ export default {
       const arr = Object.keys(this.data[0] || {});
 
       return arr.filter(item => !this.hidden.includes(item));
-    }
+    },
   },
 
   methods: {
     handleRemove (item) {
       this.$emit('remove', item);
-    }
-  }
+    },
+  },
 };
 </script>
 

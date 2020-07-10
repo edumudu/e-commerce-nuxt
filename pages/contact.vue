@@ -101,16 +101,14 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import BaseInput from '~/components/form/BaseInput.vue';
 import PhoneMask from '~/mixins/phoneMask';
 
 export default {
   transition: 'slide-left',
 
   components: {
-    BaseInput,
     ValidationProvider,
-    ValidationObserver
+    ValidationObserver,
   },
 
   mixins: [PhoneMask],
@@ -121,8 +119,8 @@ export default {
       name: '',
       email: '',
       phone: '',
-      body: ''
-    }
+      body: '',
+    },
   }),
 
   methods: {
@@ -143,13 +141,13 @@ export default {
 
       this.sending = false;
       this.$nuxt.$loading.finish();
-    }
+    },
   },
 
   head () {
     return {
-      title: `Contact | ${process.env.APP_NAME}`
+      title: `Contact | ${process.env.APP_NAME}`,
     };
-  }
+  },
 };
 </script>

@@ -10,7 +10,7 @@
 
         <div class="col-sm-12 col-md-6">
           <h2 class="title">
-            Novo Cliente
+            New Client
           </h2>
 
           <p class="paragraph">
@@ -54,7 +54,7 @@
                     v-model="login.password"
                     type="password"
                     name="password"
-                    placeholder="Senha"
+                    placeholder="password"
                     :error="errors[0]"
                     :is-valid="valid"
                   />
@@ -71,7 +71,7 @@
                   type="submit"
                   :disabled="sending || invalid"
                 >
-                  Entrar
+                  Sign in
                 </button>
               </div>
             </form>
@@ -84,7 +84,6 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import BaseInput from '~/components/form/BaseInput.vue';
 
 export default {
   middleware: 'auth',
@@ -92,17 +91,16 @@ export default {
   transition: 'slide-left',
 
   components: {
-    BaseInput,
     ValidationProvider,
-    ValidationObserver
+    ValidationObserver,
   },
 
   data: () => ({
     sending: false,
     login: {
       email: '',
-      password: ''
-    }
+      password: '',
+    },
   }),
 
   methods: {
@@ -118,13 +116,13 @@ export default {
 
       this.sending = false;
       this.$nuxt.$loading.finish();
-    }
+    },
   },
 
   head () {
     return {
-      title: `Login | ${process.env.APP_NAME}`
+      title: `Sing in | ${process.env.APP_NAME}`,
     };
-  }
+  },
 };
 </script>

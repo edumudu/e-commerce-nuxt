@@ -18,8 +18,8 @@ export default {
 
   head () {
     return {
-      title: `About | ${process.env.APP_NAME}`
+      title: `About | ${process.env.APP_NAME}`,
     };
-  }
+  },
 };
 </script>

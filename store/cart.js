@@ -1,6 +1,6 @@
 export const state = () => ({
   products: [],
-  cart: [] // id, quantity
+  cart: [], // id, quantity
 });
 
 export const getters = {
@@ -18,7 +18,7 @@ export const getters = {
 
   cartContains: (state, getters) => (id) => {
     return getters.cartItems.map(item => item.id).includes(id);
-  }
+  },
 };
 
 export const actions = {
@@ -51,12 +51,12 @@ export const actions = {
 
         commit('setItemQuantity', {
           index: state.cart.indexOf(cartItem),
-          qty
+          qty,
         });
 
         commit('setProductInfoQuantity', {
           index: state.products.indexOf(prod),
-          qty
+          qty,
         });
       }
 
@@ -83,18 +83,18 @@ export const actions = {
     if (product) {
       commit('setItemQuantity', {
         index: state.cart.indexOf(product),
-        qty
+        qty,
       });
 
       const productInfo = state.products.find(prod => prod.id === product.id);
       commit('setProductInfoQuantity', {
         index: state.products.indexOf(productInfo),
-        qty
+        qty,
       });
 
       localStorage.setItem('cart', JSON.stringify(state.cart));
     }
-  }
+  },
 };
 
 export const mutations = {
@@ -120,5 +120,5 @@ export const mutations = {
 
   setProductInfoQuantity (state, { index, qty }) {
     state.products[index].quantity = qty;
-  }
+  },
 };

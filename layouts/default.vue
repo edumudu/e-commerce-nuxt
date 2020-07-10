@@ -2,7 +2,7 @@
   <main id="page">
     <the-header-site />
 
-    <nuxt />
+    <nuxt keep-alive :keep-alive-props="{ max: 5 }" />
 
     <the-footer-site />
   </main>
@@ -17,14 +17,14 @@ export default {
 
   components: {
     TheHeaderSite,
-    TheFooterSite
+    TheFooterSite,
   },
 
   mounted () {
     // init cart
     this.$store.commit('cart/setCart', JSON.parse(localStorage.getItem('cart')) || []);
     this.$store.dispatch('cart/fetchProducts');
-  }
+  },
 };
 </script>
 

@@ -27,19 +27,19 @@ export default {
   components: {
     TableResponsive,
     DataPaginate,
-    OverlayLoading
+    OverlayLoading,
   },
 
   mixins: [listData],
 
   data: () => ({
-    route: '/product'
+    route: '/product',
   }),
 
   head () {
     return {
-      title: `List Product | Dashboard ${process.env.APP_NAME}`
+      title: `List Product | Dashboard ${process.env.APP_NAME}`,
     };
-  }
+  },
 };
 </script>

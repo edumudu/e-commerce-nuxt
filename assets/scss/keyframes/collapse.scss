@@ -1,9 +1,9 @@
-@keyframes collapse_in{
+@keyframes collapse_in {
   from { max-height: 600px; }
   to { max-height: 0; }
 }
 
-@keyframes collapse_out{
+@keyframes collapse_out {
   from { max-height: 0; }
   to { max-height: 600px; }
 }
