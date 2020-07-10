@@ -48,7 +48,6 @@
               placeholder="review"
               type="textarea"
               name="review"
-              required
             />
           </div>
 
@@ -93,7 +92,7 @@ export default {
 
   computed: {
     noHaveReviews () {
-      return this.reviews > 0;
+      return this.reviews < 1;
     },
   },
 
