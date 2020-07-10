@@ -83,6 +83,7 @@ import ProductReviews from '~/components/Product/ProductReviews.vue';
 import TabsList from '~/components/tabs/TabsList.vue';
 import TabsItem from '~/components/tabs/TabsItem.vue';
 import OverlayLoading from '~/components/OverlayLoading.vue';
+import CachingActivated from '~/mixins/caching-activated';
 
 export default {
   transition: 'slide-left',
@@ -94,6 +95,8 @@ export default {
     TabsItem,
     OverlayLoading,
   },
+
+  mixins: [CachingActivated],
 
   async fetch () {
     this.product = await this.$axios.$get(`/product/${this.$route.params.slug}`);

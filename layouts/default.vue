@@ -2,7 +2,7 @@
   <main id="page">
     <the-header-site />
 
-    <nuxt />
+    <nuxt keep-alive :keep-alive-props="{ max: 5 }" />
 
     <the-footer-site />
   </main>
