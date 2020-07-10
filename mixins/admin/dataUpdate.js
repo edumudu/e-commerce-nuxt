@@ -1,9 +1,12 @@
 import OverlayLoading from '~/components/OverlayLoading.vue';
+import CachingActivated from '~/mixins/caching-activated';
 
 export default {
   components: {
     OverlayLoading,
   },
+
+  mixins: [CachingActivated],
 
   async fetch () {
     try {

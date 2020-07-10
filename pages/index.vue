@@ -9,6 +9,7 @@
 <script>
 import HomeSlider from '~/components/HomeSlider.vue';
 import ProductVitrine from '~/components/ProductVitrine.vue';
+import CachingActivated from '~/mixins/caching-activated';
 
 export default {
   transition: 'slide-right',
@@ -17,6 +18,8 @@ export default {
     HomeSlider,
     ProductVitrine,
   },
+
+  mixins: [CachingActivated],
 
   data: () => ({
     destaques: [],
@@ -28,7 +31,7 @@ export default {
     ],
   }),
 
-  async mounted () {
+  async fetch () {
     const { data } = await this.$axios.$get('/product');
     this.destaques = data;
   },
