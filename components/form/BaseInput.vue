@@ -1,7 +1,7 @@
 <template>
   <label class="md-wrapper">
     <textarea
-      v-if="$attrs.type === 'textarea'"
+      v-if="type === 'textarea'"
       class="form-field"
       :class="classes"
       :value="value"

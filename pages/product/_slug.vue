@@ -131,8 +131,13 @@ export default {
     },
 
     async deletePost () {
-      await this.$axios.$delete(`/product/${this.product.slug}`);
-      this.$router.push('/');
+      try {
+        await this.$axios.$delete(`/product/${this.product.slug}`);
+        this.$toast.success(`Successful deleted "${this.product.name}"`);
+        this.$router.push('/');
+      } catch (e) {
+        this.$toast.error('Something went wrong, try again later');
+      }
     },
   },
 
