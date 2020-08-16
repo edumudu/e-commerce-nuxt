@@ -1,0 +1,42 @@
+.dropdown-item {
+  $transition: 0.4s;
+
+  &-link {
+    display: flex;
+    column-gap: 20px;
+  }
+
+  &-img {
+    $size: 5rem;
+
+    width: $size;
+    height: $size;
+    border-radius: 10px;
+    transition: transform $transition;
+  }
+
+  &-name {
+    font-size: 1rem;
+    color: lighten($dark, 20);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    max-width: 16ch;
+    transition: color $transition;
+
+    &::first-letter { text-transform: uppercase; }
+  }
+
+  &-price {
+    color: $gray-1;
+    transition: color $transition;
+  }
+
+  &:hover {
+    .dropdown-item-img { transform: scale(1.1); }
+    .dropdown-item-name { color: $dark; }
+    .dropdown-item-price { color: $gray-2; }
+  }
+
+  & + & { margin-top: 20px; }
+}
