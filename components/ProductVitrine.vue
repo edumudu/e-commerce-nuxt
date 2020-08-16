@@ -21,7 +21,7 @@
             <nuxt-link :to="`/product/${item.slug}`">
               <img
                 class="responsive-img box-img"
-                :src="item.photos[0] || 'https://via.placeholder.com/300x200?text=Not%20Photo'"
+                :src="item.photos[0] || 'https://via.placeholder.com/300x300?text=Not%20Photo'"
                 :alt="item.name"
                 :title="item.name"
               >
