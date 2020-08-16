@@ -120,17 +120,11 @@
                       v-if="cartProducts.length"
                       #default
                     >
-                      <li
+                      <dropdown-item-cart
                         v-for="product in cartProducts"
                         :key="product.id"
-                        class="dropdown-item"
-                      >
-                        <nuxt-link :to="`/product/${product.slug}`">
-                          {{ product.name }}
-                          -
-                          {{ (product.price * product.quantity).toFixed(2) }}
-                        </nuxt-link>
-                      </li>
+                        :product="product"
+                      />
                     </template>
 
                     <template
@@ -152,13 +146,15 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import BaseDropdown from '~/components/BaseDropdown.vue';
+import BaseDropdown from '~/components/Dropdown/BaseDropdown.vue';
+import DropdownItemCart from '~/components/Dropdown/DropdownItemCart.vue';
 import TheNavbarSearch from '~/components/page-components/TheNavbarSearch.vue';
 
 export default {
   components: {
     BaseDropdown,
     TheNavbarSearch,
+    DropdownItemCart,
   },
 
   data: () => ({
