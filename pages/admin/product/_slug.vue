@@ -89,6 +89,22 @@
             </div>
 
             <div class="form-group col-12">
+              <validation-provider
+                v-slot="{ errors, valid }"
+                rules="image"
+              >
+                <base-file-input
+                  placeholder="Photos"
+                  name="photos[]"
+                  multiple
+                  :error="errors[0]"
+                  :is-valid="valid"
+                  @input="handleInputSelection"
+                />
+              </validation-provider>
+            </div>
+
+            <div class="form-group col-12">
               <button
                 class="btn-press btn-large"
                 type="submit"
@@ -123,6 +139,12 @@ export default {
       this.categories = (await this.$axios.$get('/category')).data;
       this.product = await this.$axios.$get(`/product/${this.$route.params.slug}`);
 
+      this.product.photos = this.product.photos.map(async (url, i) => {
+        const response = await fetch(url, { mode: 'no-cors' });
+
+        return new File(response.blob(), i);
+      });
+
       this.product.genre = this.product.genre.id;
       this.product.categories = this.product.categories.map(category => category.id);
     } catch (e) {
@@ -144,6 +166,7 @@ export default {
   data: () => ({
     product: {
       name: '',
+      photos: [],
     },
     categories: [],
     genres: [],
@@ -172,6 +195,10 @@ export default {
 
       this.$nuxt.$loading.finish();
       this.sending = false;
+    },
+
+    handleInputSelection (files) {
+      this.product.photos = files;
     },
   },
 
