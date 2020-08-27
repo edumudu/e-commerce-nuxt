@@ -19,6 +19,7 @@ jobs:
         uses: borales/actions-yarn@v2.3.0
         with:
           cmd: install
+      - run: npm rebuild node-sass
       - run: sudo yarn predeploy
       - name: Deploy
         uses: crazy-max/ghaction-github-pages@v2
