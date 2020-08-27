@@ -10,7 +10,9 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore . && stylelint **/*.{scss,vue} --ignore-path .gitignore",
-    "test": "jest"
+    "test": "jest",
+    "predeploy": "yarn generate",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@nuxtjs/auth": "^4.9.1",
@@ -38,6 +40,7 @@
     "babel-jest": "^26.1.0",
     "eslint": "^7.3.1",
     "eslint-plugin-nuxt": ">=0.4.2",
+    "gh-pages": "^3.1.0",
     "husky": "^4.2.5",
     "jest": "^26.1.0",
     "node-sass": "^4.13.1",
