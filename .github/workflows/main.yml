@@ -14,9 +14,9 @@ jobs:
       - name: Set-up Node
         uses: actions/setup-node@v1
         with:
-          node-version: "10.x"
+          node-version: "12.x"
       - name: Set-up Yarn
-        uses: borales/actions-yarn@v2.0.0
+        uses: borales/actions-yarn@v2.3.0
         with:
           cmd: install
       - run: sudo yarn predeploy
