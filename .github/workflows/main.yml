@@ -19,8 +19,8 @@ jobs:
         uses: borales/actions-yarn@v2.3.0
         with:
           cmd: install
-      - run: sudo npm rebuild node-sass --force
-      - run: sudo yarn predeploy
+      - name: Generate static nuxt app
+        uses: kappa0923/nuxtjs-generate-action@v0.1.0
       - name: Deploy
         uses: crazy-max/ghaction-github-pages@v2
         with:
