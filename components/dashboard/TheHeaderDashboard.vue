@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import BaseDropdown from '~/components/BaseDropdown.vue';
+import BaseDropdown from '~/components/Dropdown/BaseDropdown.vue';
 
 export default {
   components: { BaseDropdown },

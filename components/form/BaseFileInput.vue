@@ -22,27 +22,11 @@
       </div>
     </label>
 
-    <ul
+    <file-input-images
       v-if="isImage"
-      class="d-flex flex-nowrap images-view"
-    >
-      <li
-        v-for="(image, index) in images"
-        :key="index"
-        class="col-12 col-sm-6 col-md-3 col-lg-2 images-view-item"
-      >
-        <img
-          class="images-item"
-          :src="image"
-        >
-
-        <fa
-          class="images-view-remove"
-          :icon="['far', 'times-circle']"
-          @click="removeFile(index)"
-        />
-      </li>
-    </ul>
+      :images="files"
+      @remove="removeFile"
+    />
 
     <span
       v-if="error"
@@ -54,7 +38,13 @@
 </template>
 
 <script>
+import FileInputImages from './FileInputImages';
+
 export default {
+  components: {
+    FileInputImages,
+  },
+
   inheritAttrs: false,
 
   props: {
@@ -69,7 +59,6 @@ export default {
       image: 'image/*',
     },
     files: [],
-    images: [],
   }),
 
   computed: {
@@ -94,7 +83,6 @@ export default {
 
   watch: {
     files () {
-      this.isImage && this.fetchImages();
       this.$emit('input', this.multiple ? this.files : this.files[0]);
     },
   },
@@ -111,30 +99,7 @@ export default {
     },
 
     removeFile (index) {
-      this.isImage && this.images.splice(index, 1);
       this.files.splice(index, 1);
-    },
-
-    readFileAsync (file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-
-        reader.onload = () => {
-          resolve(reader.result);
-        };
-
-        reader.onerror = reject;
-
-        reader.readAsDataURL(file);
-      });
-    },
-
-    fetchImages () {
-      this.images = [];
-
-      this.files.forEach((file) => {
-        this.readFileAsync(file).then(image => this.images.push(image));
-      });
     },
   },
 };

@@ -29,5 +29,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '~/assets/scss/components/_dropdown';
+  @import '~/assets/scss/components/dropdown/_dropdown';
 </style>

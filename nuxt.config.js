@@ -2,9 +2,11 @@ require('dotenv').config();
 
 export default {
   mode: 'universal',
-  /*
-  ** Headers of the page
-  */
+
+  env: {
+    APP_NAME: process.env.APP_NAME,
+  },
+
   head: {
     title: `| ${process.eventNames.APP_NAME || ''}`,
     meta: [
@@ -16,19 +18,13 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],
   },
-  /*
-  ** Customize the progress-bar color
-  */
+
   loading: { color: '#e53935' },
-  /*
-  ** Global CSS
-  */
+
   css: [
     'bootstrap/scss/bootstrap-grid.scss',
   ],
-  /*
-  ** Plugins to load before mounting the App
-  */
+
   plugins: [
     '~/plugins/globaly-components',
     '~/plugins/vee-validate',
@@ -36,44 +32,27 @@ export default {
     '~/plugins/v-mask',
     { src: '~/plugins/vue-chartjs', ssr: false },
   ],
-  /*
-  ** Nuxt.js dev-modules
-  */
+
   buildModules: [
     '@nuxtjs/style-resources',
-    // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
-    // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
-    ['@nuxtjs/dotenv', { path: './' }],
+    '@nuxtjs/fontawesome',
   ],
-  /*
-  ** Nuxt.js modules
-  */
+
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv',
     '@nuxtjs/auth',
-    'nuxt-fontawesome',
   ],
-  /*
-  ** Axios module configuration
-  ** See https://axios.nuxtjs.org/options
-  */
+
   axios: {
     baseURL: process.env.BASE_URL_API,
     headers: { Accept: 'aplication/json' },
   },
-  /*
-  ** Build configuration
-  */
+
   build: {
     transpile: ['vee-validate/dist/rules'],
-    /*
-    ** You can extend webpack config here
-    */
+
     extend (config, ctx) {
     },
   },
@@ -93,20 +72,11 @@ export default {
 
   fontawesome: {
     component: 'fa',
-    imports: [
-      {
-        set: '@fortawesome/free-solid-svg-icons',
-        icons: ['fas'],
-      },
-      {
-        set: '@fortawesome/free-brands-svg-icons',
-        icons: ['fab'],
-      },
-      {
-        set: '@fortawesome/free-regular-svg-icons',
-        icons: ['far'],
-      },
-    ],
+    icons: {
+      solid: true,
+      regular: true,
+      brands: true,
+    },
   },
 
   styleResources: {
