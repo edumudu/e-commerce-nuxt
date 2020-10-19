@@ -28,37 +28,9 @@ export default {
     },
   },
 
-  data: () => ({
-    urls: [],
-  }),
-
-  watch: {
-    images () {
-      this.fetchImages();
-    },
-  },
-
-  methods: {
-    readFileAsync (file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-
-        reader.onload = () => {
-          resolve(reader.result);
-        };
-
-        reader.onerror = reject;
-
-        reader.readAsDataURL(file);
-      });
-    },
-
-    fetchImages () {
-      this.urls = [];
-
-      this.images.forEach((file) => {
-        this.readFileAsync(file).then(image => this.urls.push(image));
-      });
+  computed: {
+    urls () {
+      return this.images.map(image => URL.createObjectURL(image));
     },
   },
 };

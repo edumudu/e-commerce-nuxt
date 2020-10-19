@@ -1,7 +1,13 @@
-require('dotenv').config();
+import 'dotenv/config';
 
 export default {
   mode: 'universal',
+
+  target: 'static',
+
+  router: {
+    base: process.env.NODE_ENV !== 'production' ? '/' : '/e-commerce-nuxt/',
+  },
 
   env: {
     APP_NAME: process.env.APP_NAME,
