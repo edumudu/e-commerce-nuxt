@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/products", {data:[{}],fetch:[{_error:{message:"Cannot read property 'status' of undefined",statusCode:500}}],mutations:[]});

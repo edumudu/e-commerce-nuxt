@@ -1,0 +1,1 @@
+window.__NUXT__=(function(a,b){return {staticAssetsBase:"\u002F_nuxt\u002Fstatic\u002F1603072902",layout:"default",error:{statusCode:404,path:a,message:"This page could not be found"},state:{cart:{products:[],cart:[]},auth:{user:null,loggedIn:b,strategy:"local"}},serverRendered:b,routePath:a,config:{}}}("\u002Fforget-password",false));

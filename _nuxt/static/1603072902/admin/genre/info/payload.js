@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/admin/genre/info", {data:[],fetch:[],mutations:[["auth\u002FSET",{key:"redirect",value:"\u002Fadmin\u002Fgenre\u002Finfo"}]]});
