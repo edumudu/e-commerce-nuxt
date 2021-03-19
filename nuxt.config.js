@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 export default {
   mode: 'universal',
 
@@ -9,17 +7,24 @@ export default {
     base: process.env.NODE_ENV !== 'production' ? '/' : '/e-commerce-nuxt/',
   },
 
-  env: {
-    APP_NAME: process.env.APP_NAME,
+  publicRuntimeConfig: {
+    appName: process.env.APP_NAME || 'C&G',
+    appURL: process.env.BASE_URL || 'http://localhost:3000',
+
+    axios: {
+      baseURL: process.env.BASE_URL_API || 'http://localhost:8000',
+    },
   },
 
   head: {
-    title: `| ${process.eventNames.APP_NAME || ''}`,
+    title: process.env.APP_NAME,
+
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
     ],
+
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],
@@ -52,7 +57,6 @@ export default {
   ],
 
   axios: {
-    baseURL: process.env.BASE_URL_API,
     headers: { Accept: 'aplication/json' },
   },
 

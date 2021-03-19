@@ -35,10 +35,8 @@ export default {
     route: '/product',
   }),
 
-  head () {
-    return {
-      title: `List Product | Dashboard ${process.env.APP_NAME}`,
-    };
-  },
+  head: () => ({
+    title: 'List Product',
+  }),
 };
 </script>

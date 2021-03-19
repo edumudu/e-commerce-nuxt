@@ -35,10 +35,8 @@ export default {
     route: '/order',
   }),
 
-  head () {
-    return {
-      title: `List orders | Dashboard ${process.env.APP_NAME}`,
-    };
-  },
+  head: () => ({
+    title: 'List orders',
+  }),
 };
 </script>

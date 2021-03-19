@@ -109,11 +109,9 @@ export default {
     this.product = await this.$axios.$get(`/product/${this.$route.params.slug}`);
   },
 
-  head () {
-    return {
-      title: `${this.product.name} | ${process.env.APP_NAME}`,
-    };
-  },
+  head: () => ({
+    title: `${this.product.name}`,
+  }),
 
   computed: {
     reviewsCounter () {

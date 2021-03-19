@@ -149,10 +149,8 @@ export default {
     this.totalOrders = totalOrders.total;
   },
 
-  head () {
-    return {
-      title: `Home | Dashboard ${process.env.APP_NAME}`,
-    };
-  },
+  head: () => ({
+    title: 'Home',
+  }),
 };
 </script>

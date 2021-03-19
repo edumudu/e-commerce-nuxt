@@ -57,10 +57,8 @@ export default {
     route: '/category',
   }),
 
-  head () {
-    return {
-      title: `Create new Category | Dashboard ${process.env.APP_NAME}`,
-    };
-  },
+  head: () => ({
+    title: 'Create new Category',
+  }),
 };
 </script>

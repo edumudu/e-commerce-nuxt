@@ -103,11 +103,9 @@ export default {
     },
   }),
 
-  head () {
-    return {
-      title: `Sing in | ${process.env.APP_NAME}`,
-    };
-  },
+  head: () => ({
+    title: 'Sing in',
+  }),
 
   methods: {
     async sendLogin () {

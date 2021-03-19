@@ -73,15 +73,9 @@ export default {
   middleware: 'auth',
   transition: 'slide-left',
 
-  data: () => ({
-    //
+  head: () => ({
+    title: 'My cart',
   }),
-
-  head () {
-    return {
-      title: `My cart | ${process.env.APP_NAME}`,
-    };
-  },
 
   computed: {
     ...mapGetters({

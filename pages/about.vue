@@ -16,10 +16,8 @@
 export default {
   transition: 'slide-left',
 
-  head () {
-    return {
-      title: `About | ${process.env.APP_NAME}`,
-    };
-  },
+  head: () => ({
+    title: 'About',
+  }),
 };
 </script>

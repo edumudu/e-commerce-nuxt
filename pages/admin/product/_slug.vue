@@ -175,7 +175,7 @@ export default {
 
   head () {
     return {
-      title: `Update ${this.product.name} | Dashboard ${process.env.APP_NAME}`,
+      title: `Update ${this.product.name}`,
     };
   },
 

@@ -61,7 +61,7 @@ export default {
 
   head () {
     return {
-      title: `Update ${this.data.name} | Dashboard ${process.env.APP_NAME}`,
+      title: `Update ${this.data.name}`,
     };
   },
 };

@@ -38,10 +38,8 @@ export default {
     };
   },
 
-  head () {
-    return {
-      title: `Genre info | Dasboard ${process.env.APP_NAME}`,
-    };
-  },
+  head: () => ({
+    title: 'Genre info',
+  }),
 };
 </script>

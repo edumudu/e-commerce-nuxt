@@ -22,6 +22,10 @@ export default {
 
   middleware: ['auth', 'moderation'],
   layoutTransition: 'layout',
+
+  head () {
+    return { titleTemplate: `%s | Dashboard ${this.$config.appName}` };
+  },
 };
 </script>
 

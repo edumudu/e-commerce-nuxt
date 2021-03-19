@@ -35,10 +35,8 @@ export default {
     this.destaques = data;
   },
 
-  head () {
-    return {
-      title: `Home | ${process.env.APP_NAME}`,
-    };
-  },
+  head: () => ({
+    title: 'Home',
+  }),
 };
 </script>

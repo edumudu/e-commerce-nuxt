@@ -147,11 +147,9 @@ export default {
     categories: [],
   }),
 
-  head () {
-    return {
-      title: `Create new Product | Dashboard ${process.env.APP_NAME}`,
-    };
-  },
+  head: () => ({
+    title: 'Create new Product',
+  }),
 
   async mounted () {
     const genres = await this.$axios.$get('/genre');

@@ -122,11 +122,9 @@ export default {
     },
   }),
 
-  head () {
-    return {
-      title: `Contact | ${process.env.APP_NAME}`,
-    };
-  },
+  head: () => ({
+    title: 'Contact',
+  }),
 
   methods: {
     async sendContact () {

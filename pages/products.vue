@@ -79,11 +79,9 @@ export default {
     });
   },
 
-  head () {
-    return {
-      title: `Products | ${process.env.APP_NAME}`,
-    };
-  },
+  head: () => ({
+    title: 'Products',
+  }),
 
   computed: {
     totalPages () {

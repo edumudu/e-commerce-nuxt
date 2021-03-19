@@ -28,10 +28,8 @@ export default {
   auth: 'guest',
   transition: 'slide-left',
 
-  head () {
-    return {
-      title: `Sing up | ${process.env.APP_NAME}`,
-    };
-  },
+  head: () => ({
+    title: 'Sing up',
+  }),
 };
 </script>

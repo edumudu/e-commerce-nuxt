@@ -346,14 +346,12 @@ export default {
     this.sessionId = (await this.$axios.$get('/checkout/sessionId')).sessionId;
   },
 
-  head () {
-    return {
-      title: `Chekout | ${process.env.APP_NAME}`,
-      script: [
-        { src: 'https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js' },
-      ],
-    };
-  },
+  head: () => ({
+    title: 'Chekout',
+    script: [
+      { src: 'https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js' },
+    ],
+  }),
 
   computed: {
     installmentsOptions () {

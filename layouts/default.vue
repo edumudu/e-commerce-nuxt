@@ -20,6 +20,10 @@ export default {
     TheFooterSite,
   },
 
+  head () {
+    return { titleTemplate: `%s | ${this.$config.appName}` };
+  },
+
   mounted () {
     // init cart
     this.$store.commit('cart/setCart', JSON.parse(localStorage.getItem('cart')) || []);
