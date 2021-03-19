@@ -70,10 +70,10 @@ header.site-header {
       color: $gray;
 
       > a,
-      /deep/ .dropdown-toggle { transition: color 0.25s; }
+      ::v-deep .dropdown-toggle { transition: color 0.25s; }
 
       &:hover > a,
-      &:hover /deep/ .dropdown-toggle { color: $success; }
+      &:hover ::v-deep .dropdown-toggle { color: $success; }
     }
   }
 }
