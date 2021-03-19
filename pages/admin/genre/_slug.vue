@@ -46,15 +46,14 @@ import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import dataUpdate from '~/mixins/admin/dataUpdate';
 
 export default {
-  layout: 'dashboard',
-  transition: 'slide-up',
-
   components: {
     ValidationObserver,
     ValidationProvider,
   },
 
   mixins: [dataUpdate],
+  layout: 'dashboard',
+  transition: 'slide-up',
 
   data: () => ({
     route: '/genre',

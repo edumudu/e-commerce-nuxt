@@ -104,14 +104,13 @@ import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import PhoneMask from '~/mixins/phoneMask';
 
 export default {
-  transition: 'slide-left',
-
   components: {
     ValidationProvider,
     ValidationObserver,
   },
 
   mixins: [PhoneMask],
+  transition: 'slide-left',
 
   data: () => ({
     sending: false,
@@ -122,6 +121,12 @@ export default {
       body: '',
     },
   }),
+
+  head () {
+    return {
+      title: `Contact | ${process.env.APP_NAME}`,
+    };
+  },
 
   methods: {
     async sendContact () {
@@ -142,12 +147,6 @@ export default {
       this.sending = false;
       this.$nuxt.$loading.finish();
     },
-  },
-
-  head () {
-    return {
-      title: `Contact | ${process.env.APP_NAME}`,
-    };
   },
 };
 </script>

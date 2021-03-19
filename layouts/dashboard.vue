@@ -15,13 +15,13 @@ import TheAsideDashboard from '~/components/dashboard/TheAsideDashboard.vue';
 import TheHeaderDashboard from '~/components/dashboard/TheHeaderDashboard.vue';
 
 export default {
-  middleware: ['auth', 'moderation'],
-  layoutTransition: 'layout',
-
   components: {
     TheAsideDashboard,
     TheHeaderDashboard,
   },
+
+  middleware: ['auth', 'moderation'],
+  layoutTransition: 'layout',
 };
 </script>
 

@@ -61,13 +61,17 @@ import DataPaginate from '~/components/DataPaginate.vue';
 import OverlayLoading from '~/components/OverlayLoading.vue';
 
 export default {
-  transition: 'slide-left',
-
   components: {
     ProductVitrine,
     DataPaginate,
     OverlayLoading,
   },
+
+  transition: 'slide-left',
+
+  data: () => ({
+    response: {},
+  }),
 
   async fetch () {
     this.response = await this.$axios.$get('/product', {
@@ -75,9 +79,11 @@ export default {
     });
   },
 
-  data: () => ({
-    response: {},
-  }),
+  head () {
+    return {
+      title: `Products | ${process.env.APP_NAME}`,
+    };
+  },
 
   computed: {
     totalPages () {
@@ -91,12 +97,6 @@ export default {
 
   watch: {
     '$route.query': '$fetch',
-  },
-
-  head () {
-    return {
-      title: `Products | ${process.env.APP_NAME}`,
-    };
   },
 };
 </script>

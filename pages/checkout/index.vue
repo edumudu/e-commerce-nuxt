@@ -306,17 +306,13 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-  middleware: ['auth', 'haveCart'],
-  transition: 'slide-left',
-
   components: {
     ValidationProvider,
     ValidationObserver,
   },
 
-  async fetch () {
-    this.sessionId = (await this.$axios.$get('/checkout/sessionId')).sessionId;
-  },
+  middleware: ['auth', 'haveCart'],
+  transition: 'slide-left',
 
   data: () => ({
     sessionId: '',
@@ -345,6 +341,19 @@ export default {
     installment: '1|0',
     sending: false,
   }),
+
+  async fetch () {
+    this.sessionId = (await this.$axios.$get('/checkout/sessionId')).sessionId;
+  },
+
+  head () {
+    return {
+      title: `Chekout | ${process.env.APP_NAME}`,
+      script: [
+        { src: 'https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js' },
+      ],
+    };
+  },
 
   computed: {
     installmentsOptions () {
@@ -416,7 +425,7 @@ export default {
         const address = await instance.$get(`https://viacep.com.br/ws/${this.card.address.cep}/json/`);
 
         if (address.erro) {
-          throw new Error(404);
+          throw new Error('404');
         }
 
         this.card.address = {
@@ -504,15 +513,6 @@ export default {
       clearCart: 'cart/clearCart',
       fetchProducts: 'cart/fetchProducts',
     }),
-  },
-
-  head () {
-    return {
-      title: `Chekout | ${process.env.APP_NAME}`,
-      script: [
-        { src: 'https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js' },
-      ],
-    };
   },
 };
 </script>

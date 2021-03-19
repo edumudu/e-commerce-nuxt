@@ -20,7 +20,7 @@ export default {
 
   methods: {
     handleClick (selectedItem) {
-      Array.from(this.items, (item) => {
+      this.items.forEach((item) => {
         item.active = !item.active && item.title === selectedItem.title;
       });
     },

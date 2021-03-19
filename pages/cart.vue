@@ -65,29 +65,29 @@ import CartTable from '~/components/CartTable.vue';
 import InputCollapse from '~/components/InputCollapse.vue';
 
 export default {
-  middleware: 'auth',
-  transition: 'slide-left',
-
   components: {
     CartTable,
     InputCollapse,
   },
 
+  middleware: 'auth',
+  transition: 'slide-left',
+
   data: () => ({
     //
   }),
+
+  head () {
+    return {
+      title: `My cart | ${process.env.APP_NAME}`,
+    };
+  },
 
   computed: {
     ...mapGetters({
       cartProducts: 'cart/cartProducts',
       cartTotal: 'cart/cartTotal',
     }),
-  },
-
-  head () {
-    return {
-      title: `My cart | ${process.env.APP_NAME}`,
-    };
   },
 };
 </script>

@@ -86,8 +86,6 @@ import OverlayLoading from '~/components/OverlayLoading.vue';
 import CachingActivated from '~/mixins/caching-activated';
 
 export default {
-  transition: 'slide-left',
-
   components: {
     ProductReviews,
     ProductInfo,
@@ -97,10 +95,7 @@ export default {
   },
 
   mixins: [CachingActivated],
-
-  async fetch () {
-    this.product = await this.$axios.$get(`/product/${this.$route.params.slug}`);
-  },
+  transition: 'slide-left',
 
   data: () => ({
     product: {
@@ -109,6 +104,16 @@ export default {
     },
     quantity: 1,
   }),
+
+  async fetch () {
+    this.product = await this.$axios.$get(`/product/${this.$route.params.slug}`);
+  },
+
+  head () {
+    return {
+      title: `${this.product.name} | ${process.env.APP_NAME}`,
+    };
+  },
 
   computed: {
     reviewsCounter () {
@@ -139,12 +144,6 @@ export default {
         this.$toast.error('Something went wrong, try again later');
       }
     },
-  },
-
-  head () {
-    return {
-      title: `${this.product.name} | ${process.env.APP_NAME}`,
-    };
   },
 };
 </script>

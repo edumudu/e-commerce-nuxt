@@ -124,15 +124,14 @@ import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import dataCreate from '~/mixins/admin/dataCreate';
 
 export default {
-  layout: 'dashboard',
-  transition: 'slide-up',
-
   components: {
     ValidationObserver,
     ValidationProvider,
   },
 
   mixins: [dataCreate],
+  layout: 'dashboard',
+  transition: 'slide-up',
 
   data: () => ({
     data: {
@@ -147,6 +146,12 @@ export default {
     genres: [],
     categories: [],
   }),
+
+  head () {
+    return {
+      title: `Create new Product | Dashboard ${process.env.APP_NAME}`,
+    };
+  },
 
   async mounted () {
     const genres = await this.$axios.$get('/genre');
@@ -194,12 +199,6 @@ export default {
       this.$nuxt.$loading.finish();
       this.sending = false;
     },
-  },
-
-  head () {
-    return {
-      title: `Create new Product | Dashboard ${process.env.APP_NAME}`,
-    };
   },
 };
 </script>

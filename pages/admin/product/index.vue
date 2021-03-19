@@ -21,9 +21,6 @@ import listData from '~/mixins/admin/listData';
 import OverlayLoading from '~/components/OverlayLoading.vue';
 
 export default {
-  layout: 'dashboard',
-  transition: 'slide-up',
-
   components: {
     TableResponsive,
     DataPaginate,
@@ -31,6 +28,8 @@ export default {
   },
 
   mixins: [listData],
+  layout: 'dashboard',
+  transition: 'slide-up',
 
   data: () => ({
     route: '/product',

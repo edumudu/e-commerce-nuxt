@@ -44,15 +44,14 @@ import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import dataCreate from '~/mixins/admin/dataCreate';
 
 export default {
-  layout: 'dashboard',
-  transition: 'slide-up',
-
   components: {
     ValidationObserver,
     ValidationProvider,
   },
 
   mixins: [dataCreate],
+  layout: 'dashboard',
+  transition: 'slide-up',
 
   data: () => ({
     route: '/genre',

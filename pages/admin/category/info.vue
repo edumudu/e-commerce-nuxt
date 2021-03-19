@@ -18,6 +18,13 @@ export default {
   layout: 'dashboard',
   transition: 'slide-up',
 
+  data: () => ({
+    categoriesData: {},
+    chartOptions: {
+      responsive: true,
+    },
+  }),
+
   async fetch () {
     const categoriesData = await this.$axios.$get('/category/info', {
       params: { grouped: 'products' },
@@ -30,13 +37,6 @@ export default {
       }],
     };
   },
-
-  data: () => ({
-    categoriesData: {},
-    chartOptions: {
-      responsive: true,
-    },
-  }),
 
   head () {
     return {

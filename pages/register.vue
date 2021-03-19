@@ -20,13 +20,13 @@
 import RegisterForm from '~/components/Auth/Singup/SingupForm.vue';
 
 export default {
-  middleware: 'auth',
-  auth: 'guest',
-  transition: 'slide-left',
-
   components: {
     RegisterForm,
   },
+
+  middleware: 'auth',
+  auth: 'guest',
+  transition: 'slide-left',
 
   head () {
     return {

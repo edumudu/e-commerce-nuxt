@@ -84,6 +84,25 @@ export default {
   layout: 'dashboard',
   transition: 'slide-up',
 
+  data: () => ({
+    usersXOrdersProjection: {},
+    newUsers: 0,
+    newsOrders: 0,
+    totalUsers: 0,
+    totalOrders: 0,
+    chartOptions: {
+      responsive: true,
+      scales: {
+        yAxes: [{
+          ticks: {
+            suggestedMax: 50,
+            stepSize: 5,
+          },
+        }],
+      },
+    },
+  }),
+
   async fetch () {
     const [newsUsers, newsOrders, totalUsers, totalOrders] = await Promise.all([
       this.$axios.$get('/user', {
@@ -129,25 +148,6 @@ export default {
     this.totalUsers = totalUsers.total;
     this.totalOrders = totalOrders.total;
   },
-
-  data: () => ({
-    usersXOrdersProjection: {},
-    newUsers: 0,
-    newsOrders: 0,
-    totalUsers: 0,
-    totalOrders: 0,
-    chartOptions: {
-      responsive: true,
-      scales: {
-        yAxes: [{
-          ticks: {
-            suggestedMax: 50,
-            stepSize: 5,
-          },
-        }],
-      },
-    },
-  }),
 
   head () {
     return {

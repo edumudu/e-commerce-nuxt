@@ -125,13 +125,23 @@ import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import OverlayLoading from '~/components/OverlayLoading.vue';
 
 export default {
-  layout: 'dashboard',
-
   components: {
     ValidationObserver,
     ValidationProvider,
     OverlayLoading,
   },
+
+  layout: 'dashboard',
+
+  data: () => ({
+    product: {
+      name: '',
+      photos: [],
+    },
+    categories: [],
+    genres: [],
+    sending: false,
+  }),
 
   async fetch () {
     try {
@@ -163,15 +173,11 @@ export default {
     }
   },
 
-  data: () => ({
-    product: {
-      name: '',
-      photos: [],
-    },
-    categories: [],
-    genres: [],
-    sending: false,
-  }),
+  head () {
+    return {
+      title: `Update ${this.product.name} | Dashboard ${process.env.APP_NAME}`,
+    };
+  },
 
   methods: {
     async onSubmit () {
@@ -200,12 +206,6 @@ export default {
     handleInputSelection (files) {
       this.product.photos = files;
     },
-  },
-
-  head () {
-    return {
-      title: `Update ${this.product.name} | Dashboard ${process.env.APP_NAME}`,
-    };
   },
 };
 </script>

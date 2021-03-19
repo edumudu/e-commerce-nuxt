@@ -1,3 +1,4 @@
+/* eslint-disable vue/one-component-per-file */
 import Vue from 'vue';
 import { Line, Doughnut, mixins } from 'vue-chartjs';
 import 'chartjs-plugin-colorschemes';
@@ -10,7 +11,7 @@ function mounted () {
   this.renderChart(this.chartData, { ...this.options });
 };
 
-Vue.component('line-chart', {
+Vue.component('LineChart', {
   extends: Line,
   mixins: [mixins.reactiveProp],
   props,
@@ -18,7 +19,7 @@ Vue.component('line-chart', {
   mounted,
 });
 
-Vue.component('doughnut-chart', {
+Vue.component('DoughnutChart', {
   extends: Doughnut,
   mixins: [mixins.reactiveProp],
   props,

@@ -316,7 +316,7 @@ export default {
         const address = await this.$axios.$get(`https://viacep.com.br/ws/${this.account.cep}/json/`);
 
         if (address.erro) {
-          throw new Error(404);
+          throw new Error('404');
         }
 
         this.account = {

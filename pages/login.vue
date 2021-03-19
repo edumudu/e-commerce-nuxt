@@ -86,14 +86,14 @@
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 
 export default {
-  middleware: 'auth',
-  auth: 'guest',
-  transition: 'slide-left',
-
   components: {
     ValidationProvider,
     ValidationObserver,
   },
+
+  middleware: 'auth',
+  auth: 'guest',
+  transition: 'slide-left',
 
   data: () => ({
     sending: false,
@@ -102,6 +102,12 @@ export default {
       password: '',
     },
   }),
+
+  head () {
+    return {
+      title: `Sing in | ${process.env.APP_NAME}`,
+    };
+  },
 
   methods: {
     async sendLogin () {
@@ -117,12 +123,6 @@ export default {
       this.sending = false;
       this.$nuxt.$loading.finish();
     },
-  },
-
-  head () {
-    return {
-      title: `Sing in | ${process.env.APP_NAME}`,
-    };
   },
 };
 </script>
